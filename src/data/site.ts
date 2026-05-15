@@ -175,12 +175,6 @@ export const site = {
           "Otonom uçuş algoritmaları, görüntü işleme ve yer istasyonu yazılımı; ArduPilot + OpenCV ekosistemi üstünde geliştirilir.",
       },
       {
-        id: "pilot",
-        name: "Pilot",
-        blurb:
-          "Sertifikalı pilotlarımız uçuş testlerini ve yarışma uçuşlarını gerçekleştirir; simülasyon ve gerçek saha tecrübesi taşır.",
-      },
-      {
         id: "sponsorluk",
         name: "Sponsorluk",
         blurb:

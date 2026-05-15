@@ -76,7 +76,7 @@ function TechStatsBar() {
 function StatsBar() {
   const stats = [
     { label: "Aktif Üye", value: "7" },
-    { label: "Departman", value: "5" },
+    { label: "Departman", value: "4" },
     { label: "Yarışma Projesi", value: "3" },
     { label: "Birincilik", value: "1" },
   ];

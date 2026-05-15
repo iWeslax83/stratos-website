@@ -37,7 +37,7 @@ export default function TakimPage() {
       <PageHeader
         eyebrow="Takım"
         title="Stratos'un ardındaki yedi öğrenci."
-        description="Beş departman, ortak hedef. Her ekip kendi uzmanlık alanında çalışırken, koordineli toplantılarla bilgi paylaşımı sağlanır."
+        description="Dört departman, ortak hedef. Her ekip kendi uzmanlık alanında çalışırken, koordineli toplantılarla bilgi paylaşımı sağlanır."
       />
 
       <Container size="wide">
@@ -151,7 +151,7 @@ export default function TakimPage() {
             Departmanlar
           </h2>
           <p className="mt-3 max-w-2xl text-sm text-ink-300">
-            Stratos disiplinler arası iş birliği ile çalışan beş ana ekipten
+            Stratos disiplinler arası iş birliği ile çalışan dört ana ekipten
             oluşmaktadır.
           </p>
           <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">

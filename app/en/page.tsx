@@ -214,7 +214,7 @@ function Hero() {
 function QuickFacts() {
   const stats = [
     { label: "Active Members", value: "7" },
-    { label: "Departments", value: "5" },
+    { label: "Departments", value: "4" },
     { label: "Competition Projects", value: "3" },
     { label: "1st-Place Wins", value: "1" },
   ];
