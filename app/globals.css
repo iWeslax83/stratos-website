@@ -1,0 +1,156 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand palette — anchored to the logo's deep teal */
+  --color-brand-50: #E6F5F7;
+  --color-brand-100: #BFE3E8;
+  --color-brand-200: #80C7D0;
+  --color-brand-300: #4FB3BF;
+  --color-brand-400: #2A91A0;
+  --color-brand-500: #1A6973;
+  --color-brand-600: #134E56;
+  --color-brand-700: #0E3A40;
+  --color-brand-800: #0A2A2E;
+  --color-brand-900: #06181B;
+
+  /* Cinematic sky gradient stops */
+  --color-sky-night: #07101E;
+  --color-sky-deep: #0F1D33;
+  --color-sky-steel: #173255;
+  --color-sky-blue: #2D5A88;
+  --color-sky-light: #87BBE0;
+  --color-sky-dawn: #FF7849;
+
+  /* Surface */
+  --color-ink-950: #05080F;
+  --color-ink-900: #0A0E1A;
+  --color-ink-800: #11151F;
+  --color-ink-700: #1A2030;
+  --color-ink-600: #2B3447;
+  --color-ink-500: #475266;
+  --color-ink-400: #6B7691;
+  --color-ink-300: #9AA3BA;
+  --color-ink-200: #C5CCDB;
+  --color-ink-100: #E3E7EF;
+  --color-ink-50: #F2F4F7;
+
+  /* Typography */
+  --font-display: "Saira Condensed", "Bahnschrift", "Arial Narrow", system-ui, sans-serif;
+  --font-wordmark: "Saira Stencil One", "Saira Condensed", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+
+  /* Radius */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+
+  /* Shadows */
+  --shadow-glow: 0 0 60px -10px color-mix(in oklab, var(--color-brand-300) 35%, transparent);
+  --shadow-card: 0 12px 40px -8px rgb(0 0 0 / 0.6);
+}
+
+/* Base reset on top of Tailwind preflight */
+html {
+  background: var(--color-ink-900);
+  color: var(--color-ink-50);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100dvh;
+  background:
+    radial-gradient(1200px 600px at 80% -10%, color-mix(in oklab, var(--color-brand-500) 18%, transparent), transparent 60%),
+    radial-gradient(900px 500px at -10% 20%, color-mix(in oklab, var(--color-sky-steel) 30%, transparent), transparent 60%),
+    var(--color-ink-900);
+}
+
+::selection {
+  background: var(--color-brand-400);
+  color: var(--color-ink-50);
+}
+
+/* Cinematic display defaults */
+.font-display { font-family: var(--font-display); letter-spacing: -0.01em; }
+.font-wordmark { font-family: var(--font-wordmark); letter-spacing: 0.05em; }
+.font-body { font-family: var(--font-body); }
+
+/* Aerospace stencil treatment for the STRATOS wordmark */
+.wordmark-stratos {
+  font-family: var(--font-wordmark);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-feature-settings: "ss01" on;
+  background: linear-gradient(180deg, #F2F4F7 0%, #B5C8D0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Subtle starfield for hero (pure CSS, no asset) */
+.starfield {
+  background-image:
+    radial-gradient(1.5px 1.5px at 20% 30%, rgb(255 255 255 / 0.5), transparent 50%),
+    radial-gradient(1px 1px at 70% 60%, rgb(255 255 255 / 0.45), transparent 50%),
+    radial-gradient(1.5px 1.5px at 50% 80%, rgb(255 255 255 / 0.4), transparent 50%),
+    radial-gradient(1px 1px at 85% 25%, rgb(255 255 255 / 0.6), transparent 50%),
+    radial-gradient(1px 1px at 35% 70%, rgb(255 255 255 / 0.4), transparent 50%),
+    radial-gradient(2px 2px at 15% 90%, rgb(255 255 255 / 0.3), transparent 50%);
+  background-size: 600px 600px;
+  background-repeat: repeat;
+}
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid var(--color-brand-300);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Smooth-edged section dividers */
+.edge-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--color-brand-300) 40%, transparent), transparent);
+}
+
+/* Entrance animations — no JS, runs once on initial paint */
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-rise {
+  animation: rise-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.animate-fade {
+  animation: fade-in 1.4s ease-out both;
+}
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* Slow spin for decorative props */
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+.spin-slow {
+  animation: spin-slow 18s linear infinite;
+  transform-origin: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-rise, .animate-fade, .spin-slow {
+    animation: none;
+  }
+}
