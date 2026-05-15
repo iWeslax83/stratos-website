@@ -13,7 +13,7 @@ import { site } from "@/data/site";
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="relative mt-24 border-t border-white/5 bg-[color-mix(in_oklab,var(--color-ink-950)_85%,transparent)]">
+    <footer className="relative mt-24 border-t border-white/5 bg-[color-mix(in_oklab,var(--color-ink-950)_55%,transparent)] backdrop-blur-sm">
       <Container size="wide">
         <div className="grid gap-12 py-16 md:grid-cols-12">
           <div className="md:col-span-5">

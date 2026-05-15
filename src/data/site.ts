@@ -22,7 +22,7 @@ export const site = {
     competition: "TEKNOFEST 2026 — Liseler Arası İHA",
     // Yarışma haftası — TEKNOFEST'in resmi tarihi açıklandığında güncelle.
     competitionDate: "2026-09-10",
-    sponsorshipDeadline: "2026-04-30",
+    sponsorshipDeadline: "2026-06-03",
     currentPhase: "Detay Tasarım",
     nextMilestone: "Üretim & Entegrasyon",
   },

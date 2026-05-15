@@ -31,7 +31,7 @@ function TechStatsBar() {
     { label: "Total Ağırlık", value: "2.4", unit: "kg" },
   ];
   return (
-    <section className="relative border-b border-white/5 bg-gradient-to-b from-[var(--color-ink-900)] via-[color-mix(in_oklab,var(--color-sky-deep)_18%,var(--color-ink-900))] to-[var(--color-ink-900)]">
+    <section className="relative border-b border-white/5 bg-[color-mix(in_oklab,var(--color-ink-900)_55%,transparent)]">
       <Container size="wide">
         <div className="flex items-center gap-3 py-6">
           <Gauge size={14} className="shrink-0 text-[var(--color-brand-300)]" />
@@ -50,7 +50,7 @@ function TechStatsBar() {
           {specs.map((s) => (
             <div
               key={s.label}
-              className="bg-[var(--color-ink-900)] px-5 py-7 text-center"
+              className="bg-[color-mix(in_oklab,var(--color-ink-900)_70%,transparent)] px-5 py-7 text-center"
             >
               <dt className="text-[0.6rem] uppercase tracking-[0.3em] text-ink-400">
                 {s.label}

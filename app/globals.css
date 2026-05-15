@@ -66,11 +66,48 @@ html {
 body {
   min-height: 100dvh;
   overflow-x: hidden;
-  background:
-    radial-gradient(1200px 600px at 80% -10%, color-mix(in oklab, var(--color-brand-500) 18%, transparent), transparent 60%),
-    radial-gradient(900px 500px at -10% 20%, color-mix(in oklab, var(--color-sky-steel) 30%, transparent), transparent 60%),
-    var(--color-ink-900);
+  background: transparent;
 }
+
+/* Site-wide sky backdrop layers — solid pinpoint stars */
+.sky-stars {
+  background-repeat: repeat;
+  background-image:
+    radial-gradient(circle at 20% 30%, white 0, white 1px, transparent 1.5px),
+    radial-gradient(circle at 70% 60%, white 0, white 0.8px, transparent 1.3px),
+    radial-gradient(circle at 50% 80%, white 0, white 1.2px, transparent 1.7px),
+    radial-gradient(circle at 85% 25%, white 0, white 0.8px, transparent 1.3px),
+    radial-gradient(circle at 35% 70%, white 0, white 0.8px, transparent 1.3px),
+    radial-gradient(circle at 15% 90%, white 0, white 1.4px, transparent 2px),
+    radial-gradient(circle at 60% 15%, white 0, white 0.7px, transparent 1.2px),
+    radial-gradient(circle at 90% 75%, white 0, white 0.8px, transparent 1.3px);
+}
+.sky-stars--sm  { background-size: 220px 220px; }
+.sky-stars--mid { background-size: 380px 380px; }
+.sky-stars--lg  { background-size: 600px 600px; }
+/* Hero glow for the brighter "lg" stars */
+.sky-stars--lg {
+  filter: drop-shadow(0 0 2px rgb(255 255 255 / 0.5));
+}
+
+@keyframes sky-twinkle {
+  0%, 100% { opacity: 0.6; }
+  50%      { opacity: 1; }
+}
+.sky-twinkle-slow { animation: sky-twinkle 7s ease-in-out infinite; }
+.sky-twinkle-mid  { animation: sky-twinkle 4.5s ease-in-out infinite -1.5s; }
+.sky-twinkle-fast { animation: sky-twinkle 3s ease-in-out infinite -0.7s; }
+
+@keyframes sky-drift-a {
+  0%, 100% { transform: translate(0, 0); }
+  50%      { transform: translate(-50px, 30px); }
+}
+@keyframes sky-drift-b {
+  0%, 100% { transform: translate(0, 0); }
+  50%      { transform: translate(40px, -30px); }
+}
+.sky-drift-a { animation: sky-drift-a 60s ease-in-out infinite; }
+.sky-drift-b { animation: sky-drift-b 75s ease-in-out infinite; }
 
 /* Mobile defaults: keep long words and tracked uppercase strings inside the viewport */
 @media (max-width: 640px) {
@@ -160,6 +197,8 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .sky-twinkle-slow, .sky-twinkle-mid, .sky-twinkle-fast,
+  .sky-drift-a, .sky-drift-b,
   .animate-rise, .animate-fade, .spin-slow {
     animation: none;
   }

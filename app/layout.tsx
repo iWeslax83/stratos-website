@@ -5,6 +5,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { SkyBackdrop } from "@/components/brand/sky-backdrop";
+import { LogoLightbox } from "@/components/brand/logo-lightbox";
 import { site } from "@/data/site";
 
 const inter = Inter({
@@ -44,7 +46,7 @@ export const metadata: Metadata = {
     "Otonom",
     "Lise Takımı",
   ],
-  metadataBase: new URL("https://stratosiha.com"),
+  metadataBase: new URL("https://stratosiha.vercel.app"),
   openGraph: {
     title: `${site.brand.name} · ${site.brand.descriptor}`,
     description: site.brand.longTagline,
@@ -81,8 +83,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "@type": "Organization",
     name: site.brand.name,
     alternateName: site.brand.descriptor,
-    url: "https://stratosiha.com",
-    logo: "https://stratosiha.com/brand/logo-mark.png",
+    url: "https://stratosiha.vercel.app",
+    logo: "https://stratosiha.vercel.app/brand/logo-mark.png",
     description: site.brand.longTagline,
     email: site.contact.email,
     telephone: site.contact.phone,
@@ -113,11 +115,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="font-body">
-        <div className="flex min-h-dvh flex-col">
+        <SkyBackdrop />
+        <div className="relative flex min-h-dvh flex-col">
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
         </div>
+        <LogoLightbox />
         <Analytics />
         <SpeedInsights />
       </body>

@@ -13,3 +13,9 @@ tsconfig.tsbuildinfo
 .omc/
 .superpowers/
 .claude/
+.playwright-mcp/
+
+# Local debug screenshots in repo root (Playwright captures, etc.)
+/*.png
+/*.jpg
+/*.jpeg

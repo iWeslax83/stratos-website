@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/"],
     },
-    sitemap: "https://stratosiha.com/sitemap.xml",
+    sitemap: "https://stratosiha.vercel.app/sitemap.xml",
   };
 }

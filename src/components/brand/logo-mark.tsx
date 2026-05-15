@@ -22,7 +22,7 @@ export function LogoMark({ size = 44, className, priority }: LogoMarkProps) {
         width={size}
         height={size}
         priority={priority}
-        className="h-full w-full rounded-full object-cover"
+        className="h-full w-full rounded-full object-cover transition-transform hover:scale-105"
       />
     </span>
   );
