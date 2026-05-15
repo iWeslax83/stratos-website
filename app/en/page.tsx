@@ -179,7 +179,7 @@ function Hero() {
             <p className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 text-[0.7rem] uppercase tracking-[0.3em] text-ink-200 backdrop-blur animate-rise">
               <Languages size={12} /> English · TEKNOFEST 2026 · Rotary Wing
             </p>
-            <h1 className="mt-8 font-display text-[3.2rem] sm:text-[5rem] lg:text-[6.4rem] font-black leading-[0.95] tracking-tight">
+            <h1 className="mt-8 font-display text-[2.4rem] sm:text-[5rem] lg:text-[6.4rem] font-black leading-[0.95] tracking-tight break-words [overflow-wrap:anywhere] hyphens-auto">
               <span className="block text-ink-50 animate-rise delay-100">
                 Aiming for the
               </span>

@@ -1,8 +1,29 @@
 import type { Metadata, Viewport } from "next";
+import { Inter, Saira_Condensed, Saira_Stencil_One } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { site } from "@/data/site";
+
+const inter = Inter({
+  subsets: ["latin", "latin-ext"],
+  display: "swap",
+  variable: "--font-body",
+});
+const sairaCondensed = Saira_Condensed({
+  subsets: ["latin", "latin-ext"],
+  weight: ["500", "600", "700", "800", "900"],
+  display: "swap",
+  variable: "--font-display",
+});
+const sairaStencil = Saira_Stencil_One({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400"],
+  display: "swap",
+  variable: "--font-wordmark",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -23,7 +44,7 @@ export const metadata: Metadata = {
     "Otonom",
     "Lise Takımı",
   ],
-  metadataBase: new URL("https://bursafeniha.com"),
+  metadataBase: new URL("https://stratosiha.com"),
   openGraph: {
     title: `${site.brand.name} · ${site.brand.descriptor}`,
     description: site.brand.longTagline,
@@ -32,8 +53,19 @@ export const metadata: Metadata = {
     siteName: site.brand.name,
   },
   icons: {
-    icon: "/brand/logo-mark.png",
-    apple: "/brand/logo-mark.png",
+    icon: [
+      { url: "/brand/logo-mark.png", type: "image/png" },
+    ],
+    apple: [
+      { url: "/brand/logo-mark.png", sizes: "180x180", type: "image/png" },
+    ],
+    shortcut: "/brand/logo-mark.png",
+  },
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    title: site.brand.name,
+    statusBarStyle: "black-translucent",
   },
 };
 
@@ -49,8 +81,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "@type": "Organization",
     name: site.brand.name,
     alternateName: site.brand.descriptor,
-    url: "https://bursafeniha.com",
-    logo: "https://bursafeniha.com/brand/logo-mark.png",
+    url: "https://stratosiha.com",
+    logo: "https://stratosiha.com/brand/logo-mark.png",
     description: site.brand.longTagline,
     email: site.contact.email,
     telephone: site.contact.phone,
@@ -69,14 +101,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   };
 
   return (
-    <html lang="tr" suppressHydrationWarning>
+    <html
+      lang="tr"
+      suppressHydrationWarning
+      className={`${inter.variable} ${sairaCondensed.variable} ${sairaStencil.variable}`}
+    >
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Saira+Condensed:wght@500;600;700;800;900&family=Saira+Stencil+One&display=swap"
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -88,6 +118,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main className="flex-1">{children}</main>
           <Footer />
         </div>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

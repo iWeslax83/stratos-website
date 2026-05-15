@@ -19,7 +19,7 @@ npm run typecheck    # tsc --noEmit
 | --- | --- | --- |
 | `RESEND_API_KEY` | Üretim | https://resend.com/api-keys üzerinden alın. Yoksa form çalışır ama mail gitmez (sunucu loguna düşer). |
 | `RESEND_FROM` | Hayır | Mail gönderilen "from" adresi. Varsayılan: `onboarding@resend.dev` (test sandbox). Üretimde doğrulanmış bir domain kullanın. |
-| `CONTACT_TO` | Hayır | Form maillerinin iletileceği adres. Varsayılan: `bursafeniha@gmail.com`. |
+| `CONTACT_TO` | Hayır | Form maillerinin iletileceği adres. Varsayılan: `stratosiha@gmail.com`. |
 
 ## Dizin yapısı
 
@@ -73,7 +73,7 @@ Logo: `public/brand/logo-mark.png` (yuvarlak amblem). Wordmark: CSS-rendered (`S
 3. Environment Variables sekmesinde `RESEND_API_KEY` ve opsiyonel olarak `RESEND_FROM`, `CONTACT_TO` ekle
 4. Deploy
 
-Production'da `bursafeniha@gmail.com`'a sponsor + üyelik mail'lerinin ulaşması için Resend'de domain doğrulaması yapılmalı (aksi halde varsayılan `onboarding@resend.dev` adresi kullanılır — bu sandbox sadece test için).
+Production'da `stratosiha@gmail.com`'a sponsor + üyelik mail'lerinin ulaşması için Resend'de domain doğrulaması yapılmalı (aksi halde varsayılan `onboarding@resend.dev` adresi kullanılır — bu sandbox sadece test için).
 
 ## Henüz eksik / yakında
 

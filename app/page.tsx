@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { ArrowRight, Plane, Cpu, Wrench, Trophy, Gauge } from "lucide-react";
+import { ArrowRight, Plane, Cpu, Wrench, Trophy, Gauge, Users } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { DroneSilhouette } from "@/components/brand/drone-silhouette";
+import { CompetitionPulse } from "@/components/home/competition-pulse";
 import { site } from "@/data/site";
 
 export default function HomePage() {
@@ -123,7 +124,7 @@ function Hero() {
               <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand-300)] shadow-[0_0_12px_var(--color-brand-300)]" />
               TEKNOFEST 2026 · Döner Kanat
             </p>
-            <h1 className="mt-8 font-display text-[3.4rem] sm:text-[5rem] lg:text-[6.8rem] font-black leading-[0.95] tracking-tight">
+            <h1 className="mt-8 font-display text-[2.6rem] sm:text-[5rem] lg:text-[6.8rem] font-black leading-[0.95] tracking-tight break-words [overflow-wrap:anywhere] hyphens-auto">
               <span className="block text-ink-50 animate-rise delay-100">Stratosferi</span>
               <span className="wordmark-stratos block animate-rise delay-200">HEDEFLİYORUZ</span>
             </h1>
@@ -134,10 +135,14 @@ function Hero() {
               <Button as="link" href="/sponsorlar" size="lg">
                 Sponsor Ol <ArrowRight size={16} />
               </Button>
+              <Button as="link" href="/iletisim#uyelik" variant="secondary" size="lg">
+                <Users size={16} /> Bize Katıl
+              </Button>
               <Button as="link" href="/projeler" variant="outline" size="lg">
                 Projeleri Gör
               </Button>
             </div>
+            <CompetitionPulse />
             <p className="mt-12 text-[0.65rem] uppercase tracking-[0.4em] text-ink-400 animate-rise delay-500">
               {site.brand.school} · {site.brand.city}
             </p>

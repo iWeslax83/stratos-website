@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { site } from "@/data/site";
 import { posts } from "@/data/blog";
 
-const BASE = "https://bursafeniha.com";
+const BASE = "https://stratosiha.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

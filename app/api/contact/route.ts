@@ -6,6 +6,10 @@ const resendKey = process.env.RESEND_API_KEY;
 const fromAddress = process.env.RESEND_FROM ?? "Stratos Web <onboarding@resend.dev>";
 const toAddress = process.env.CONTACT_TO ?? site.contact.email;
 
+// Bot guards: honeypot field must stay empty + form must be open at least 2.5s.
+const HONEYPOT_FIELD = "website_url";
+const MIN_ELAPSED_MS = 2_500;
+
 interface SponsorPayload {
   kind: "sponsor";
   company: string;
@@ -32,9 +36,18 @@ function isString(v: unknown): v is string {
   return typeof v === "string" && v.trim().length > 0;
 }
 
-function validate(body: unknown): Payload | { error: string } {
+function isSpam(b: Record<string, unknown>): boolean {
+  const honey = b[HONEYPOT_FIELD];
+  if (typeof honey === "string" && honey.trim().length > 0) return true;
+  const elapsed = b._elapsed;
+  if (typeof elapsed === "number" && elapsed < MIN_ELAPSED_MS) return true;
+  return false;
+}
+
+function validate(body: unknown): Payload | { error: string; spam?: boolean } {
   if (!body || typeof body !== "object") return { error: "Geçersiz istek." };
   const b = body as Record<string, unknown>;
+  if (isSpam(b)) return { error: "Spam koruması tetiklendi.", spam: true };
   if (b.kind === "sponsor") {
     const required = ["company", "name", "email", "tier", "message"] as const;
     for (const k of required) if (!isString(b[k])) return { error: `Alan eksik: ${k}` };
@@ -104,6 +117,11 @@ export async function POST(req: Request) {
   const json = await req.json().catch(() => null);
   const result = validate(json);
   if ("error" in result) {
+    if (result.spam) {
+      // Quietly accept so bots don't iterate based on response codes.
+      console.warn("[contact] honeypot/timing rejected");
+      return NextResponse.json({ ok: true });
+    }
     return NextResponse.json({ error: result.error }, { status: 400 });
   }
 

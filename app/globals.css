@@ -34,10 +34,10 @@
   --color-ink-100: #E3E7EF;
   --color-ink-50: #F2F4F7;
 
-  /* Typography */
-  --font-display: "Saira Condensed", "Bahnschrift", "Arial Narrow", system-ui, sans-serif;
-  --font-wordmark: "Saira Stencil One", "Saira Condensed", system-ui, sans-serif;
-  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+  /* Typography — `--font-*` vars are injected by next/font in layout.tsx */
+  --font-display-fallback: "Saira Condensed", "Bahnschrift", "Arial Narrow", system-ui, sans-serif;
+  --font-wordmark-fallback: "Saira Stencil One", "Saira Condensed", system-ui, sans-serif;
+  --font-body-fallback: "Inter", system-ui, -apple-system, sans-serif;
 
   /* Radius */
   --radius-xs: 4px;
@@ -56,18 +56,28 @@
 html {
   background: var(--color-ink-900);
   color: var(--color-ink-50);
-  font-family: var(--font-body);
+  font-family: var(--font-body, var(--font-body-fallback));
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   min-height: 100dvh;
+  overflow-x: hidden;
   background:
     radial-gradient(1200px 600px at 80% -10%, color-mix(in oklab, var(--color-brand-500) 18%, transparent), transparent 60%),
     radial-gradient(900px 500px at -10% 20%, color-mix(in oklab, var(--color-sky-steel) 30%, transparent), transparent 60%),
     var(--color-ink-900);
+}
+
+/* Mobile defaults: keep long words and tracked uppercase strings inside the viewport */
+@media (max-width: 640px) {
+  h1, h2, h3 {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
 }
 
 ::selection {
@@ -76,13 +86,13 @@ body {
 }
 
 /* Cinematic display defaults */
-.font-display { font-family: var(--font-display); letter-spacing: -0.01em; }
-.font-wordmark { font-family: var(--font-wordmark); letter-spacing: 0.05em; }
-.font-body { font-family: var(--font-body); }
+.font-display { font-family: var(--font-display, var(--font-display-fallback)); letter-spacing: -0.01em; }
+.font-wordmark { font-family: var(--font-wordmark, var(--font-wordmark-fallback)); letter-spacing: 0.05em; }
+.font-body { font-family: var(--font-body, var(--font-body-fallback)); }
 
 /* Aerospace stencil treatment for the STRATOS wordmark */
 .wordmark-stratos {
-  font-family: var(--font-wordmark);
+  font-family: var(--font-wordmark, var(--font-wordmark-fallback));
   font-weight: 400;
   letter-spacing: 0.02em;
   text-transform: uppercase;

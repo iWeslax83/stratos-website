@@ -119,7 +119,7 @@ export default async function OG() {
             fontSize: 20,
           }}
         >
-          <div>bursafeniha.com</div>
+          <div>stratosiha.com</div>
           <div style={{ letterSpacing: "0.3em", textTransform: "uppercase" }}>
             Tofaş Fen Lisesi · Bursa
           </div>

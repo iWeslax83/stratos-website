@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Send, Check, AlertCircle, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
@@ -8,10 +8,49 @@ import { cn } from "@/lib/cn";
 type FormType = "sponsor" | "membership";
 type Status = "idle" | "submitting" | "success" | "error";
 
+const MEMBERSHIP_HASHES = new Set(["#uyelik", "#katil", "#bize-katil", "#membership"]);
+
+// Honeypot field name — must match server. Real users won't see/fill this.
+const HONEYPOT = "website_url";
+
+function useFormGuards() {
+  const renderedAt = useRef<number>(Date.now());
+  return renderedAt;
+}
+
+function HoneypotField() {
+  return (
+    <div aria-hidden="true" className="absolute left-[-9999px] h-0 w-0 overflow-hidden opacity-0">
+      <label>
+        Web siteniz (boş bırakın)
+        <input
+          type="text"
+          name={HONEYPOT}
+          tabIndex={-1}
+          autoComplete="off"
+          defaultValue=""
+        />
+      </label>
+    </div>
+  );
+}
+
 export function ContactForms() {
   const [active, setActive] = useState<FormType>("sponsor");
+
+  useEffect(() => {
+    const sync = () => {
+      if (MEMBERSHIP_HASHES.has(window.location.hash.toLowerCase())) {
+        setActive("membership");
+      }
+    };
+    sync();
+    window.addEventListener("hashchange", sync);
+    return () => window.removeEventListener("hashchange", sync);
+  }, []);
+
   return (
-    <div>
+    <div id="uyelik">
       <div className="flex gap-2 border-b border-white/10">
         <TabButton
           active={active === "sponsor"}
@@ -75,6 +114,7 @@ const inputClasses =
 function SponsorForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const renderedAt = useFormGuards();
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -86,7 +126,11 @@ function SponsorForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ kind: "sponsor", ...data }),
+        body: JSON.stringify({
+          kind: "sponsor",
+          ...data,
+          _elapsed: Date.now() - renderedAt.current,
+        }),
       });
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));
@@ -101,7 +145,8 @@ function SponsorForm() {
   };
 
   return (
-    <form onSubmit={onSubmit} className="grid gap-5">
+    <form onSubmit={onSubmit} className="relative grid gap-5">
+      <HoneypotField />
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <FieldLabel>Şirket / Kurum</FieldLabel>
@@ -137,7 +182,7 @@ function SponsorForm() {
           <option value="platin">Platin</option>
           <option value="altin">Altın</option>
           <option value="gumus">Gümüş</option>
-          <option value="destekci">Destekçi / Ayni</option>
+          <option value="destekci">Destekçi</option>
           <option value="custom">Özel iş birliği</option>
         </select>
       </div>
@@ -174,6 +219,7 @@ function SponsorForm() {
 function MembershipForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const renderedAt = useFormGuards();
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -185,7 +231,11 @@ function MembershipForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ kind: "membership", ...data }),
+        body: JSON.stringify({
+          kind: "membership",
+          ...data,
+          _elapsed: Date.now() - renderedAt.current,
+        }),
       });
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));
@@ -200,7 +250,8 @@ function MembershipForm() {
   };
 
   return (
-    <form onSubmit={onSubmit} className="grid gap-5">
+    <form onSubmit={onSubmit} className="relative grid gap-5">
+      <HoneypotField />
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <FieldLabel>Ad Soyad</FieldLabel>

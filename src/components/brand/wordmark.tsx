@@ -1,4 +1,5 @@
 import { cn } from "@/lib/cn";
+import { site } from "@/data/site";
 
 interface WordmarkProps {
   className?: string;
@@ -16,18 +17,19 @@ export function Wordmark({
   descriptorClassName,
 }: WordmarkProps) {
   return (
-    <div className="flex flex-col leading-none">
-      <span className={cn("wordmark-stratos text-[1.6rem] sm:text-[1.85rem]", className)}>
+    <div className="flex min-w-0 flex-col leading-none">
+      <span className={cn("wordmark-stratos text-[1.4rem] sm:text-[1.85rem]", className)}>
         STRATOS
       </span>
       {withDescriptor && (
         <span
           className={cn(
-            "mt-1 text-[0.6rem] sm:text-[0.65rem] uppercase tracking-[0.28em] text-ink-300/80 font-display",
+            "mt-1 truncate text-[0.55rem] sm:text-[0.65rem] uppercase tracking-[0.2em] sm:tracking-[0.28em] text-ink-300/80 font-display",
             descriptorClassName,
           )}
         >
-          Bursa Fen Lisesi İHA Takımı
+          <span className="sm:hidden">{site.brand.descriptorShort}</span>
+          <span className="hidden sm:inline">{site.brand.descriptor}</span>
         </span>
       )}
     </div>

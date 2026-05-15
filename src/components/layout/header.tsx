@@ -36,8 +36,8 @@ export function Header() {
       )}
     >
       <Container size="wide">
-        <div className="flex h-20 items-center justify-between">
-          <Link href="/" className="flex items-center gap-3 group" aria-label="Stratos anasayfaya dön">
+        <div className="flex h-20 items-center justify-between gap-3">
+          <Link href="/" className="flex min-w-0 items-center gap-3 group" aria-label="Stratos anasayfaya dön">
             <LogoMark size={44} priority />
             <Wordmark withDescriptor />
           </Link>

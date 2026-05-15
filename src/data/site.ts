@@ -12,10 +12,19 @@ export const site = {
       "Tasarım, üretim, otonom yazılım ve uçuş — hepsini öğrenci eliyle yapan, ulusal yarışmalarda sahaya çıkan bir lise takımı.",
   },
   contact: {
-    email: "bursafeniha@gmail.com",
+    email: "stratosiha@gmail.com",
     phone: "+90 505 036 36 07",
     phoneHref: "tel:+905050363607",
     address: "Tofaş Fen Lisesi, Bursa",
+  },
+  season: {
+    label: "Sezon 2025-26",
+    competition: "TEKNOFEST 2026 — Liseler Arası İHA",
+    // Yarışma haftası — TEKNOFEST'in resmi tarihi açıklandığında güncelle.
+    competitionDate: "2026-09-10",
+    sponsorshipDeadline: "2026-04-30",
+    currentPhase: "Detay Tasarım",
+    nextMilestone: "Üretim & Entegrasyon",
   },
   social: {
     // None active yet — will be opened soon. Render as "coming soon" badges.
@@ -44,11 +53,11 @@ export const site = {
     },
     {
       id: "nasa-spaceapps",
-      title: "NASA SpaceApps Hackathon — Bursa İl 1.liği",
+      title: "NASA SpaceApps Hackathon — Türkiye 2.liği",
       year: "2025",
       category: "Hackathon",
       blurb:
-        "NASA SpaceApps Challenge'da Bursa il birinciliği aldık.",
+        "2025 NASA SpaceApps Challenge'da Bursa il birinciliği ve Türkiye 2.liği aldık.",
     },
     {
       id: "teknofest-iha",
@@ -56,7 +65,7 @@ export const site = {
       year: "2026",
       category: "TEKNOFEST",
       blurb:
-        "Sabit Kanat ve Döner Kanat kategorisi proje sunum raporu başarıyla kabul edildi.",
+        "Döner Kanat kategorisinde proje sunum raporumuz baraj puanının 8 puan üstünde bir başarı elde ederek başarıyla kabul edildi.",
     },
   ],
   projects: [
@@ -79,7 +88,6 @@ export const site = {
         "ArduPilot",
         "OpenCV",
         "MAVLink",
-        "T-MOTOR MN4010",
         "Karbon Fiber",
       ],
     },
@@ -125,9 +133,9 @@ export const site = {
         captain: true,
       },
       {
-        name: "Demir Özcan",
-        role: "Tasarım Kaptanı",
-        department: "Çizim",
+        name: "Berke Azim Açıkkol",
+        role: "Sponsorluk Kaptanı",
+        department: "Sponsorluk",
         captain: true,
       },
       {
@@ -137,11 +145,12 @@ export const site = {
         captain: true,
       },
       {
-        name: "Berke Azim Açıkkol",
-        role: "Sponsorluk Kaptanı",
-        department: "Sponsorluk",
+        name: "Demir Özcan",
+        role: "Tasarım Kaptanı",
+        department: "Çizim",
         captain: true,
       },
+
       { name: "Yusuf Talha Kaya", role: "Üye", department: "Mekanik", captain: false },
       { name: "Ahmet Ege Aksoy", role: "Üye", department: "Yazılım", captain: false },
       { name: "İbrahim Özdemir", role: "Üye", department: "Çizim", captain: false },
