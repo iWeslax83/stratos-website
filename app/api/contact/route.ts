@@ -139,7 +139,7 @@ export async function POST(req: Request) {
       : `Üyelik başvurusu — ${result.name}`;
 
   try {
-    const { error } = await resend.emails.send({
+    const { data, error } = await resend.emails.send({
       from: fromAddress,
       to: [toAddress],
       replyTo: result.email,
@@ -147,13 +147,21 @@ export async function POST(req: Request) {
       html: renderHtml(result),
     });
     if (error) {
-      console.error("[contact] resend error", error);
-      return NextResponse.json({ error: "Mail gönderilemedi." }, { status: 502 });
+      console.error("[contact] resend error", error, { from: fromAddress, to: toAddress });
+      return NextResponse.json(
+        {
+          error: "Mail gönderilemedi.",
+          detail: { name: error.name, message: error.message, from: fromAddress, to: toAddress },
+        },
+        { status: 502 },
+      );
     }
-    return NextResponse.json({ ok: true });
+    console.log("[contact] resend ok", data?.id);
+    return NextResponse.json({ ok: true, id: data?.id });
   } catch (err) {
     console.error("[contact] resend throw", err);
-    return NextResponse.json({ error: "Beklenmeyen hata." }, { status: 500 });
+    const message = err instanceof Error ? err.message : String(err);
+    return NextResponse.json({ error: "Beklenmeyen hata.", detail: message }, { status: 500 });
   }
 }
 

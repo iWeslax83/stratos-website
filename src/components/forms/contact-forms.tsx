@@ -134,7 +134,13 @@ function SponsorForm() {
       });
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));
-        throw new Error(body.error ?? "Gönderim başarısız.");
+        const detail =
+          body.detail && typeof body.detail === "object"
+            ? ` — ${body.detail.message ?? JSON.stringify(body.detail)}`
+            : body.detail
+              ? ` — ${body.detail}`
+              : "";
+        throw new Error(`${body.error ?? "Gönderim başarısız."}${detail}`);
       }
       setStatus("success");
       form.reset();
@@ -239,7 +245,13 @@ function MembershipForm() {
       });
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));
-        throw new Error(body.error ?? "Gönderim başarısız.");
+        const detail =
+          body.detail && typeof body.detail === "object"
+            ? ` — ${body.detail.message ?? JSON.stringify(body.detail)}`
+            : body.detail
+              ? ` — ${body.detail}`
+              : "";
+        throw new Error(`${body.error ?? "Gönderim başarısız."}${detail}`);
       }
       setStatus("success");
       form.reset();
@@ -287,7 +299,6 @@ function MembershipForm() {
           <option value="cizim">Çizim</option>
           <option value="mekanik">Mekanik</option>
           <option value="yazilim">Yazılım</option>
-          <option value="pilot">Pilot</option>
           <option value="sponsorluk">Sponsorluk</option>
         </select>
       </div>
