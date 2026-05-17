@@ -29,7 +29,7 @@ const sairaStencil = Saira_Stencil_One({
 
 export const metadata: Metadata = {
   title: {
-    default: `${site.brand.name} — ${site.brand.descriptor}`,
+    default: `${site.brand.name} · ${site.brand.descriptor}`,
     template: `%s · ${site.brand.name}`,
   },
   description: site.brand.longTagline,
@@ -114,7 +114,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="font-body">
+      <body className="font-body" suppressHydrationWarning>
         <SkyBackdrop />
         <div className="relative flex min-h-dvh flex-col">
           <Header />

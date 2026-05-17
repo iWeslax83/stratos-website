@@ -14,7 +14,7 @@ const upcomingTopics = [
     icon: Cpu,
     title: "Raspberry Pi 5 üzerinde gerçek zamanlı görüntü işleme",
     blurb:
-      "OpenCV ile hedef tespiti — Pi 5'in performans sınırları, jello etkisi ve optimizasyon notları.",
+      "OpenCV ile hedef tespiti: Pi 5'in performans sınırları, jello etkisi ve optimizasyon notları.",
   },
   {
     icon: Wrench,
@@ -23,7 +23,7 @@ const upcomingTopics = [
   },
   {
     icon: Rocket,
-    title: "Otonom iniş algoritması — SITL'den sahaya",
+    title: "Otonom iniş algoritması: SITL'den sahaya",
     blurb: "Hedef merkezi hesabı, PID ayarı, MAVLink komutları.",
   },
 ];
@@ -34,7 +34,7 @@ export default function BlogPage() {
       <PageHeader
         eyebrow="Blog & Haberler"
         title="Build log'lar ve teknik yazılar."
-        description="Sezon boyunca öğrendiklerimizi paylaşıyoruz — donanım tercihleri, yazılım kararları, saha notları."
+        description="Sezon boyunca öğrendiklerimizi paylaşıyoruz: donanım tercihleri, yazılım kararları, saha notları."
       />
 
       <Container size="default">

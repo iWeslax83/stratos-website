@@ -160,8 +160,8 @@ export default function SponsorlarPage() {
                 İlk sponsor sözlerimizi yakında burada paylaşacağız.
               </p>
               <p className="mt-5 max-w-xl text-sm leading-relaxed text-ink-300">
-                Sponsorlarımızdan aldığımız geri dönüşler — neden Stratos&apos;u
-                desteklediklerini ve birlikte ne ürettiğimizi — bu bölümde yer
+                Sponsorlarımızdan aldığımız geri dönüşler, neden Stratos&apos;u
+                desteklediklerini ve birlikte ne ürettiğimizi, bu bölümde yer
                 alacak. İlk iş birliğimizden ses çıktığında, doğrudan onların
                 ağzından duyacaksınız.
               </p>

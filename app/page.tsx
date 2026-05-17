@@ -12,6 +12,7 @@ export default function HomePage() {
       <Hero />
       <StatsBar />
       <TechStatsBar />
+      <FpvStatsBar />
       <Manifesto />
       <Pillars />
       <AchievementsStrip />
@@ -66,6 +67,56 @@ function TechStatsBar() {
         </dl>
         <p className="mt-4 text-center text-[0.65rem] uppercase tracking-[0.3em] text-ink-500 sm:text-left">
           Pixhawk 6C · Raspberry Pi 5 · ArduPilot · OpenCV · 3K Karbon Fiber
+        </p>
+        <div className="pb-12" />
+      </Container>
+    </section>
+  );
+}
+
+function FpvStatsBar() {
+  const specs = [
+    { label: "Maks. Hız", value: "~170", unit: "km/h" },
+    { label: "Ağırlık", value: "409", unit: "g" },
+    { label: "Uçuş Süresi", value: "14-19", unit: "dk" },
+    { label: "Video Gecikmesi", value: "8", unit: "ms" },
+  ];
+  return (
+    <section className="relative border-b border-white/5 bg-[color-mix(in_oklab,var(--color-ink-900)_45%,transparent)]">
+      <Container size="wide">
+        <div className="flex items-center gap-3 py-6">
+          <Gauge size={14} className="shrink-0 text-[var(--color-sky-dawn)]" />
+          <p className="text-[0.65rem] uppercase tracking-[0.35em] text-[var(--color-sky-dawn)]">
+            FPV Yarış Drone&apos;u Teknik Özellikleri
+          </p>
+          <span className="hidden h-px flex-1 bg-gradient-to-r from-[var(--color-sky-dawn)]/40 to-transparent sm:block" />
+          <Link
+            href="/projeler/fpv-doner-kanat"
+            className="hidden text-[0.65rem] font-display font-semibold uppercase tracking-[0.25em] text-ink-300 hover:text-white sm:inline-flex items-center gap-1.5"
+          >
+            Teknik Detay <ArrowRight size={11} />
+          </Link>
+        </div>
+        <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] pb-px sm:grid-cols-4">
+          {specs.map((s) => (
+            <div
+              key={s.label}
+              className="bg-[color-mix(in_oklab,var(--color-ink-900)_70%,transparent)] px-5 py-7 text-center"
+            >
+              <dt className="text-[0.6rem] uppercase tracking-[0.3em] text-ink-400">
+                {s.label}
+              </dt>
+              <dd className="mt-3 font-display font-black leading-none tracking-tight text-ink-50">
+                <span className="text-3xl sm:text-4xl">{s.value}</span>
+                <span className="ml-1.5 text-sm font-bold text-[var(--color-sky-dawn)]">
+                  {s.unit}
+                </span>
+              </dd>
+            </div>
+          ))}
+        </dl>
+        <p className="mt-4 text-center text-[0.65rem] uppercase tracking-[0.3em] text-ink-500 sm:text-left">
+          GEPRC SpeedX2 2207E 1960Kv · Gemfan 5136 · F722-HD V2 · TAKER H60 60A · MATEN 1.6W VTX · Caddx Ratel 2 · ELRS 2.4GHz · GPS
         </p>
         <div className="pb-12" />
       </Container>
@@ -168,15 +219,14 @@ function Manifesto() {
           </div>
           <div className="md:col-span-8">
             <p className="text-lg leading-relaxed text-ink-200">
-              Stratos, insansız hava araçları teknolojisine ilgi duyan
-              öğrencileri bir araya getiren bir lise takımıdır. Drone tasarımı,
-              yazılım geliştirme ve uçuş eğitimi konularında öğrencilerine
-              kapsamlı bir öğrenme ortamı sunuyoruz.
+              Stratos, Tofaş Fen Lisesi&apos;nde insansız hava araçlarına ilgi
+              duyan öğrencilerin kurduğu bir takım. Drone&apos;u tasarlıyor,
+              kontrol yazılımını yazıyor ve uçuş testlerini kendimiz yapıyoruz.
             </p>
             <p className="mt-4 text-lg leading-relaxed text-ink-300">
-              Teorik bilgiyi pratik uygulamayla birleştirerek geleceğin
-              havacılık mühendislerini yetiştirmek için her sezon yeni bir İHA
-              tasarlıyor, üretiyor ve sahaya çıkıyoruz.
+              Her sezon yarışma şartnamesine göre yeni bir İHA tasarlayıp
+              üretiyor, sahada test ediyoruz. Bir önceki araçtan öğrendiğimiz
+              her şey bir sonrakine giriyor.
             </p>
           </div>
         </div>
@@ -326,18 +376,18 @@ function Roadmap() {
       tag: "Şubat 2026",
       title: "Detay Tasarım",
       blurb:
-        "Kavramsal aşama bitti — şimdi CAD üzerinde son detaylar ve malzeme onayları.",
+        "Kavramsal aşama bitti, şimdi CAD üzerinde son detaylar ve malzeme onayları.",
       status: "active",
     },
     {
-      tag: "Mart — Mayıs 2026",
+      tag: "Mart - Mayıs 2026",
       title: "Üretim & Entegrasyon",
       blurb:
         "Karbon fiber CNC kesim, 3D baskı, elektronik montaj. Üretim hatları paralel ilerliyor.",
       status: "next",
     },
     {
-      tag: "Haziran — Ağustos 2026",
+      tag: "Haziran - Ağustos 2026",
       title: "Test & Optimizasyon",
       blurb:
         "PID ayarı, otonom hedef tespiti testleri, saha uçuşları.",
@@ -347,7 +397,7 @@ function Roadmap() {
       tag: "Eylül 2026",
       title: "TEKNOFEST Yarışması",
       blurb:
-        "Liseler Arası İHA — Döner Kanat kategorisinde sahada olacağız.",
+        "Liseler Arası İHA · Döner Kanat kategorisinde sahada olacağız.",
       status: "final",
     },
   ];
@@ -362,7 +412,7 @@ function Roadmap() {
             TEKNOFEST 2026 sezon planı.
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-sm text-ink-300">
-            Şubat'tan Eylül'e — her aşama ölçülebilir bir hedefle bağlı.
+            Şubat'tan Eylül'e, her aşama ölçülebilir bir hedefle bağlı.
           </p>
         </div>
         <ol className="mt-14 grid gap-4 md:grid-cols-4">

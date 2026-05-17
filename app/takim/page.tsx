@@ -114,7 +114,7 @@ export default function TakimPage() {
               <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-ink-300">
                 Stratos&apos;un aktif kadrosu hâlâ lise sıralarında. Bu bölüm,
                 mezunlarımızın gittiği üniversiteleri ve seçtikleri mühendislik
-                dallarını zamanla yayımlamak için ayrıldı — takımın uzun vadeli
+                dallarını zamanla yayımlamak için ayrıldı, takımın uzun vadeli
                 etkisinin somut kaydı.
               </p>
               <p className="mt-6 text-[0.65rem] uppercase tracking-[0.3em] text-ink-500">

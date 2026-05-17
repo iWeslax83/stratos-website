@@ -3,7 +3,7 @@ import { site } from "@/data/site";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: `${site.brand.name} — ${site.brand.descriptor}`,
+    name: `${site.brand.name} · ${site.brand.descriptor}`,
     short_name: site.brand.name,
     description: site.brand.longTagline,
     start_url: "/",

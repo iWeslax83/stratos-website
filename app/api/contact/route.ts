@@ -85,7 +85,7 @@ function renderHtml(p: Payload) {
   <tr><td><strong>Şirket</strong></td><td>${escapeHtml(p.company)}</td></tr>
   <tr><td><strong>İletişim</strong></td><td>${escapeHtml(p.name)}</td></tr>
   <tr><td><strong>E-posta</strong></td><td>${escapeHtml(p.email)}</td></tr>
-  <tr><td><strong>Telefon</strong></td><td>${escapeHtml(p.phone ?? "—")}</td></tr>
+  <tr><td><strong>Telefon</strong></td><td>${escapeHtml(p.phone ?? "Belirtilmedi")}</td></tr>
   <tr><td><strong>Paket</strong></td><td>${escapeHtml(p.tier)}</td></tr>
 </table>
 <h3>Mesaj</h3>
@@ -97,7 +97,7 @@ function renderHtml(p: Payload) {
   <tr><td><strong>Ad</strong></td><td>${escapeHtml(p.name)}</td></tr>
   <tr><td><strong>Sınıf</strong></td><td>${escapeHtml(p.grade)}</td></tr>
   <tr><td><strong>E-posta</strong></td><td>${escapeHtml(p.email)}</td></tr>
-  <tr><td><strong>Telefon</strong></td><td>${escapeHtml(p.phone ?? "—")}</td></tr>
+  <tr><td><strong>Telefon</strong></td><td>${escapeHtml(p.phone ?? "Belirtilmedi")}</td></tr>
   <tr><td><strong>Departman</strong></td><td>${escapeHtml(p.department)}</td></tr>
 </table>
 <h3>Mesaj</h3>
@@ -135,8 +135,8 @@ export async function POST(req: Request) {
   const resend = new Resend(resendKey);
   const subject =
     result.kind === "sponsor"
-      ? `Sponsor talebi — ${result.company}`
-      : `Üyelik başvurusu — ${result.name}`;
+      ? `Sponsor talebi: ${result.company}`
+      : `Üyelik başvurusu: ${result.name}`;
 
   try {
     const { data, error } = await resend.emails.send({

@@ -15,7 +15,7 @@ export default function ProjelerPage() {
       <PageHeader
         eyebrow="Projeler"
         title="Tasarladık, ürettik, uçurduk."
-        description="Her sezon yeni bir görev kümesi için sıfırdan tasarladığımız araçlar — yarışma yönetmelikleri ışığında ama kendi mühendislik tercihlerimizle."
+        description="Her sezon yeni bir görev kümesi için sıfırdan tasarladığımız araçlar, yarışma yönetmelikleri ışığında ama kendi mühendislik tercihlerimizle."
       />
       <Container size="wide">
         <div className="grid gap-6 py-16 md:grid-cols-2 lg:grid-cols-3">

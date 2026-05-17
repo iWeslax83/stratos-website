@@ -7,9 +7,9 @@ export const site = {
     descriptorShort: "Bursa Fen İHA",
     school: "Tofaş Fen Lisesi",
     city: "Bursa",
-    tagline: "Stratosferi hedefleyen lise İHA takımı.",
+    tagline: "Tofaş Fen Lisesi'nin insansız hava aracı takımı.",
     longTagline:
-      "Tasarım, üretim, otonom yazılım ve uçuş — hepsini öğrenci eliyle yapan, ulusal yarışmalarda sahaya çıkan bir lise takımı.",
+      "İHA'mızın tasarımını da, üretimini de, yazılımını da öğrenciler yapıyor. Ulusal yarışmalarda da bu araçla yarışıyoruz.",
   },
   contact: {
     email: "stratosiha@gmail.com",
@@ -19,7 +19,7 @@ export const site = {
   },
   season: {
     label: "Sezon 2025-26",
-    competition: "TEKNOFEST 2026 — Liseler Arası İHA",
+    competition: "TEKNOFEST 2026 · Liseler Arası İHA",
     // Yarışma haftası — TEKNOFEST'in resmi tarihi açıklandığında güncelle.
     competitionDate: "2026-09-10",
     sponsorshipDeadline: "2026-06-03",
@@ -45,7 +45,7 @@ export const site = {
   achievements: [
     {
       id: "meb-design",
-      title: "MEB Robot — En İyi Tasarım Ödülü",
+      title: "MEB Robot · En İyi Tasarım Ödülü",
       year: "2025",
       category: "Tasarım",
       blurb:
@@ -53,7 +53,7 @@ export const site = {
     },
     {
       id: "nasa-spaceapps",
-      title: "NASA SpaceApps Hackathon — Türkiye 2.liği",
+      title: "NASA SpaceApps Hackathon · Türkiye 2.liği",
       year: "2025",
       category: "Hackathon",
       blurb:
@@ -61,18 +61,18 @@ export const site = {
     },
     {
       id: "teknofest-iha",
-      title: "TEKNOFEST Liseler Arası İHA — İlk Raporu Geçtik",
+      title: "TEKNOFEST Liseler Arası İHA · İlk Raporu Geçtik",
       year: "2026",
       category: "TEKNOFEST",
       blurb:
-        "Döner Kanat kategorisinde proje sunum raporumuz baraj puanının 8 puan üstünde bir başarı elde ederek başarıyla kabul edildi.",
+        "Döner Kanat kategorisinde proje sunum raporumuz, baraj puanının 8 puan üzerinde kalarak kabul edildi.",
     },
   ],
   projects: [
     {
       slug: "otonom-doner-kanat",
       title: "Otonom Döner Kanat İHA",
-      competition: "TEKNOFEST Liseler Arası İHA — Döner Kanat",
+      competition: "TEKNOFEST Liseler Arası İHA · Döner Kanat",
       year: "2026",
       summary:
         "Görüntü işleme ile otonom hedef tespiti, hassas iniş ve görev mekanizması yapabilen X-quadrotor.",
@@ -94,10 +94,10 @@ export const site = {
     {
       slug: "fpv-doner-kanat",
       title: "FPV Döner Kanat İHA",
-      competition: "MEB Robot FPV İHA — Döner Kanat",
+      competition: "MEB Robot FPV İHA · Döner Kanat",
       year: "2025",
       summary:
-        "Gerçek zamanlı FPV görüntü aktarımı ve yüksek manevra kabiliyetine sahip yarış drone'u.",
+        "Düşük gecikmeli FPV görüntü aktarımıyla uçurduğumuz, yarış için ayarlanmış manevra kabiliyeti yüksek bir drone.",
       highlights: [
         "Düşük gecikmeli analog FPV video aktarımı",
         "Yarış parkurları için optimize edilmiş hafif gövde",
@@ -107,11 +107,11 @@ export const site = {
     },
     {
       slug: "vex-pushback",
-      title: "VEX Robotics V5 — Pushback",
+      title: "VEX Robotics V5 · Pushback",
       competition: "VEX Robotics Competition",
       year: "2025",
       summary:
-        "Özel mekanik tasarım ve stratejik otonom programlama içeren yarışma seviyesinde robot.",
+        "Sezonun \"Pushback\" oyunu için tasarladığımız, özel mekanizmaları ve otonom rutinleri olan yarışma robotu.",
       highlights: [
         "Sezona özel \"Pushback\" oyunu için tasarlandı",
         "Sensör entegrasyonu ile gelişmiş otonom rutin",
@@ -166,25 +166,25 @@ export const site = {
         id: "mekanik",
         name: "Mekanik",
         blurb:
-          "Tasarımın gerçek dünyaya geçişini yönetir — CNC kesim, 3D baskı, montaj ve prototip testleri ekibin elinden çıkar.",
+          "Tasarımı fiziksel parçaya dönüştürür: CNC kesim, 3D baskı, montaj ve prototip testleri bu ekipte yapılır.",
       },
       {
         id: "yazilim",
         name: "Yazılım",
         blurb:
-          "Otonom uçuş algoritmaları, görüntü işleme ve yer istasyonu yazılımı; ArduPilot + OpenCV ekosistemi üstünde geliştirilir.",
+          "Otonom uçuş algoritmaları, görüntü işleme ve yer istasyonu yazılımını ArduPilot ile OpenCV üzerinde geliştirir.",
       },
       {
         id: "sponsorluk",
         name: "Sponsorluk",
         blurb:
-          "Takımın maddi ve manevi destekleri için kurumlarla iletişim kurar; pitch deck, raporlama ve marka iş birlikleri ekipte yönetilir.",
+          "Sponsor bulmak için kurumlarla iletişim kurar; sunum dosyası, raporlama ve marka iş birlikleri bu ekipte yürütülür.",
       },
     ],
   },
   sponsorship: {
     intro:
-      "Stratos, Türkiye'nin önde gelen lise İHA takımlarından biri olma yolunda. Sponsorlarımız bu yolculuğun parçası — adınız uçtuğumuz her görevde, paylaştığımız her başarıda taşınır.",
+      "Stratos yeni kurulan bir takım ve ulusal yarışmalarda iddialı olmayı hedefliyor. Sponsorlarımızın adı aracımızın gövdesinde ve paylaştığımız içeriklerde yer alır.",
     tiers: [
       {
         id: "platin",

@@ -4,7 +4,7 @@ import { GalleryGrid } from "@/components/gallery/gallery-grid";
 
 export const metadata = {
   title: "Galeri",
-  description: "Atölyeden sahaya — Stratos İHA Takımı çalışma kareleri.",
+  description: "Atölyeden sahaya, Stratos İHA Takımı çalışma kareleri.",
 };
 
 const gallery = [
@@ -28,7 +28,7 @@ export default function GaleriPage() {
       <PageHeader
         eyebrow="Galeri"
         title="Atölyeden sahaya."
-        description="Tasarım ekranından üretim tezgâhına, uçuş alanından yarışma sahnesine — Stratos'un çalışma günleri."
+        description="Tasarım ekranından üretim tezgâhına, uçuş alanından yarışma sahnesine: Stratos'un çalışma günleri."
       />
       <Container size="wide">
         <div className="py-16">

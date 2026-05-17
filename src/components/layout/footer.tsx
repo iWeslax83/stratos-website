@@ -109,8 +109,8 @@ function SocialBadge({
 }) {
   return (
     <span
-      aria-label={`${label} — yakında`}
-      title={`${label} — yakında`}
+      aria-label={`${label} (yakında)`}
+      title={`${label} (yakında)`}
       className="grid h-10 w-10 cursor-not-allowed place-items-center rounded-full border border-white/10 text-ink-400 opacity-60"
     >
       <Icon size={16} />

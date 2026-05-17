@@ -136,9 +136,9 @@ function SponsorForm() {
         const body = await res.json().catch(() => ({}));
         const detail =
           body.detail && typeof body.detail === "object"
-            ? ` — ${body.detail.message ?? JSON.stringify(body.detail)}`
+            ? `: ${body.detail.message ?? JSON.stringify(body.detail)}`
             : body.detail
-              ? ` — ${body.detail}`
+              ? `: ${body.detail}`
               : "";
         throw new Error(`${body.error ?? "Gönderim başarısız."}${detail}`);
       }
@@ -203,7 +203,7 @@ function SponsorForm() {
         />
       </div>
 
-      <StatusLine status={status} errorMsg={errorMsg} successMsg="Sponsor talebiniz iletildi — 24-48 saat içinde yanıt vereceğiz." />
+      <StatusLine status={status} errorMsg={errorMsg} successMsg="Sponsor talebiniz iletildi, 24-48 saat içinde yanıt vereceğiz." />
 
       <div className="flex justify-end">
         <Button type="submit" size="md" variant="primary">
@@ -247,9 +247,9 @@ function MembershipForm() {
         const body = await res.json().catch(() => ({}));
         const detail =
           body.detail && typeof body.detail === "object"
-            ? ` — ${body.detail.message ?? JSON.stringify(body.detail)}`
+            ? `: ${body.detail.message ?? JSON.stringify(body.detail)}`
             : body.detail
-              ? ` — ${body.detail}`
+              ? `: ${body.detail}`
               : "";
         throw new Error(`${body.error ?? "Gönderim başarısız."}${detail}`);
       }
@@ -313,7 +313,7 @@ function MembershipForm() {
         />
       </div>
 
-      <StatusLine status={status} errorMsg={errorMsg} successMsg="Başvurun bize ulaştı — yakında geri döneceğiz." />
+      <StatusLine status={status} errorMsg={errorMsg} successMsg="Başvurun bize ulaştı, yakında geri döneceğiz." />
 
       <div className="flex justify-end">
         <Button type="submit" size="md" variant="primary">

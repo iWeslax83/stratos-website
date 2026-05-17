@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Stratos — Bursa Fen Lisesi İHA Takımı";
+export const alt = "Stratos · Bursa Fen Lisesi İHA Takımı";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -105,7 +105,7 @@ export default async function OG() {
             STRATOS
           </div>
           <div style={{ fontSize: 30, color: "#9AA3BA", maxWidth: 900 }}>
-            Tasarım, üretim, otonom yazılım ve uçuş — hepsini öğrenci eliyle
+            Tasarım, üretim, otonom yazılım ve uçuş, hepsini öğrenci eliyle
             yapan, ulusal yarışmalarda sahaya çıkan bir lise takımı.
           </div>
         </div>

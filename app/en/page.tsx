@@ -16,9 +16,9 @@ import { site } from "@/data/site";
 import { cn } from "@/lib/cn";
 
 export const metadata = {
-  title: "English — Stratos UAV Team",
+  title: "English · Stratos UAV Team",
   description:
-    "Stratos is the UAV team of Tofaş Fen Lisesi (Bursa, Turkey). Autonomous + FPV rotary-wing aircraft built end-to-end by high-school students. Sponsorship and partnership inquiries welcome.",
+    "Stratos is the UAV team of Tofaş Fen Lisesi in Bursa, Turkey. Students design, build, program and fly autonomous and FPV rotary-wing aircraft, and compete with them at national level. Sponsorship and partnership inquiries welcome.",
 };
 
 const tierAccent: Record<string, string> = {
@@ -92,7 +92,7 @@ const pillarsEn = [
     icon: Wrench,
     title: "Design & Manufacture",
     blurb:
-      "Full 3D CAD design, CNC-cut carbon fiber, 3D-printed structural parts — fabricated in-house.",
+      "Full 3D CAD design, CNC-cut carbon fiber, 3D-printed structural parts, all fabricated in-house.",
   },
   {
     icon: Cpu,
@@ -117,7 +117,7 @@ const pillarsEn = [
 const achievementsEn = [
   {
     id: "meb-design",
-    title: "MEB Robot — Best Design Award",
+    title: "MEB Robot · Best Design Award",
     year: "2025",
     category: "Design",
     blurb:
@@ -125,7 +125,7 @@ const achievementsEn = [
   },
   {
     id: "nasa-spaceapps",
-    title: "NASA SpaceApps Hackathon — Bursa Province 1st",
+    title: "NASA SpaceApps Hackathon · Bursa Province 1st",
     year: "2025",
     category: "Hackathon",
     blurb:
@@ -133,7 +133,7 @@ const achievementsEn = [
   },
   {
     id: "teknofest-iha",
-    title: "TEKNOFEST UAV — Project Report Accepted",
+    title: "TEKNOFEST UAV · Project Report Accepted",
     year: "2026",
     category: "TEKNOFEST",
     blurb:
@@ -189,9 +189,8 @@ function Hero() {
             </h1>
             <p className="mx-auto mt-8 max-w-2xl text-base sm:text-lg leading-relaxed text-ink-200 animate-rise delay-300">
               Stratos is the UAV team at {site.brand.school} in {site.brand.city}.
-              Design, manufacturing, autonomous software, and flight — all
-              owned end-to-end by high-school students, competing at the
-              national level.
+              Students design our aircraft, build it, write its software and
+              fly it themselves, and we compete with it at national level.
             </p>
             <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row animate-rise delay-400">
               <Button as="link" href="#sponsor" size="lg">
@@ -253,10 +252,10 @@ function About() {
           </div>
           <div className="md:col-span-8">
             <p className="text-lg leading-relaxed text-ink-200">
-              Stratos brings together students drawn to unmanned aerial
-              vehicles and turns curiosity into hardware. We learn drone
-              design, embedded software, and flight — and we show up to
-              compete with what we&apos;ve built.
+              Stratos is a team of {site.brand.school} students interested in
+              unmanned aerial vehicles. We design the drone, write its control
+              software and run the flight tests ourselves. What we learn from
+              one aircraft goes into the next.
             </p>
             <p className="mt-4 text-lg leading-relaxed text-ink-300">
               Every season we design a new aircraft from scratch, manufacture
@@ -306,7 +305,7 @@ function Achievements() {
             Achievements
           </p>
           <h2 className="mt-4 font-display text-3xl sm:text-4xl font-bold">
-            Where we&apos;ve competed — and won.
+            Where we&apos;ve competed, and won.
           </h2>
         </div>
         <div className="mt-12 grid gap-6 md:grid-cols-3">
@@ -340,13 +339,13 @@ function FlagshipProject() {
               Flagship Project
             </p>
             <h2 className="mt-4 font-display text-3xl sm:text-4xl font-bold leading-tight">
-              Autonomous Rotary-Wing UAV — TEKNOFEST 2026
+              Autonomous Rotary-Wing UAV · TEKNOFEST 2026
             </h2>
             <p className="mt-5 text-base leading-relaxed text-ink-200">
               An X-quadrotor purpose-built for the TEKNOFEST 2026
               Rotary-Wing competition. Onboard vision pipeline detects ground
               targets, executes precision landing, and triggers the mission
-              payload — autonomously.
+              payload, autonomously.
             </p>
             <ul className="mt-6 space-y-3 text-sm text-ink-200">
               <li className="flex items-start gap-2.5">
@@ -375,7 +374,7 @@ function FlagshipProject() {
               <div className="mt-6 grid gap-4">
                 <div className="rounded-xl border border-white/10 bg-white/[0.02] p-5">
                   <p className="text-[0.65rem] uppercase tracking-[0.3em] text-ink-400">
-                    MEB Robot FPV UAV — Rotary Wing
+                    MEB Robot FPV UAV · Rotary Wing
                   </p>
                   <h3 className="mt-2 font-display text-lg font-bold text-ink-50">
                     FPV Rotary-Wing UAV
@@ -390,7 +389,7 @@ function FlagshipProject() {
                     VEX Robotics Competition
                   </p>
                   <h3 className="mt-2 font-display text-lg font-bold text-ink-50">
-                    VEX V5 — Pushback
+                    VEX V5 · Pushback
                   </h3>
                   <p className="mt-2 text-sm text-ink-300">
                     Competition-grade robot with custom mechanics and strategic
@@ -423,7 +422,7 @@ function TechSpecs() {
               <strong className="text-ink-50">TEKNOFEST 2026</strong>{" "}
               project-report review. Configuration, manufacturing, and
               software choices are documented in detail. The numbers below
-              are measured — not advertised.
+              are measured, not advertised.
             </p>
           </div>
 
@@ -473,7 +472,7 @@ function Team() {
             <strong className="text-ink-50">
               {site.team.advisor.name}
             </strong>{" "}
-            — {site.brand.school}.
+            at {site.brand.school}.
           </p>
         </div>
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -516,10 +515,9 @@ function SponsorTiers() {
             Your name flies with every mission.
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-ink-200">
-            Stratos is on track to become one of Turkey&apos;s leading
-            high-school UAV programs. Our sponsors are part of that journey —
-            your name travels with us on every flight and every result we
-            share.
+            Stratos is a newly formed team aiming to compete seriously at the
+            national level. Our sponsors&apos; names appear on the aircraft
+            body and in the content we share.
           </p>
         </div>
 
@@ -565,7 +563,7 @@ function SponsorTiers() {
               <Button
                 as="link"
                 href={`mailto:${site.contact.email}?subject=${encodeURIComponent(
-                  `Sponsorship inquiry — ${tier.name} tier`,
+                  `Sponsorship inquiry: ${tier.name} tier`,
                 )}`}
                 external
                 variant={idx === 0 ? "primary" : "outline"}
@@ -580,7 +578,7 @@ function SponsorTiers() {
 
         <p className="mx-auto mt-10 max-w-xl text-center text-sm text-ink-300">
           Considering a custom partnership? We&apos;re open to packages outside
-          these tiers — media sponsorships, equipment in-kind, training
+          these tiers: media sponsorships, equipment in-kind, training
           collaborations.
         </p>
       </Container>
@@ -599,17 +597,17 @@ function Contact() {
               Get in touch
             </p>
             <h2 className="mt-4 max-w-2xl font-display text-3xl sm:text-5xl font-bold leading-tight">
-              Let&apos;s talk — in English, anytime.
+              Let&apos;s talk, in English, anytime.
             </h2>
             <p className="mt-5 max-w-xl text-base text-ink-100/90">
               Whether you&apos;re reaching out as a potential sponsor,
-              partner, or media contact — email us in English and we&apos;ll
+              partner, or media contact, email us in English and we&apos;ll
               respond in English. Same address, same team.
             </p>
 
             <dl className="mt-8 grid gap-4 sm:grid-cols-2">
               <a
-                href={`mailto:${site.contact.email}?subject=${encodeURIComponent("Stratos — inquiry (EN)")}`}
+                href={`mailto:${site.contact.email}?subject=${encodeURIComponent("Stratos inquiry (EN)")}`}
                 className="flex items-start gap-4 rounded-2xl border border-white/15 bg-white/[0.04] p-5 transition hover:border-white/30 hover:bg-white/[0.08]"
               >
                 <Mail size={20} className="mt-0.5 shrink-0 text-[var(--color-brand-200)]" />

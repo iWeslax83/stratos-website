@@ -23,7 +23,7 @@ export default function NotFound() {
             404
           </h1>
           <p className="mx-auto mt-6 max-w-md text-base text-ink-200">
-            Aradığınız sayfa stratosferin ötesinde — telemetri bu noktayı
+            Aradığınız sayfa stratosferin ötesinde, telemetri bu noktayı
             görmüyor. Anasayfaya dönelim.
           </p>
           <div className="mt-10 flex justify-center">

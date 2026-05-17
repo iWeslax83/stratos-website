@@ -20,9 +20,9 @@ export type BlogBlock =
 export const posts: BlogPost[] = [
   {
     slug: "teknofest-2026-donanim-tercihleri",
-    title: "TEKNOFEST 2026 — Donanım Tercihlerimiz ve Neden Önemli",
+    title: "TEKNOFEST 2026 · Donanım Tercihlerimiz ve Neden Önemli",
     excerpt:
-      "Otonom Döner Kanat İHA'mızın her bir bileşeni belirli bir mühendislik tercihinin ürünü. Pixhawk 6C'den karbon fiber gövdeye — neden bu seçimleri yaptığımızı anlatıyoruz.",
+      "Otonom Döner Kanat İHA'mızdaki her parça bir mühendislik tercihinin sonucu. Pixhawk 6C'den karbon fiber gövdeye, bu seçimleri neden yaptığımızı anlatıyoruz.",
     date: "2026-02-14",
     readTimeMin: 7,
     category: "Donanım",
@@ -38,7 +38,7 @@ export const posts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "X-tipi konfigürasyonda motor kolları gövdenin diyagonalinde — bu, Pi Kamera Modülü 3'ün geniş görüş açısını pervane gölgesi olmadan kullanmamızı sağlıyor. Geniş açılı tarama, otonom hedef tespitinin temel girdisi. 520 mm motor-to-motor mesafesi ise 10 inç pervaneye yeterli açıklığı verirken, sahaya çıkış için kompakt kalıyor.",
+        text: "X-tipi konfigürasyonda motor kolları gövdenin diyagonalinde, bu sayede Pi Kamera Modülü 3'ün geniş görüş açısını pervane gölgesi olmadan kullanmamızı sağlıyor. Geniş açılı tarama, otonom hedef tespitinin temel girdisi. 520 mm motor-to-motor mesafesi ise 10 inç pervaneye yeterli açıklığı verirken, sahaya çıkış için kompakt kalıyor.",
       },
       {
         type: "metric",
@@ -51,11 +51,11 @@ export const posts: BlogPost[] = [
       },
       {
         type: "h2",
-        text: "Pixhawk 6C + Raspberry Pi 5 — Çift İşlemci Mimarisi",
+        text: "Pixhawk 6C + Raspberry Pi 5 · Çift İşlemci Mimarisi",
       },
       {
         type: "p",
-        text: "Tek bir SoC üzerinde hem PID uçuş kontrolünü hem ağır görüntü işlemeyi koşturmak, kararlılığı riske atar. Bu yüzden iki ayrı kart kullanıyoruz: Pixhawk 6C deterministik uçuş kontrolünü çift IMU yedekliliğiyle yapıyor; Raspberry Pi 5 (8 GB) OpenCV tabanlı hedef tespit pipeline'ını yürütüyor. İki kart FTDI USB-TTL üzerinden MAVLink protokolüyle haberleşiyor — kritik yol gecikmesi saniyenin altında.",
+        text: "Tek bir SoC üzerinde hem PID uçuş kontrolünü hem ağır görüntü işlemeyi koşturmak, kararlılığı riske atar. Bu yüzden iki ayrı kart kullanıyoruz: Pixhawk 6C deterministik uçuş kontrolünü çift IMU yedekliliğiyle yapıyor; Raspberry Pi 5 (8 GB) OpenCV tabanlı hedef tespit pipeline'ını yürütüyor. İki kart FTDI USB-TTL üzerinden MAVLink protokolüyle haberleşiyor, kritik yol gecikmesi saniyenin altında.",
       },
       {
         type: "list",
@@ -68,11 +68,11 @@ export const posts: BlogPost[] = [
       },
       {
         type: "quote",
-        text: "Ucuz olanı değil, sahada çalışan en uygunu seçtik — düşük voltaj drop, tutarlı tepki süresi ve servis edilebilirlik öncelik.",
+        text: "Ucuz olanı değil, sahada çalışan en uygunu seçtik: düşük voltaj drop, tutarlı tepki süresi ve servis edilebilirlik öncelik.",
       },
       {
         type: "h2",
-        text: "3K karbon fiber + ABS — neden iki malzeme?",
+        text: "3K karbon fiber + ABS · neden iki malzeme?",
       },
       {
         type: "p",
@@ -84,7 +84,7 @@ export const posts: BlogPost[] = [
       },
       {
         type: "p",
-        text: "Her komponent tek başına değerlendirilince makul görünebilir — ama hep birlikte sahada çalışmak zorunda. Bu yazıda gösterdiğimiz tercihlerin hepsi, iki ana hedefe hizmet ediyor: (1) otonom hedef tespiti pipeline'ının kesintisiz çalışması, (2) yarışma sahasında 10 dakika içinde onarılabilir olmak. Bir sonraki yazıda yazılım tarafından — özellikle SITL simülasyon → saha geçiş süreci — yazacağız.",
+        text: "Her komponent tek başına değerlendirilince makul görünebilir, ama hep birlikte sahada çalışmak zorunda. Bu yazıda gösterdiğimiz tercihlerin hepsi, iki ana hedefe hizmet ediyor: (1) otonom hedef tespiti pipeline'ının kesintisiz çalışması, (2) yarışma sahasında 10 dakika içinde onarılabilir olmak. Bir sonraki yazıda yazılım tarafını, özellikle SITL simülasyondan saha geçişi sürecini, yazacağız.",
       },
     ],
   },

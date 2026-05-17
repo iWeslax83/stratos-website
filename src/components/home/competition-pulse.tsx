@@ -32,7 +32,7 @@ export function CompetitionPulse() {
         <PulseCell
           icon={<Calendar size={14} />}
           eyebrow="Yarışma haftası"
-          value={comp != null ? `${comp}` : "—"}
+          value={comp != null ? `${comp}` : "···"}
           unit="gün"
           hint={site.season.competition}
         />
@@ -50,7 +50,7 @@ export function CompetitionPulse() {
             <Megaphone size={14} /> Sponsor penceresi
           </div>
           <p className="mt-2 font-display text-2xl font-black leading-none text-ink-50 group-hover:text-white">
-            {sponsor != null ? sponsor : "—"}
+            {sponsor != null ? sponsor : "···"}
             <span className="ml-1.5 text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-sky-dawn)]">
               gün
             </span>

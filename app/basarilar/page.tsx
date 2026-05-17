@@ -21,7 +21,7 @@ export default function BasarilarPage() {
       <PageHeader
         eyebrow="Başarılar"
         title="Sahada olduğumuz her organizasyon bir adım."
-        description="Yarışmalar, hackathon'lar ve resmî değerlendirmelerde aldığımız sonuçlar — her biri ekip içi tecrübemizi büyüten birer adım."
+        description="Yarışmalar, hackathon'lar ve resmî değerlendirmelerde aldığımız sonuçlar, her biri ekip içi tecrübemizi büyüten birer adım."
       />
 
       <Container size="default">
