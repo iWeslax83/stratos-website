@@ -29,7 +29,7 @@ function TechStatsBar() {
     { label: "Hover Süresi", value: "19.76", unit: "dk" },
     { label: "Maks. Hız", value: "59.4", unit: "km/h" },
     { label: "Maks. Menzil", value: "~12", unit: "km" },
-    { label: "Total Ağırlık", value: "2.4", unit: "kg" },
+    { label: "Taşıma Kapasitesi", value: "11.8", unit: "kg" },
   ];
   return (
     <section className="relative border-b border-white/5 bg-[color-mix(in_oklab,var(--color-ink-900)_55%,transparent)]">
