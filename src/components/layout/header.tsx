@@ -12,6 +12,7 @@ import { cn } from "@/lib/cn";
 
 export function Header() {
   const pathname = usePathname();
+  const isEn = pathname === "/en" || pathname.startsWith("/en/");
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -42,6 +43,7 @@ export function Header() {
             <Wordmark withDescriptor />
           </Link>
 
+          {!isEn && (
           <nav className="hidden items-center gap-1 lg:flex">
             {site.nav.map((item) => {
               const active =
@@ -67,23 +69,26 @@ export function Header() {
               );
             })}
           </nav>
+          )}
 
           <div className="flex items-center gap-2">
             <LangSwitcher pathname={pathname} />
-            <button
-              type="button"
-              onClick={() => setOpen((v) => !v)}
-              className="grid h-11 w-11 place-items-center rounded-full border border-white/10 text-ink-100 lg:hidden"
-              aria-label={open ? "Menüyü kapat" : "Menüyü aç"}
-              aria-expanded={open}
-            >
-              {open ? <X size={20} /> : <Menu size={20} />}
-            </button>
+            {!isEn && (
+              <button
+                type="button"
+                onClick={() => setOpen((v) => !v)}
+                className="grid h-11 w-11 place-items-center rounded-full border border-white/10 text-ink-100 lg:hidden"
+                aria-label={open ? "Menüyü kapat" : "Menüyü aç"}
+                aria-expanded={open}
+              >
+                {open ? <X size={20} /> : <Menu size={20} />}
+              </button>
+            )}
           </div>
         </div>
       </Container>
 
-      {open && (
+      {open && !isEn && (
         <MobileMenu pathname={pathname} />
       )}
     </header>
