@@ -132,11 +132,9 @@ export function GalleryGrid({ items }: GalleryGridProps) {
   );
 }
 
-// Bento span pattern repeats every 6 items: large hero + smaller tiles.
+// First three items are the large featured tiles; the rest are uniform.
 function spanFor(i: number): string {
-  const k = i % 6;
-  if (k === 0) return "col-span-2 row-span-2";
-  if (k === 5) return "col-span-2";
+  if (i < 3) return "col-span-2 row-span-2";
   return "";
 }
 

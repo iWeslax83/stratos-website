@@ -9,7 +9,7 @@ export const site = {
     city: "Bursa",
     tagline: "Tofaş Fen Lisesi'nin insansız hava aracı takımı.",
     longTagline:
-      "İHA'mızın tasarımını da, üretimini de, yazılımını da öğrenciler yapıyor. Ulusal yarışmalarda da bu araçla yarışıyoruz.",
+      "İHA'mızın tasarımını da, üretimini de, yazılımını da öğrenciler yapıyor. Ulusal ve uluslararası yarışmalarda da bu araçla yarışıyoruz.",
   },
   contact: {
     email: "stratosiha@gmail.com",
@@ -20,7 +20,6 @@ export const site = {
   season: {
     label: "Sezon 2025-26",
     competition: "TEKNOFEST 2026 · Liseler Arası İHA",
-    // Yarışma haftası — TEKNOFEST'in resmi tarihi açıklandığında güncelle.
     competitionDate: "2026-09-10",
     sponsorshipDeadline: "2026-06-03",
     currentPhase: "Detay Tasarım",
@@ -127,6 +126,18 @@ export const site = {
     },
     members: [
       {
+        name: "Arda Akalın",
+        role: "Takım Kaptanı",
+        department: "Yönetim",
+        captain: true,
+      },
+      {
+        name: "Sualp Çelik",
+        role: "Takım Kaptanı",
+        department: "Yönetim",
+        captain: true,
+      },
+      {
         name: "Emir Sakarya",
         role: "Elektronik & Yazılım Kaptanı",
         department: "Yazılım",
@@ -184,7 +195,7 @@ export const site = {
   },
   sponsorship: {
     intro:
-      "Stratos yeni kurulan bir takım ve ulusal yarışmalarda iddialı olmayı hedefliyor. Sponsorlarımızın adı aracımızın gövdesinde ve paylaştığımız içeriklerde yer alır.",
+      "Stratos yeni kurulan bir takım ve ulusal ve uluslararası yarışmalarda iddialı olmayı hedefliyor. Sponsorlarımızın adı aracımızın gövdesinde ve paylaştığımız içeriklerde yer alır.",
     tiers: [
       {
         id: "platin",
@@ -231,6 +242,14 @@ export const site = {
         ],
       },
     ],
+    sponsors: [
+      {
+        name: "Deneme Dünyası",
+        logo: "/images/sponsors/deneme-dunyasi-logo.png",
+        url: "https://denemedunyasi.com.tr" as string | null,
+        tier: "gumus",
+      },
+    ],
     credibility: [
       { label: "Toplam uçuş ağırlığı", value: "2.4 kg" },
       { label: "Hover uçuş süresi", value: "19.76 dk" },
@@ -249,3 +268,4 @@ export type Member = (typeof site.team.members)[number];
 export type Department = (typeof site.team.departments)[number];
 export type Achievement = (typeof site.achievements)[number];
 export type Tier = (typeof site.sponsorship.tiers)[number];
+export type Sponsor = (typeof site.sponsorship.sponsors)[number];

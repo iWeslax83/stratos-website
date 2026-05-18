@@ -111,6 +111,17 @@ function FieldLabel({ children }: { children: React.ReactNode }) {
 const inputClasses =
   "mt-2 block w-full rounded-lg border border-white/10 bg-white/[0.02] px-4 py-3 text-sm text-ink-50 placeholder:text-ink-500 focus:border-[var(--color-brand-300)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand-300)]/40";
 
+// Native <select> renders with the OS dropdown (light popup, default arrow) and
+// clashes with the dark theme. Strip the native chrome, paint our own chevron,
+// and force a dark option list.
+const selectClasses = cn(
+  inputClasses,
+  "cursor-pointer appearance-none bg-no-repeat pr-11",
+  "[background-position:right_1rem_center] [background-size:0.7rem]",
+  "[background-image:url(\"data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2012%208'%20fill='none'%3E%3Cpath%20d='M1%201.5L6%206.5L11%201.5'%20stroke='%237dd3fc'%20stroke-width='1.75'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3C/svg%3E\")]",
+  "[&>option]:bg-[var(--color-ink-900)] [&>option]:text-ink-100",
+);
+
 function SponsorForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -181,7 +192,7 @@ function SponsorForm() {
       </div>
       <div>
         <FieldLabel>İlgilendiğiniz paket</FieldLabel>
-        <select name="tier" required className={inputClasses} defaultValue="">
+        <select name="tier" required className={selectClasses} defaultValue="">
           <option value="" disabled>
             Bir paket seçin
           </option>
@@ -292,7 +303,7 @@ function MembershipForm() {
       </div>
       <div>
         <FieldLabel>İlgilendiğiniz departman</FieldLabel>
-        <select name="department" required className={inputClasses} defaultValue="">
+        <select name="department" required className={selectClasses} defaultValue="">
           <option value="" disabled>
             Bir departman seçin
           </option>

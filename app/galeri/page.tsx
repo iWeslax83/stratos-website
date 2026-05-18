@@ -8,18 +8,19 @@ export const metadata = {
 };
 
 const gallery = [
-  { src: "/images/gallery/01.png", alt: "Atölyede çalışma anı", category: "Atölye" },
-  { src: "/images/gallery/02.png", alt: "İHA tasarım çalışması", category: "Tasarım" },
-  { src: "/images/gallery/03.jpeg", alt: "Üretim süreci", category: "Üretim" },
-  { src: "/images/gallery/04.jpeg", alt: "Saha hazırlığı", category: "Saha" },
-  { src: "/images/gallery/05.png", alt: "CAD ortamında model", category: "Tasarım" },
-  { src: "/images/gallery/06.png", alt: "Elektronik montaj", category: "Üretim" },
-  { src: "/images/gallery/07.png", alt: "Yarışma hazırlığı", category: "Saha" },
-  { src: "/images/gallery/08.jpeg", alt: "FPV uçuş hazırlığı", category: "Saha" },
-  { src: "/images/gallery/09.png", alt: "Ekip çalışması", category: "Atölye" },
-  { src: "/images/gallery/10.png", alt: "Prototip testi", category: "Test" },
-  { src: "/images/gallery/11.png", alt: "Atölye genel görünüm", category: "Atölye" },
-  { src: "/images/gallery/12.jpeg", alt: "Saha ekip portresi", category: "Saha" },
+  { src: "/images/gallery/uretim-kesim.jpg", alt: "Kıvılcımlar arasında parça kesimi", category: "Üretim" },
+  { src: "/images/gallery/ekip-tasarim-eskiz.jpg", alt: "Tasarımı birlikte çiziyoruz", category: "Ekip" },
+  { src: "/images/gallery/cad-modelleme.jpg", alt: "CAD ortamında gövde modelleme", category: "Tasarım" },
+  { src: "/images/gallery/uretim-tezgah.jpg", alt: "Tezgahta montaj", category: "Üretim" },
+  { src: "/images/gallery/fpv-drone.jpg", alt: "Eski Drone Modelimiz", category: "Tasarım" },
+  { src: "/images/gallery/atolye-genel.jpg", alt: "Atölyemizden genel görünüm", category: "Atölye" },
+  { src: "/images/gallery/astro-hackathon.jpg", alt: "ASTRO Hackathon'da Stratos", category: "Ekip" },
+  { src: "/images/gallery/ekip-vex.jpg", alt: "VEX robotu üzerinde çalışırken", category: "Ekip" },
+  { src: "/images/gallery/cad-model-ekran.png", alt: "Gövde CAD modeli", category: "Tasarım" },
+  { src: "/images/gallery/uretim-elektronik.jpg", alt: "Elektronik ve yazılım masası", category: "Üretim" },
+  { src: "/images/gallery/atolye-pencere.jpg", alt: "Pencere ışığında atölye", category: "Atölye" },
+  { src: "/images/gallery/saha-okul-onu.jpg", alt: "Okul önünde saha hazırlığı", category: "Saha" },
+  { src: "/images/gallery/fpv-drone-masa.jpg", alt: "FPV drone'lar ve uçuş ekipmanı", category: "Tasarım" },
 ];
 
 export default function GaleriPage() {

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Check, ArrowRight, Quote } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { PageHeader } from "@/components/ui/page-header";
@@ -207,12 +208,54 @@ export default function SponsorlarPage() {
               Stratos'a güvenenler.
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-sm text-ink-300">
-              Sponsorlarımızın listesi yakında burada yayınlanacak.
-              Aşağıdaki yerler ilk sponsorlarımıza ayrıldı.
+              İlk destekçimiz yanımızda. Kalan yerler bir sonraki
+              sponsorlarımıza ayrıldı.
             </p>
           </div>
           <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-            {Array.from({ length: 5 }).map((_, i) => (
+            {site.sponsorship.sponsors.map((s) => {
+              const tierName = site.sponsorship.tiers.find(
+                (t) => t.id === s.tier,
+              )?.name;
+              const tile = (
+                <div className="relative flex aspect-[3/2] items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-white p-5 transition-transform hover:scale-[1.03]">
+                  <Image
+                    src={s.logo}
+                    alt={s.name}
+                    width={200}
+                    height={120}
+                    className="h-full w-full object-contain"
+                  />
+                  {tierName && (
+                    <span
+                      className={cn(
+                        "absolute left-0 top-0 rounded-br-lg bg-gradient-to-r px-2.5 py-1 font-display text-[0.6rem] font-bold uppercase tracking-[0.2em] text-ink-950",
+                        tierAccent[s.tier],
+                      )}
+                    >
+                      {tierName}
+                    </span>
+                  )}
+                </div>
+              );
+              return s.url ? (
+                <a
+                  key={s.name}
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.name}
+                  className="rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand-300)]"
+                >
+                  {tile}
+                </a>
+              ) : (
+                <div key={s.name}>{tile}</div>
+              );
+            })}
+            {Array.from({
+              length: Math.max(0, 5 - site.sponsorship.sponsors.length),
+            }).map((_, i) => (
               <div
                 key={i}
                 className="flex aspect-[3/2] items-center justify-center rounded-xl border border-dashed border-white/10 bg-white/[0.02]"

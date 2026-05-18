@@ -106,7 +106,7 @@ export default async function OG() {
           </div>
           <div style={{ fontSize: 30, color: "#9AA3BA", maxWidth: 900 }}>
             Tasarım, üretim, otonom yazılım ve uçuş, hepsini öğrenci eliyle
-            yapan, ulusal yarışmalarda sahaya çıkan bir lise takımı.
+            yapan, ulusal ve uluslararası yarışmalarda sahaya çıkan bir lise takımı.
           </div>
         </div>
 

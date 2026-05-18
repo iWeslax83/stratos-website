@@ -36,7 +36,7 @@ export default function TakimPage() {
     <>
       <PageHeader
         eyebrow="Takım"
-        title="Stratos'un ardındaki yedi öğrenci."
+        title={`Stratos'un ardındaki ${site.team.members.length} öğrenci.`}
         description="Dört departman, ortak hedef. Her ekip kendi uzmanlık alanında çalışırken, koordineli toplantılarla bilgi paylaşımı sağlanır."
       />
 
