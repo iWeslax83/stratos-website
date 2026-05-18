@@ -10,9 +10,21 @@ import { Wordmark } from "@/components/brand/wordmark";
 import { site } from "@/data/site";
 import { cn } from "@/lib/cn";
 
+// /en is a single-page site, so its nav scrolls to in-page sections.
+const enNav = [
+  { href: "/en", label: "Home" },
+  { href: "/en#about", label: "About" },
+  { href: "/en#project", label: "Project" },
+  { href: "/en#team", label: "Team" },
+  { href: "/en#achievements", label: "Achievements" },
+  { href: "/en#sponsor", label: "Sponsors" },
+  { href: "/en#contact", label: "Contact" },
+];
+
 export function Header() {
   const pathname = usePathname();
   const isEn = pathname === "/en" || pathname.startsWith("/en/");
+  const navItems = isEn ? enNav : site.nav;
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -38,18 +50,17 @@ export function Header() {
     >
       <Container size="wide">
         <div className="flex h-20 items-center justify-between gap-3">
-          <Link href="/" className="flex min-w-0 items-center gap-3 group" aria-label="Stratos anasayfaya dön">
+          <Link href={isEn ? "/en" : "/"} className="flex min-w-0 items-center gap-3 group" aria-label={isEn ? "Back to Stratos home" : "Stratos anasayfaya dön"}>
             <LogoMark size={44} priority />
             <Wordmark withDescriptor />
           </Link>
 
-          {!isEn && (
           <nav className="hidden items-center gap-1 lg:flex">
-            {site.nav.map((item) => {
+            {navItems.map((item) => {
               const active =
-                item.href === "/"
-                  ? pathname === "/"
-                  : pathname.startsWith(item.href);
+                item.href === "/" || item.href === "/en"
+                  ? pathname === item.href
+                  : !item.href.includes("#") && pathname.startsWith(item.href);
               return (
                 <Link
                   key={item.href}
@@ -69,27 +80,28 @@ export function Header() {
               );
             })}
           </nav>
-          )}
 
           <div className="flex items-center gap-2">
             <LangSwitcher pathname={pathname} />
-            {!isEn && (
-              <button
-                type="button"
-                onClick={() => setOpen((v) => !v)}
-                className="grid h-11 w-11 place-items-center rounded-full border border-white/10 text-ink-100 lg:hidden"
-                aria-label={open ? "Menüyü kapat" : "Menüyü aç"}
-                aria-expanded={open}
-              >
-                {open ? <X size={20} /> : <Menu size={20} />}
-              </button>
-            )}
+            <button
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              className="grid h-11 w-11 place-items-center rounded-full border border-white/10 text-ink-100 lg:hidden"
+              aria-label={
+                open
+                  ? isEn ? "Close menu" : "Menüyü kapat"
+                  : isEn ? "Open menu" : "Menüyü aç"
+              }
+              aria-expanded={open}
+            >
+              {open ? <X size={20} /> : <Menu size={20} />}
+            </button>
           </div>
         </div>
       </Container>
 
-      {open && !isEn && (
-        <MobileMenu pathname={pathname} />
+      {open && (
+        <MobileMenu pathname={pathname} items={navItems} />
       )}
     </header>
   );
@@ -127,17 +139,24 @@ function LangSwitcher({ pathname }: { pathname: string }) {
   );
 }
 
-function MobileMenu({ pathname }: { pathname: string }) {
+function MobileMenu({
+  pathname,
+  items,
+}: {
+  pathname: string;
+  items: readonly { href: string; label: string }[];
+}) {
   return (
     <div className="lg:hidden">
           <div className="border-y border-white/5 bg-[color-mix(in_oklab,var(--color-ink-900)_95%,transparent)] backdrop-blur-xl">
             <Container size="wide">
               <nav className="grid gap-1 py-4">
-                {site.nav.map((item) => {
+                {items.map((item) => {
                   const active =
-                    item.href === "/"
-                      ? pathname === "/"
-                      : pathname.startsWith(item.href);
+                    item.href === "/" || item.href === "/en"
+                      ? pathname === item.href
+                      : !item.href.includes("#") &&
+                        pathname.startsWith(item.href);
                   return (
                     <Link
                       key={item.href}

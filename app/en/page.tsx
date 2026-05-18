@@ -239,7 +239,7 @@ function QuickFacts() {
 
 function About() {
   return (
-    <section className="relative py-24 sm:py-32">
+    <section id="about" className="relative scroll-mt-24 py-24 sm:py-32">
       <Container size="default">
         <div className="grid gap-10 md:grid-cols-12 md:gap-16">
           <div className="md:col-span-4">
@@ -298,7 +298,7 @@ function Pillars() {
 
 function Achievements() {
   return (
-    <section className="relative py-24">
+    <section id="achievements" className="relative scroll-mt-24 py-24">
       <Container size="default">
         <div className="text-center">
           <p className="text-xs uppercase tracking-[0.3em] text-[var(--color-brand-300)]">
@@ -331,7 +331,7 @@ function Achievements() {
 
 function FlagshipProject() {
   return (
-    <section className="relative border-t border-white/5 py-24">
+    <section id="project" className="relative scroll-mt-24 border-t border-white/5 py-24">
       <Container size="wide">
         <div className="grid gap-10 md:grid-cols-12 md:gap-16">
           <div className="md:col-span-5">
@@ -458,7 +458,7 @@ function Team() {
     "Berke Azim Açıkkol": "Sponsorship Lead",
   };
   return (
-    <section className="relative border-t border-white/5 py-24">
+    <section id="team" className="relative scroll-mt-24 border-t border-white/5 py-24">
       <Container size="wide">
         <div className="text-center">
           <p className="text-xs uppercase tracking-[0.3em] text-[var(--color-brand-300)]">
@@ -588,7 +588,7 @@ function SponsorTiers() {
 
 function Contact() {
   return (
-    <section className="relative py-24">
+    <section id="contact" className="relative scroll-mt-24 py-24">
       <Container size="default">
         <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-[var(--color-brand-700)] to-[var(--color-sky-deep)] p-10 sm:p-16">
           <div className="absolute right-0 top-0 h-72 w-72 rounded-full bg-[radial-gradient(circle,var(--color-brand-300)_0%,transparent_60%)] opacity-40 blur-3xl" />
