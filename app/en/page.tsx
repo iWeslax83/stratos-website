@@ -118,7 +118,7 @@ const achievementsEn = [
   {
     id: "meb-design",
     title: "MEB Robot · Best Design Award",
-    year: "2025",
+    year: "2026",
     category: "Design",
     blurb:
       "Recognized for mechanical design and originality at the national MEB Robot competition.",

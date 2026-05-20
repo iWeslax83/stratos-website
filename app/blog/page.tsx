@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, FileText, Cpu, Wrench, Rocket } from "lucide-react";
+import { ArrowRight, FileText, Camera, Plane, Users } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { PageHeader } from "@/components/ui/page-header";
 import { posts } from "@/data/blog";
@@ -11,20 +11,22 @@ export const metadata = {
 
 const upcomingTopics = [
   {
-    icon: Cpu,
-    title: "Raspberry Pi 5 üzerinde gerçek zamanlı görüntü işleme",
+    icon: Camera,
+    title: "Jello etkisiyle mücadele: TPU sönümleyici testleri",
     blurb:
-      "OpenCV ile hedef tespiti: Pi 5'in performans sınırları, jello etkisi ve optimizasyon notları.",
+      "MN4010 580kv motorların yarattığı titreşim Pi Kamera Modül 3'ün görüntüsünü nasıl etkiledi, hangi sönümleyici geometrisi sonuca götürdü?",
   },
   {
-    icon: Wrench,
-    title: "Karbon fiber CNC kesimde 0.1 mm tolerans nasıl yakalanır?",
-    blurb: "Üretim sürecinin ardındaki teknik kararlar ve testler.",
+    icon: Plane,
+    title: "İlk uçuş testi: PID ayarından saha kayıtlarına",
+    blurb:
+      "Karbon fiber gövdenin dinamiklerine uygun PID değerleri nasıl ayarlandı, ilk hover denemesinde neler öğrendik?",
   },
   {
-    icon: Rocket,
-    title: "Otonom iniş algoritması: SITL'den sahaya",
-    blurb: "Hedef merkezi hesabı, PID ayarı, MAVLink komutları.",
+    icon: Users,
+    title: "Saha günü protokolü: 10 dakikada onarım",
+    blurb:
+      "Cıvatalı montaj, yedek parça çantası ve checklist sistemi sahada bize ne kadar zaman kazandırıyor?",
   },
 ];
 

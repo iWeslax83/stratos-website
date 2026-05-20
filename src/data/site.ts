@@ -45,7 +45,7 @@ export const site = {
     {
       id: "meb-design",
       title: "MEB Robot · En İyi Tasarım Ödülü",
-      year: "2025",
+      year: "2026",
       category: "Tasarım",
       blurb:
         "MEB Robot Yarışması'nda mekanik tasarım ve özgünlük dalında ödüllendirildik.",
@@ -140,7 +140,7 @@ export const site = {
       {
         name: "Emir Sakarya",
         role: "Elektronik & Yazılım Kaptanı",
-        department: "Yazılım",
+        department: "Elektronik & Yazılım",
         captain: true,
       },
       {
@@ -149,22 +149,13 @@ export const site = {
         department: "Sponsorluk",
         captain: true,
       },
-      {
-        name: "Erdem Gümüş",
-        role: "Ana Pilot",
-        department: "Pilot",
-        captain: true,
-      },
-      {
-        name: "Demir Özcan",
-        role: "Tasarım Kaptanı",
-        department: "Çizim",
-        captain: true,
-      },
 
-      { name: "Yusuf Talha Kaya", role: "Üye", department: "Mekanik", captain: false },
-      { name: "Ahmet Ege Aksoy", role: "Üye", department: "Yazılım", captain: false },
-      { name: "İbrahim Özdemir", role: "Üye", department: "Çizim", captain: false },
+      { name: "Erdem Gümüş", role: "Ana Pilot", department: "Pilot", captain: false },
+      { name: "Demir Özcan", role: "Tasarım Üyesi", department: "Çizim", captain: false },
+      { name: "Yusuf Talha Kaya", role: "Sponsorluk Üyesi", department: "Sponsorluk", captain: false },
+      { name: "Ali Arda Tırnava", role: "Sponsorluk Üyesi", department: "Sponsorluk", captain: false },
+      { name: "Ahmet Ege Aksoy", role: "Elektronik Üyesi", department: "Elektronik", captain: false },
+      { name: "İbrahim Özdemir", role: "Mekanik Üyesi", department: "Mekanik", captain: false },
     ],
     departments: [
       {
@@ -184,6 +175,12 @@ export const site = {
         name: "Yazılım",
         blurb:
           "Otonom uçuş algoritmaları, görüntü işleme ve yer istasyonu yazılımını ArduPilot ile OpenCV üzerinde geliştirir.",
+      },
+      {
+        id: "elektronik",
+        name: "Elektronik",
+        blurb:
+          "Uçuş kontrolcüsü, ESC, motor ve sensör entegrasyonunu kurar; güç dağıtımı ve telemetri bağlantılarının testini yapar.",
       },
       {
         id: "sponsorluk",
