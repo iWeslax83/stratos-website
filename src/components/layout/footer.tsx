@@ -28,7 +28,7 @@ const t = {
     tagline: site.brand.longTagline,
     explore: "Keşfet",
     contact: "İletişim",
-    socialSoon: "Sosyal medya yakında",
+    socialSoon: "Diğer sosyal medya yakında",
     rights: "Tüm hakları saklıdır.",
     motto: "Stratosferi hedefliyoruz.",
     comingSoon: "yakında",
@@ -38,7 +38,7 @@ const t = {
       "Students design, build, program and fly our UAV, and we compete with it at national level.",
     explore: "Explore",
     contact: "Contact",
-    socialSoon: "Social media coming soon",
+    socialSoon: "More social channels soon",
     rights: "All rights reserved.",
     motto: "Aiming for the stratosphere.",
     comingSoon: "coming soon",
@@ -116,13 +116,32 @@ export function Footer() {
             </ul>
 
             <div className="mt-6 flex items-center gap-2">
-              <SocialBadge icon={InstagramIcon} label="Instagram" soon={c.comingSoon} />
-              <SocialBadge icon={LinkedinIcon} label="LinkedIn" soon={c.comingSoon} />
-              <SocialBadge icon={YoutubeIcon} label="YouTube" soon={c.comingSoon} />
+              <SocialBadge
+                icon={InstagramIcon}
+                label="Instagram"
+                soon={c.comingSoon}
+                href={site.social.instagram}
+              />
+              <SocialBadge
+                icon={LinkedinIcon}
+                label="LinkedIn"
+                soon={c.comingSoon}
+                href={site.social.linkedin}
+              />
+              <SocialBadge
+                icon={YoutubeIcon}
+                label="YouTube"
+                soon={c.comingSoon}
+                href={site.social.youtube}
+              />
             </div>
-            <p className="mt-3 text-[0.7rem] uppercase tracking-[0.2em] text-ink-500">
-              {c.socialSoon}
-            </p>
+            {(!site.social.instagram ||
+              !site.social.linkedin ||
+              !site.social.youtube) && (
+              <p className="mt-3 text-[0.7rem] uppercase tracking-[0.2em] text-ink-500">
+                {c.socialSoon}
+              </p>
+            )}
           </div>
         </div>
         <div className="edge-divider" />
@@ -143,11 +162,27 @@ function SocialBadge({
   icon: Icon,
   label,
   soon,
+  href,
 }: {
   icon: React.ComponentType<{ size?: number; className?: string }>;
   label: string;
   soon: string;
+  href?: string | null;
 }) {
+  if (href) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={label}
+        title={label}
+        className="grid h-10 w-10 place-items-center rounded-full border border-white/15 text-ink-200 transition-colors hover:border-[var(--color-brand-300)] hover:text-white"
+      >
+        <Icon size={16} />
+      </a>
+    );
+  }
   return (
     <span
       aria-label={`${label} (${soon})`}

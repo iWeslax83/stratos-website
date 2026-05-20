@@ -26,9 +26,11 @@ export const site = {
     nextMilestone: "Üretim & Entegrasyon",
   },
   social: {
-    // None active yet — will be opened soon. Render as "coming soon" badges.
+    // Live: LinkedIn. Instagram / YouTube open later — render as "coming soon".
     instagram: null as string | null,
-    linkedin: null as string | null,
+    linkedin: "https://www.linkedin.com/company/stratos-i%CC%87ha" as
+      | string
+      | null,
     youtube: null as string | null,
   },
   nav: [
