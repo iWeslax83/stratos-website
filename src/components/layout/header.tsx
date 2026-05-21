@@ -51,7 +51,7 @@ export function Header() {
       <Container size="wide">
         <div className="flex h-20 items-center justify-between gap-3">
           <Link href={isEn ? "/en" : "/"} className="flex min-w-0 items-center gap-3 group" aria-label={isEn ? "Back to Stratos home" : "Stratos anasayfaya dön"}>
-            <LogoMark size={44} priority />
+            <LogoMark size={40} priority />
             <Wordmark withDescriptor />
           </Link>
 

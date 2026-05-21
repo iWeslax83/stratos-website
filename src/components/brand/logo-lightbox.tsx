@@ -24,7 +24,7 @@ export function LogoLightbox() {
       e.preventDefault();
       // Resolve to the original (un-optimized) source for max quality.
       const raw = img.currentSrc || img.src;
-      setSrc(raw.includes("/_next/image") ? "/brand/logo-mark.png" : raw);
+      setSrc(raw.includes("/_next/image") ? "/brand/phoenix.png" : raw);
     };
     document.addEventListener("click", onClick);
     return () => document.removeEventListener("click", onClick);

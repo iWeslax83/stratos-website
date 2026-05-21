@@ -196,10 +196,13 @@ export const site = {
     intro:
       "Stratos yeni kurulan bir takım ve ulusal ve uluslararası yarışmalarda iddialı olmayı hedefliyor. Sponsorlarımızın adı aracımızın gövdesinde ve paylaştığımız içeriklerde yer alır.",
     tiers: [
+      // Platin & Altın hidden until first big sponsor lands — empty high tiers
+      // signal "nobody committed yet" to visitors. Flip hidden→false to re-enable.
       {
         id: "platin",
         name: "Platin",
         amount: "50.000 TL+",
+        hidden: true,
         benefits: [
           "İHA gövdesinde büyük logo",
           "Tüm takım kıyafetlerinde logo",
@@ -213,6 +216,7 @@ export const site = {
         id: "altin",
         name: "Altın",
         amount: "25.000 TL+",
+        hidden: true,
         benefits: [
           "İHA gövdesinde orta boy logo",
           "Takım kıyafetlerinde logo",

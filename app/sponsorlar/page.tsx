@@ -39,8 +39,10 @@ export default function SponsorlarPage() {
 
       <Container size="wide">
         <section className="py-16">
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {site.sponsorship.tiers.map((tier, idx) => (
+          <div className="mx-auto grid max-w-3xl gap-6 md:grid-cols-2">
+            {site.sponsorship.tiers
+              .filter((t) => !("hidden" in t && t.hidden))
+              .map((tier, idx) => (
               <div
                 key={tier.id}
                 className={cn(

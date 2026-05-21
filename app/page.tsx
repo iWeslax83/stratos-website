@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Plane, Cpu, Wrench, Trophy, Gauge, Users } from "lucide-react";
 import { Container } from "@/components/ui/container";
@@ -160,6 +161,19 @@ function Hero() {
         <div className="absolute inset-0 starfield opacity-70" />
         <div className="absolute -top-32 right-[-10%] h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle,var(--color-brand-400)_0%,transparent_60%)] opacity-25 blur-3xl" />
         <div className="absolute bottom-[-20%] left-[-10%] h-[700px] w-[700px] rounded-full bg-[radial-gradient(circle,var(--color-sky-dawn)_0%,transparent_60%)] opacity-15 blur-3xl" />
+        {/* Phoenix backdrop: gentle rise + wing-flap loop behind the headline */}
+        <div className="pointer-events-none absolute inset-x-0 top-[6%] flex justify-center">
+          <div className="phoenix-rise w-[min(1000px,108%)] opacity-[0.18] mix-blend-screen">
+            <Image
+              src="/brand/phoenix.png"
+              alt=""
+              width={1350}
+              height={625}
+              aria-hidden="true"
+              className="phoenix-flap h-auto w-full select-none"
+            />
+          </div>
+        </div>
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-[var(--color-ink-900)]" />
       </div>
 

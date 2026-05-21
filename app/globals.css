@@ -196,10 +196,31 @@ body {
   transform-origin: center;
 }
 
+/* Phoenix hero backdrop — outer wrapper handles slow rise/fall,
+   inner element does a faster wing-flap (scaleY pulse). */
+@keyframes phoenix-rise {
+  0%, 100% { transform: translateY(18px); }
+  50%      { transform: translateY(-14px); }
+}
+@keyframes phoenix-flap {
+  0%, 100% { transform: scaleY(1); }
+  50%      { transform: scaleY(0.92); }
+}
+.phoenix-rise {
+  animation: phoenix-rise 7.5s ease-in-out infinite;
+  will-change: transform;
+}
+.phoenix-flap {
+  animation: phoenix-flap 2.1s ease-in-out infinite;
+  transform-origin: center;
+  will-change: transform;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .sky-twinkle-slow, .sky-twinkle-mid, .sky-twinkle-fast,
   .sky-drift-a, .sky-drift-b,
-  .animate-rise, .animate-fade, .spin-slow {
+  .animate-rise, .animate-fade, .spin-slow,
+  .phoenix-rise, .phoenix-flap {
     animation: none;
   }
 }
