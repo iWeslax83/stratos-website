@@ -1,5 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Saira_Condensed, Saira_Stencil_One } from "next/font/google";
+import {
+  Space_Grotesk,
+  Hanken_Grotesk,
+  Space_Mono,
+  Saira_Stencil_One,
+} from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
@@ -9,16 +14,22 @@ import { SkyBackdrop } from "@/components/brand/sky-backdrop";
 import { LogoLightbox } from "@/components/brand/logo-lightbox";
 import { site } from "@/data/site";
 
-const inter = Inter({
+const body = Hanken_Grotesk({
   subsets: ["latin", "latin-ext"],
   display: "swap",
   variable: "--font-body",
 });
-const sairaCondensed = Saira_Condensed({
+const display = Space_Grotesk({
   subsets: ["latin", "latin-ext"],
-  weight: ["500", "600", "700", "800", "900"],
+  weight: ["500", "600", "700"],
   display: "swap",
   variable: "--font-display",
+});
+const mono = Space_Mono({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+  variable: "--font-numeric",
 });
 const sairaStencil = Saira_Stencil_One({
   subsets: ["latin", "latin-ext"],
@@ -106,7 +117,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="tr"
       suppressHydrationWarning
-      className={`${inter.variable} ${sairaCondensed.variable} ${sairaStencil.variable}`}
+      className={`${body.variable} ${display.variable} ${mono.variable} ${sairaStencil.variable}`}
     >
       <head>
         <script

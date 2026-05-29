@@ -35,9 +35,10 @@
   --color-ink-50: #F2F4F7;
 
   /* Typography — `--font-*` vars are injected by next/font in layout.tsx */
-  --font-display-fallback: "Saira Condensed", "Bahnschrift", "Arial Narrow", system-ui, sans-serif;
-  --font-wordmark-fallback: "Saira Stencil One", "Saira Condensed", system-ui, sans-serif;
-  --font-body-fallback: "Inter", system-ui, -apple-system, sans-serif;
+  --font-display-fallback: "Space Grotesk", "Archivo", system-ui, sans-serif;
+  --font-wordmark-fallback: "Saira Stencil One", "Space Grotesk", system-ui, sans-serif;
+  --font-body-fallback: "Hanken Grotesk", system-ui, -apple-system, sans-serif;
+  --font-numeric-fallback: "Space Mono", ui-monospace, "SFMono-Regular", "Menlo", monospace;
 
   /* Radius */
   --radius-xs: 4px;
@@ -67,6 +68,23 @@ body {
   min-height: 100dvh;
   overflow-x: hidden;
   background: transparent;
+}
+
+/* Fine film grain over everything — breaks the flat, "digitally perfect" feel.
+   Sits above content but below the sticky header (z-50); never blocks clicks. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+@media (prefers-reduced-motion: reduce) {
+  body::after { opacity: 0.03; }
 }
 
 /* Site-wide sky backdrop layers — solid pinpoint stars */
@@ -123,9 +141,20 @@ body {
 }
 
 /* Cinematic display defaults */
-.font-display { font-family: var(--font-display, var(--font-display-fallback)); letter-spacing: -0.01em; }
+.font-display { font-family: var(--font-display, var(--font-display-fallback)); letter-spacing: -0.02em; }
 .font-wordmark { font-family: var(--font-wordmark, var(--font-wordmark-fallback)); letter-spacing: 0.05em; }
 .font-body { font-family: var(--font-body, var(--font-body-fallback)); }
+
+/* Engineering-readout numerals: monospaced + tabular figures for specs/stats */
+.font-data {
+  font-family: var(--font-numeric, var(--font-numeric-fallback));
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* Headlines balance across lines; paragraphs avoid orphans */
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
 
 /* Aerospace stencil treatment for the STRATOS wordmark */
 .wordmark-stratos {

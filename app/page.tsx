@@ -70,7 +70,7 @@ function TechStatsBar() {
               <dt className="text-[0.6rem] uppercase tracking-[0.3em] text-ink-400">
                 {s.label}
               </dt>
-              <dd className="mt-3 font-display font-black leading-none tracking-tight text-ink-50">
+              <dd className="mt-3 font-data font-bold leading-none tracking-tight text-ink-50">
                 <span className="text-3xl sm:text-4xl">{s.value}</span>
                 <span className="ml-1.5 text-sm font-bold text-[var(--color-brand-300)]">
                   {s.unit}
@@ -120,7 +120,7 @@ function FpvStatsBar() {
               <dt className="text-[0.6rem] uppercase tracking-[0.3em] text-ink-400">
                 {s.label}
               </dt>
-              <dd className="mt-3 font-display font-black leading-none tracking-tight text-ink-50">
+              <dd className="mt-3 font-data font-bold leading-none tracking-tight text-ink-50">
                 <span className="text-3xl sm:text-4xl">{s.value}</span>
                 <span className="ml-1.5 text-sm font-bold text-[var(--color-sky-dawn)]">
                   {s.unit}
@@ -154,7 +154,7 @@ function StatsBar() {
               <dt className="text-[0.65rem] uppercase tracking-[0.3em] text-ink-400">
                 {s.label}
               </dt>
-              <dd className="mt-3 font-display text-3xl sm:text-4xl font-black text-ink-50">
+              <dd className="mt-3 font-data text-3xl sm:text-4xl font-bold text-ink-50">
                 {s.value}
               </dd>
             </div>
@@ -172,8 +172,8 @@ function Hero() {
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-sky-night)] via-[var(--color-sky-deep)] to-[var(--color-ink-900)]" />
         <div className="absolute inset-0 starfield opacity-70" />
-        <div className="absolute -top-32 right-[-10%] h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle,var(--color-brand-400)_0%,transparent_60%)] opacity-25 blur-3xl" />
-        <div className="absolute bottom-[-20%] left-[-10%] h-[700px] w-[700px] rounded-full bg-[radial-gradient(circle,var(--color-sky-dawn)_0%,transparent_60%)] opacity-15 blur-3xl" />
+        <div className="absolute -top-32 right-[-10%] h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle,var(--color-brand-400)_0%,transparent_60%)] opacity-[0.12] blur-3xl" />
+        <div className="absolute bottom-[-20%] left-[-10%] h-[700px] w-[700px] rounded-full bg-[radial-gradient(circle,var(--color-sky-dawn)_0%,transparent_60%)] opacity-[0.07] blur-3xl" />
         {/* Phoenix backdrop: gentle rise + wing-flap loop behind the headline */}
         <div className="pointer-events-none absolute inset-x-0 top-[6%] flex justify-center">
           <div className="phoenix-rise w-[min(1000px,108%)] opacity-[0.18] mix-blend-screen">

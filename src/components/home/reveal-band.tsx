@@ -53,7 +53,7 @@ export function RevealBand({
             <dl className="mx-auto mt-10 flex max-w-xl flex-wrap items-start justify-center gap-x-10 gap-y-6">
               {stats.map((s) => (
                 <div key={s.label}>
-                  <dd className="font-display text-3xl font-black leading-none text-ink-50 sm:text-4xl">
+                  <dd className="font-data text-3xl font-bold leading-none text-ink-50 sm:text-4xl">
                     {s.value}
                     {s.unit && (
                       <span className="ml-1 text-sm font-bold text-[var(--color-brand-300)]">
