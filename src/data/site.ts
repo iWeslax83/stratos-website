@@ -112,7 +112,7 @@ export const site = {
         "Sertifikalı pilotlar tarafından çalıştırılıyor",
       ],
       tech: ["FPV", "Analog Video", "Carbon Frame", "Race-tuned PID"],
-      image: null as string | null,
+      image: "/images/projects/fpv-doner-kanat.jpg" as string | null,
       specs: [
         { value: "~170", unit: "km/h", label: "Maks. Hız" },
         { value: "409", unit: "g", label: "Ağırlık" },
