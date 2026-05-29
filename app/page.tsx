@@ -198,7 +198,7 @@ function Hero() {
 
       <Container size="wide">
         <div className="grid min-h-[80dvh] items-center py-24 sm:py-32">
-          <div className="max-w-3xl">
+          <div className="max-w-5xl">
             <p className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 text-[0.7rem] uppercase tracking-[0.3em] text-ink-200 backdrop-blur animate-rise">
               <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand-300)] shadow-[0_0_12px_var(--color-brand-300)]" />
               TEKNOFEST 2026 · Döner Kanat
