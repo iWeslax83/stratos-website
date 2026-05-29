@@ -1,7 +1,8 @@
+import Image from "next/image";
 import { GraduationCap } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { PageHeader } from "@/components/ui/page-header";
-import { site } from "@/data/site";
+import { site, type Member } from "@/data/site";
 import { cn } from "@/lib/cn";
 
 type Alumnus = {
@@ -47,8 +48,18 @@ export default function TakimPage() {
           </h2>
           <div className="mt-6 max-w-md rounded-2xl border border-white/10 bg-white/[0.02] p-6">
             <div className="flex items-center gap-4">
-              <div className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-[var(--color-brand-700)] font-display text-base font-bold text-[var(--color-brand-100)]">
-                {initials(site.team.advisor.name)}
+              <div className="relative grid h-14 w-14 shrink-0 place-items-center overflow-hidden rounded-full bg-[var(--color-brand-700)] font-display text-base font-bold text-[var(--color-brand-100)]">
+                {site.team.advisor.photo ? (
+                  <Image
+                    src={site.team.advisor.photo}
+                    alt={site.team.advisor.name}
+                    fill
+                    sizes="56px"
+                    className="object-cover"
+                  />
+                ) : (
+                  initials(site.team.advisor.name)
+                )}
               </div>
               <div>
                 <p className="font-display text-lg font-bold text-ink-50">
@@ -70,7 +81,7 @@ export default function TakimPage() {
             Departmanlarını yöneten, sezon planını ve teknik kararları taşıyan
             kaptanlar.
           </p>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {captains.map((c) => (
               <MemberCard key={c.name} member={c} variant="captain" />
             ))}
@@ -179,46 +190,56 @@ function MemberCard({
   member,
   variant,
 }: {
-  member: (typeof site.team.members)[number];
+  member: Member;
   variant: "captain" | "member";
 }) {
   return (
     <div
       className={cn(
-        "rounded-2xl border bg-white/[0.02] p-6 transition-all",
+        "grid min-h-[140px] grid-cols-[42%_1fr] overflow-hidden rounded-2xl border bg-white/[0.02] transition-colors",
         variant === "captain"
           ? "border-[var(--color-brand-400)]/30 hover:border-[var(--color-brand-300)]/60"
           : "border-white/10 hover:border-white/20",
       )}
     >
-      <div className="flex items-center gap-4">
-        <div
+      <div className="relative bg-[linear-gradient(150deg,var(--color-sky-deep),var(--color-brand-800))]">
+        {member.photo ? (
+          <Image
+            src={member.photo}
+            alt={member.name}
+            fill
+            sizes="180px"
+            className="object-cover"
+          />
+        ) : (
+          <div className="absolute inset-0 grid place-items-center font-display text-3xl font-black text-[var(--color-brand-300)]/45">
+            {initials(member.name)}
+          </div>
+        )}
+      </div>
+      <div className="flex flex-col justify-center p-4 sm:p-5">
+        <p className="font-display text-lg font-bold leading-tight text-ink-50">
+          {member.name}
+        </p>
+        <p className="mt-1.5 text-[0.6rem] uppercase tracking-[0.18em] text-ink-400">
+          {member.department}
+        </p>
+        {variant === "captain" && (
+          <span className="mt-2.5 w-fit rounded-full bg-[var(--color-brand-400)] px-2 py-0.5 text-[0.5rem] font-bold uppercase tracking-[0.16em] text-ink-950">
+            Kaptan
+          </span>
+        )}
+        <p
           className={cn(
-            "grid h-12 w-12 shrink-0 place-items-center rounded-full font-display text-sm font-bold",
+            "mt-2.5 text-[0.8rem] leading-snug",
             variant === "captain"
-              ? "bg-[var(--color-brand-600)] text-[var(--color-brand-100)]"
-              : "bg-white/5 text-ink-200",
+              ? "text-[var(--color-brand-200)]"
+              : "text-ink-300",
           )}
         >
-          {initials(member.name)}
-        </div>
-        <div className="min-w-0">
-          <p className="font-display text-base font-bold text-ink-50 leading-tight">
-            {member.name}
-          </p>
-          <p className="mt-0.5 text-[0.7rem] uppercase tracking-[0.2em] text-ink-400">
-            {member.department}
-          </p>
-        </div>
+          {member.role}
+        </p>
       </div>
-      <p
-        className={cn(
-          "mt-4 text-xs",
-          variant === "captain" ? "text-[var(--color-brand-200)]" : "text-ink-300",
-        )}
-      >
-        {member.role}
-      </p>
     </div>
   );
 }

@@ -369,7 +369,7 @@ function FlagshipProject() {
           <div className="md:col-span-7">
             <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.03] to-transparent p-8">
               <p className="text-[0.65rem] uppercase tracking-[0.3em] text-ink-400">
-                Other Active Projects
+                Other Active Project
               </p>
               <div className="mt-6 grid gap-4">
                 <div className="rounded-xl border border-white/10 bg-white/[0.02] p-5">
@@ -382,18 +382,6 @@ function FlagshipProject() {
                   <p className="mt-2 text-sm text-ink-300">
                     Low-latency analog FPV, lightweight race-tuned airframe,
                     flown by certified pilots.
-                  </p>
-                </div>
-                <div className="rounded-xl border border-white/10 bg-white/[0.02] p-5">
-                  <p className="text-[0.65rem] uppercase tracking-[0.3em] text-ink-400">
-                    VEX Robotics Competition
-                  </p>
-                  <h3 className="mt-2 font-display text-lg font-bold text-ink-50">
-                    VEX V5 · Pushback
-                  </h3>
-                  <p className="mt-2 text-sm text-ink-300">
-                    Competition-grade robot with custom mechanics and strategic
-                    autonomous routines for the &quot;Pushback&quot; season.
                   </p>
                 </div>
               </div>

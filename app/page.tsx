@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Plane, Cpu, Wrench, Trophy, Gauge, Users } from "lucide-react";
+import { ArrowRight, Plane, Cpu, Wrench, Trophy, Gauge, Users, GraduationCap } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { DroneSilhouette } from "@/components/brand/drone-silhouette";
 import { CompetitionPulse } from "@/components/home/competition-pulse";
+import { RevealBand } from "@/components/home/reveal-band";
+import { ProjectCard } from "@/components/projects/project-card";
 import { site } from "@/data/site";
 
 export default function HomePage() {
@@ -15,11 +17,22 @@ export default function HomePage() {
       <TechStatsBar />
       <FpvStatsBar />
       <Manifesto />
+      <RevealBand
+        image={site.media.revealBand}
+        eyebrow="Otonom Döner Kanat · TEKNOFEST 2026"
+        title="Tasarladık, ürettik, uçurduk."
+        stats={[
+          { value: "19.76", unit: "dk", label: "Hover" },
+          { value: "59.4", unit: "km/h", label: "Maks. Hız" },
+          { value: "12", unit: "km", label: "Menzil" },
+        ]}
+      />
       <Pillars />
       <AchievementsStrip />
       <ProjectPreview />
       <Roadmap />
       <TeamTeaser />
+      <Outreach />
       <SponsorCta />
     </>
   );
@@ -357,26 +370,9 @@ function ProjectPreview() {
             Tümünü Gör <ArrowRight size={14} />
           </Button>
         </div>
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:max-w-4xl">
           {site.projects.map((p) => (
-            <Link
-              key={p.slug}
-              href={`/projeler/${p.slug}`}
-              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition-all hover:border-[var(--color-brand-400)]/50 hover:bg-white/[0.04]"
-            >
-              <p className="text-[0.65rem] uppercase tracking-[0.3em] text-ink-400">
-                {p.competition}
-              </p>
-              <h3 className="mt-3 font-display text-xl font-bold text-ink-50 group-hover:text-[var(--color-brand-300)]">
-                {p.title}
-              </h3>
-              <p className="mt-3 text-sm text-ink-300 line-clamp-3">
-                {p.summary}
-              </p>
-              <span className="mt-6 inline-flex items-center gap-1.5 text-xs font-display uppercase tracking-[0.2em] text-[var(--color-brand-300)]">
-                İncele <ArrowRight size={14} />
-              </span>
-            </Link>
+            <ProjectCard key={p.slug} project={p} />
           ))}
         </div>
       </Container>
@@ -506,6 +502,90 @@ function TeamTeaser() {
             </div>
           ))}
         </div>
+      </Container>
+    </section>
+  );
+}
+
+function Outreach() {
+  return (
+    <section className="relative border-t border-white/5 py-24">
+      <Container size="default">
+        <div className="text-center">
+          <p className="text-xs uppercase tracking-[0.3em] text-[var(--color-brand-300)]">
+            Topluma Açılan Kanatlar
+          </p>
+          <h2 className="mt-4 font-display text-3xl sm:text-4xl font-bold">
+            Bildiğimizi paylaşıyoruz.
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-sm text-ink-300">
+            İHA&apos;yı yalnızca yarışmak için değil, anlatmak için de yapıyoruz.
+          </p>
+        </div>
+
+        {site.outreach.length === 0 ? (
+          <div className="relative mt-12 overflow-hidden rounded-2xl border border-dashed border-white/15 bg-white/[0.02] p-10 text-center">
+            <GraduationCap
+              size={36}
+              className="mx-auto text-[var(--color-brand-300)]/80"
+            />
+            <p className="mt-6 font-display text-xl font-bold text-ink-50">
+              Atölyeden topluma.
+            </p>
+            <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-ink-300">
+              Genç öğrencilere yönelik atölyelerimizi, okul ziyaretlerimizi ve
+              tanıtım çalışmalarımızı yakında karelerle ve sayılarla burada
+              paylaşacağız.
+            </p>
+            <p className="mt-6 text-[0.65rem] uppercase tracking-[0.3em] text-ink-500">
+              Yakında
+            </p>
+          </div>
+        ) : (
+          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {site.outreach.map((o) => (
+              <article
+                key={o.slug}
+                className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] transition-colors hover:border-[var(--color-brand-400)]/40"
+              >
+                <div className="relative aspect-[16/10] overflow-hidden bg-[linear-gradient(150deg,var(--color-sky-deep),var(--color-brand-800))]">
+                  {o.image && (
+                    <Image
+                      src={o.image}
+                      alt={o.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  )}
+                  {o.stat && (
+                    <div className="absolute left-3 top-3 rounded-full bg-[color-mix(in_oklab,var(--color-ink-950)_70%,transparent)] px-3 py-1 backdrop-blur">
+                      <span className="font-display text-sm font-black text-ink-50">
+                        {o.stat}
+                      </span>
+                      {o.statLabel && (
+                        <span className="ml-1.5 text-[0.6rem] uppercase tracking-[0.15em] text-ink-200">
+                          {o.statLabel}
+                        </span>
+                      )}
+                    </div>
+                  )}
+                </div>
+                <div className="p-6">
+                  <p className="text-[0.6rem] uppercase tracking-[0.3em] text-ink-400">
+                    {o.period}
+                  </p>
+                  <h3 className="mt-2 font-display text-lg font-bold text-ink-50">
+                    {o.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-ink-300">
+                    {o.blurb}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
       </Container>
     </section>
   );

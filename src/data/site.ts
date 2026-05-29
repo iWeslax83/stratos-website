@@ -91,6 +91,13 @@ export const site = {
         "MAVLink",
         "Karbon Fiber",
       ],
+      image: null as string | null,
+      specs: [
+        { value: "2.4", unit: "kg", label: "Ağırlık" },
+        { value: "19.76", unit: "dk", label: "Hover" },
+        { value: "59.4", unit: "km/h", label: "Maks. Hız" },
+        { value: "12", unit: "km", label: "Menzil" },
+      ],
     },
     {
       slug: "fpv-doner-kanat",
@@ -105,26 +112,20 @@ export const site = {
         "Sertifikalı pilotlar tarafından çalıştırılıyor",
       ],
       tech: ["FPV", "Analog Video", "Carbon Frame", "Race-tuned PID"],
-    },
-    {
-      slug: "vex-pushback",
-      title: "VEX Robotics V5 · Pushback",
-      competition: "VEX Robotics Competition",
-      year: "2025",
-      summary:
-        "Sezonun \"Pushback\" oyunu için tasarladığımız, özel mekanizmaları ve otonom rutinleri olan yarışma robotu.",
-      highlights: [
-        "Sezona özel \"Pushback\" oyunu için tasarlandı",
-        "Sensör entegrasyonu ile gelişmiş otonom rutin",
-        "Mekanizma tekrarı için modüler tasarım",
+      image: null as string | null,
+      specs: [
+        { value: "~170", unit: "km/h", label: "Maks. Hız" },
+        { value: "409", unit: "g", label: "Ağırlık" },
+        { value: "14-19", unit: "dk", label: "Uçuş" },
+        { value: "8", unit: "ms", label: "Video Gecikmesi" },
       ],
-      tech: ["VEX V5", "C++", "Modular Mechanics"],
     },
   ],
   team: {
     advisor: {
       name: "Kadir Hançer",
       role: "Takım Sorumlusu (Öğretmen)",
+      photo: null as string | null,
     },
     members: [
       {
@@ -158,7 +159,7 @@ export const site = {
       { name: "Ali Arda Tırnava", role: "Sponsorluk Üyesi", department: "Sponsorluk", captain: false },
       { name: "Ahmet Ege Aksoy", role: "Elektronik Üyesi", department: "Elektronik", captain: false },
       { name: "İbrahim Özdemir", role: "Mekanik Üyesi", department: "Mekanik", captain: false },
-    ],
+    ] as Member[],
     departments: [
       {
         id: "cizim",
@@ -264,10 +265,32 @@ export const site = {
       { label: "Gövde", value: "3K Karbon Fiber" },
     ],
   },
+  // "Topluma Açılan Kanatlar" — gerçek etkinlikler docs/media-fill-prompt.md
+  // promptuyla doldurulur. Boşken anasayfada zarif bir "yakında" durumu gösterilir.
+  outreach: [] as OutreachItem[],
+  media: {
+    // Sabit arka plan reveal bandının fotoğrafı (public/images/reveal/...).
+    revealBand: null as string | null,
+  },
 } as const;
 
 export type Project = (typeof site.projects)[number];
-export type Member = (typeof site.team.members)[number];
+export type Member = {
+  name: string;
+  role: string;
+  department: string;
+  captain: boolean;
+  photo?: string | null;
+};
+export type OutreachItem = {
+  slug: string;
+  title: string;
+  period: string;
+  blurb: string;
+  stat?: string;
+  statLabel?: string;
+  image?: string | null;
+};
 export type Department = (typeof site.team.departments)[number];
 export type Achievement = (typeof site.achievements)[number];
 export type Tier = (typeof site.sponsorship.tiers)[number];
