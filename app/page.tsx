@@ -436,46 +436,49 @@ function Roadmap() {
   ];
   return (
     <section className="relative border-y border-white/5 py-24">
-      <Container size="wide">
-        <div className="text-center">
+      <Container size="default">
+        <div className="max-w-xl">
           <p className="text-xs uppercase tracking-[0.3em] text-[var(--color-brand-300)]">
             Yol Haritası
           </p>
-          <h2 className="mt-4 font-display text-3xl sm:text-4xl font-bold">
+          <h2 className="mt-4 font-display text-3xl sm:text-4xl font-bold leading-tight">
             TEKNOFEST 2026 sezon planı.
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-sm text-ink-300">
-            Şubat'tan Eylül'e, her aşama ölçülebilir bir hedefle bağlı.
+          <p className="mt-4 text-sm leading-relaxed text-ink-300">
+            Şubat&apos;tan Eylül&apos;e, her aşama ölçülebilir bir hedefle bağlı.
           </p>
         </div>
-        <ol className="mt-14 grid gap-4 md:grid-cols-4">
+        <ol className="mt-12 max-w-2xl">
           {phases.map((p, i) => (
-            <li key={p.title} className="relative">
-              <div className="mb-4 flex items-center gap-3">
+            <li key={p.title} className="flex gap-5">
+              <div className="flex flex-col items-center">
                 <span
-                  className={`grid h-9 w-9 place-items-center rounded-full font-display text-xs font-bold ${
+                  className={cn(
+                    "grid h-10 w-10 shrink-0 place-items-center rounded-full font-data text-xs font-bold",
                     p.status === "active"
                       ? "bg-[var(--color-brand-400)] text-ink-950"
                       : p.status === "final"
                         ? "bg-[var(--color-sky-dawn)] text-ink-950"
-                        : "border border-white/15 text-ink-300"
-                  }`}
+                        : "border border-white/15 text-ink-300",
+                  )}
                 >
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 {i < phases.length - 1 && (
-                  <span className="hidden h-px flex-1 bg-gradient-to-r from-white/15 to-transparent md:block" />
+                  <span className="my-1 w-px flex-1 bg-gradient-to-b from-white/20 to-transparent" />
                 )}
               </div>
-              <p className="text-[0.65rem] uppercase tracking-[0.3em] text-ink-400">
-                {p.tag}
-              </p>
-              <h3 className="mt-1.5 font-display text-lg font-bold text-ink-50">
-                {p.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink-300">
-                {p.blurb}
-              </p>
+              <div className={i < phases.length - 1 ? "pb-9" : ""}>
+                <p className="text-[0.65rem] uppercase tracking-[0.3em] text-ink-400">
+                  {p.tag}
+                </p>
+                <h3 className="mt-1.5 font-display text-lg font-bold text-ink-50">
+                  {p.title}
+                </h3>
+                <p className="mt-2 max-w-md text-sm leading-relaxed text-ink-300">
+                  {p.blurb}
+                </p>
+              </div>
             </li>
           ))}
         </ol>
@@ -489,41 +492,55 @@ function TeamTeaser() {
   return (
     <section className="relative py-24">
       <Container size="wide">
-        <div className="flex flex-col items-end justify-between gap-6 sm:flex-row">
-          <div>
+        <div className="grid gap-10 md:grid-cols-12 md:gap-16">
+          <div className="md:col-span-5">
             <p className="text-xs uppercase tracking-[0.3em] text-[var(--color-brand-300)]">
               Takım
             </p>
-            <h2 className="mt-4 font-display text-3xl sm:text-4xl font-bold">
+            <h2 className="mt-4 font-display text-3xl sm:text-4xl font-bold leading-tight">
               Sezonu yürüten kaptanlar.
             </h2>
-          </div>
-          <Button as="link" href="/takim" variant="outline" size="sm">
-            Tam Kadro <ArrowRight size={14} />
-          </Button>
-        </div>
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {captains.map((c) => (
-            <div
-              key={c.name}
-              className="rounded-2xl border border-[var(--color-brand-400)]/30 bg-white/[0.02] p-6"
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-300">
+              Dört departman, dört kaptan. Sezon planını ve teknik kararları
+              onlar taşıyor.
+            </p>
+            <Button
+              as="link"
+              href="/takim"
+              variant="outline"
+              size="sm"
+              className="mt-6"
             >
-              <div className="grid h-12 w-12 place-items-center rounded-full bg-[var(--color-brand-600)] font-display text-sm font-bold text-[var(--color-brand-100)]">
-                {c.name
-                  .split(" ")
-                  .map((p) => p[0])
-                  .join("")
-                  .slice(0, 2)
-                  .toUpperCase()}
-              </div>
-              <p className="mt-4 font-display text-base font-bold text-ink-50">
-                {c.name}
-              </p>
-              <p className="mt-1 text-[0.7rem] uppercase tracking-[0.2em] text-[var(--color-brand-200)]">
-                {c.role}
-              </p>
-            </div>
-          ))}
+              Tam Kadro <ArrowRight size={14} />
+            </Button>
+          </div>
+          <div className="md:col-span-7">
+            <ul className="divide-y divide-white/5 border-y border-white/5">
+              {captains.map((c) => (
+                <li key={c.name} className="flex items-center gap-4 py-4">
+                  <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[var(--color-brand-600)] font-display text-sm font-bold text-[var(--color-brand-100)]">
+                    {c.name
+                      .split(" ")
+                      .map((p) => p[0])
+                      .join("")
+                      .slice(0, 2)
+                      .toUpperCase()}
+                  </div>
+                  <div className="min-w-0">
+                    <p className="font-display text-base font-bold text-ink-50">
+                      {c.name}
+                    </p>
+                    <p className="text-[0.65rem] uppercase tracking-[0.2em] text-ink-400">
+                      {c.department}
+                    </p>
+                  </div>
+                  <p className="ml-auto max-w-[45%] text-right text-[0.7rem] uppercase tracking-[0.18em] text-[var(--color-brand-200)]">
+                    {c.role}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </Container>
     </section>
