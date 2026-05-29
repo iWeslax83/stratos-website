@@ -7,6 +7,7 @@ import { DroneSilhouette } from "@/components/brand/drone-silhouette";
 import { CompetitionPulse } from "@/components/home/competition-pulse";
 import { RevealBand } from "@/components/home/reveal-band";
 import { ProjectCard } from "@/components/projects/project-card";
+import { cn } from "@/lib/cn";
 import { site } from "@/data/site";
 
 export default function HomePage() {
@@ -175,8 +176,8 @@ function Hero() {
         <div className="absolute -top-32 right-[-10%] h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle,var(--color-brand-400)_0%,transparent_60%)] opacity-[0.12] blur-3xl" />
         <div className="absolute bottom-[-20%] left-[-10%] h-[700px] w-[700px] rounded-full bg-[radial-gradient(circle,var(--color-sky-dawn)_0%,transparent_60%)] opacity-[0.07] blur-3xl" />
         {/* Phoenix backdrop: gentle rise + wing-flap loop behind the headline */}
-        <div className="pointer-events-none absolute inset-x-0 top-[6%] flex justify-center">
-          <div className="phoenix-rise w-[min(1000px,108%)] opacity-[0.18] mix-blend-screen">
+        <div className="pointer-events-none absolute inset-x-0 top-[8%] flex justify-center lg:justify-end lg:pr-[4%]">
+          <div className="phoenix-rise w-[min(820px,94%)] opacity-[0.16] mix-blend-screen">
             <Image
               src="/brand/phoenix.png"
               alt=""
@@ -196,28 +197,28 @@ function Hero() {
       </div>
 
       <Container size="wide">
-        <div className="grid min-h-[80dvh] place-items-center py-24 sm:py-32">
-          <div className="text-center">
+        <div className="grid min-h-[80dvh] items-center py-24 sm:py-32">
+          <div className="max-w-3xl">
             <p className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 text-[0.7rem] uppercase tracking-[0.3em] text-ink-200 backdrop-blur animate-rise">
               <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand-300)] shadow-[0_0_12px_var(--color-brand-300)]" />
               TEKNOFEST 2026 · Döner Kanat
             </p>
-            <h1 className="mt-8 font-display text-[2.6rem] sm:text-[5rem] lg:text-[6.8rem] font-black leading-[0.95] tracking-tight break-words [overflow-wrap:anywhere] hyphens-auto">
+            <h1 className="mt-8 font-display text-[2.7rem] sm:text-[5rem] lg:text-[6.8rem] font-black leading-[0.92] tracking-tight break-words [overflow-wrap:anywhere] hyphens-auto">
               <span className="block text-ink-50 animate-rise delay-100">Stratosferi</span>
               <span className="wordmark-stratos block animate-rise delay-200">HEDEFLİYORUZ</span>
             </h1>
-            <p className="mx-auto mt-8 max-w-2xl text-base sm:text-lg leading-relaxed text-ink-200 animate-rise delay-300">
+            <p className="mt-8 max-w-xl text-base sm:text-lg leading-relaxed text-ink-200 animate-rise delay-300">
               {site.brand.longTagline}
             </p>
-            <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row animate-rise delay-400">
+            <div className="mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center animate-rise delay-400">
               <Button as="link" href="/sponsorlar" size="lg">
                 Sponsor Ol <ArrowRight size={16} />
               </Button>
               <Button as="link" href="/iletisim#uyelik" variant="secondary" size="lg">
                 <Users size={16} /> Bize Katıl
               </Button>
-              <Button as="link" href="/projeler" variant="outline" size="lg">
-                Projeleri Gör
+              <Button as="link" href="/projeler" variant="ghost" size="lg">
+                Projeleri gör <ArrowRight size={16} />
               </Button>
             </div>
             <CompetitionPulse />
@@ -293,22 +294,41 @@ function Pillars() {
   return (
     <section className="relative border-y border-white/5 bg-gradient-to-b from-transparent via-white/[0.02] to-transparent py-24">
       <Container size="wide">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {pillars.map((p) => (
-            <div
-              key={p.title}
-              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition-all hover:border-[var(--color-brand-400)]/40 hover:bg-white/[0.04]"
-            >
-              <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-[radial-gradient(circle,var(--color-brand-400)_0%,transparent_70%)] opacity-0 blur-2xl transition-opacity group-hover:opacity-30" />
-              <p.icon size={28} className="text-[var(--color-brand-300)]" />
-              <h3 className="mt-5 font-display text-xl font-bold uppercase tracking-wide">
-                {p.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink-300">
-                {p.blurb}
-              </p>
+        <div className="grid gap-10 md:grid-cols-12 md:gap-16">
+          <div className="md:col-span-4">
+            <p className="text-xs uppercase tracking-[0.3em] text-[var(--color-brand-300)]">
+              Disiplinler
+            </p>
+            <h2 className="mt-4 font-display text-3xl sm:text-4xl font-bold leading-tight">
+              Tasarımdan uçuşa, dört koldan.
+            </h2>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-300">
+              Her araç dört ekibin ortak işi: çizimden üretime, otonom
+              yazılımdan saha testine kadar.
+            </p>
+          </div>
+          <div className="md:col-span-8">
+            <div className="grid gap-5 sm:grid-cols-2">
+              {pillars.map((p, i) => (
+                <div
+                  key={p.title}
+                  className={cn(
+                    "group relative overflow-hidden rounded-xl border border-white/10 bg-white/[0.02] p-6 transition-all hover:border-[var(--color-brand-400)]/40 hover:bg-white/[0.04]",
+                    i % 2 === 1 && "sm:mt-10",
+                  )}
+                >
+                  <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-[radial-gradient(circle,var(--color-brand-400)_0%,transparent_70%)] opacity-0 blur-2xl transition-opacity group-hover:opacity-30" />
+                  <p.icon size={26} className="text-[var(--color-brand-300)]" />
+                  <h3 className="mt-5 font-display text-lg font-bold uppercase tracking-wide">
+                    {p.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-ink-300">
+                    {p.blurb}
+                  </p>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </Container>
     </section>
@@ -319,19 +339,27 @@ function AchievementsStrip() {
   return (
     <section className="relative py-24">
       <Container size="default">
-        <div className="text-center">
-          <p className="text-xs uppercase tracking-[0.3em] text-[var(--color-brand-300)]">
-            Başarılar
-          </p>
-          <h2 className="mt-4 font-display text-3xl sm:text-4xl font-bold">
-            Sahada olduğumuz organizasyonlar.
-          </h2>
+        <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
+          <div>
+            <p className="text-xs uppercase tracking-[0.3em] text-[var(--color-brand-300)]">
+              Başarılar
+            </p>
+            <h2 className="mt-4 max-w-md font-display text-3xl sm:text-4xl font-bold leading-tight">
+              Sahada olduğumuz organizasyonlar.
+            </h2>
+          </div>
+          <Button as="link" href="/basarilar" variant="ghost" size="sm">
+            Tüm başarılar <ArrowRight size={14} />
+          </Button>
         </div>
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {site.achievements.map((a) => (
+          {site.achievements.map((a, i) => (
             <div
               key={a.id}
-              className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.03] to-transparent p-6"
+              className={cn(
+                "relative overflow-hidden border border-white/10 bg-gradient-to-br from-white/[0.03] to-transparent p-6",
+                i === 1 ? "rounded-3xl md:mt-12" : "rounded-2xl",
+              )}
             >
               <p className="text-[0.65rem] uppercase tracking-[0.3em] text-ink-400">
                 {a.category} · {a.year}
@@ -342,11 +370,6 @@ function AchievementsStrip() {
               <p className="mt-3 text-sm text-ink-300">{a.blurb}</p>
             </div>
           ))}
-        </div>
-        <div className="mt-10 text-center">
-          <Button as="link" href="/basarilar" variant="ghost" size="sm">
-            Tüm başarılar <ArrowRight size={14} />
-          </Button>
         </div>
       </Container>
     </section>
