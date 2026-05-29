@@ -18,9 +18,10 @@ export function SkyBackdrop() {
       <div className="absolute inset-0 sky-stars sky-stars--mid sky-twinkle-mid opacity-80" />
       <div className="absolute inset-0 sky-stars sky-stars--lg sky-twinkle-fast opacity-70" />
 
-      {/* Drifting aurora blobs — teal (top right) + sunset orange (bottom left) */}
-      <div className="absolute -right-[15%] -top-[20%] h-[90vh] w-[90vh] rounded-full bg-[radial-gradient(circle,var(--color-brand-400)_0%,transparent_60%)] opacity-40 blur-3xl sky-drift-a" />
-      <div className="absolute -bottom-[20%] -left-[15%] h-[90vh] w-[90vh] rounded-full bg-[radial-gradient(circle,var(--color-sky-dawn)_0%,transparent_60%)] opacity-25 blur-3xl sky-drift-b" />
+      {/* Drifting aurora blobs — teal (top right) + sunset orange (bottom left).
+          Kept restrained so the dark sky reads as atmosphere, not an "AI glow". */}
+      <div className="absolute -right-[15%] -top-[20%] h-[80vh] w-[80vh] rounded-full bg-[radial-gradient(circle,var(--color-brand-400)_0%,transparent_60%)] opacity-[0.16] blur-3xl sky-drift-a" />
+      <div className="absolute -bottom-[20%] -left-[15%] h-[80vh] w-[80vh] rounded-full bg-[radial-gradient(circle,var(--color-sky-dawn)_0%,transparent_60%)] opacity-[0.09] blur-3xl sky-drift-b" />
 
       {/* Atmospheric ground haze — softens the bottom into the page */}
       <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[color-mix(in_oklab,var(--color-sky-steel)_25%,transparent)] to-transparent" />

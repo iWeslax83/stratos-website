@@ -49,7 +49,7 @@ export function ProjectCard({ project }: { project: Project }) {
                 i < project.specs.length - 1 && "border-r border-white/10",
               )}
             >
-              <dd className="font-display text-2xl font-black leading-none tracking-tight text-ink-50">
+              <dd className="font-data text-2xl font-bold leading-none tracking-tight text-ink-50">
                 {s.value}
                 <span className="ml-0.5 text-[0.7rem] font-bold text-[var(--color-brand-300)]">
                   {s.unit}
