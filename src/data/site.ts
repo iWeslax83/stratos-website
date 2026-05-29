@@ -91,7 +91,7 @@ export const site = {
         "MAVLink",
         "Karbon Fiber",
       ],
-      image: null as string | null,
+      image: "/images/projects/otonom-doner-kanat.jpg" as string | null,
       specs: [
         { value: "2.4", unit: "kg", label: "Ağırlık" },
         { value: "19.76", unit: "dk", label: "Hover" },
