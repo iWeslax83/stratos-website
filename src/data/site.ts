@@ -270,7 +270,8 @@ export const site = {
   outreach: [] as OutreachItem[],
   media: {
     // Sabit arka plan reveal bandının fotoğrafı (public/images/reveal/...).
-    revealBand: null as string | null,
+    // Geçici stok görsel; gerçek uçuş karesiyle değiştir (docs/media-fill-prompt.md).
+    revealBand: "/images/reveal/flight-band-placeholder.jpg" as string | null,
   },
 } as const;
 
