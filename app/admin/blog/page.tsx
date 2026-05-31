@@ -128,15 +128,22 @@ export default function BlogEditor() {
   const { lang } = useAdminLang();
   const posts = useSection<BlogPost[]>("blog", "tr");
 
+  if (lang === "en") {
+    return (
+      <div className="flex items-center justify-center py-24">
+        <p className="text-sm text-neutral-500 text-center">
+          Blog yalnızca Türkçe düzenlenir. Düzenlemek için yukarıdan TR&apos;ye geç.
+        </p>
+      </div>
+    );
+  }
+
   if (!posts) return <p className="text-neutral-500">Yükleniyor…</p>;
 
   return (
     <div className="space-y-8">
       <h1 className="text-xl font-bold">Blog</h1>
-      {lang === "en" && (
-        <p className="text-sm text-neutral-500">Blog yalnızca Türkçe düzenlenir.</p>
-      )}
-      <SectionForm section="blog" initial={posts} lang="tr">
+      <SectionForm key="blog" section="blog" initial={posts} lang="tr">
         {(s, set) => (
           <ListEditor<BlogPost>
             label="Yazılar"
