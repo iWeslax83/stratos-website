@@ -65,15 +65,6 @@ export const metadata: Metadata = {
     locale: "tr_TR",
     siteName: site.brand.name,
   },
-  icons: {
-    icon: [
-      { url: "/brand/logo-mark.png", type: "image/png" },
-    ],
-    apple: [
-      { url: "/brand/logo-mark.png", sizes: "180x180", type: "image/png" },
-    ],
-    shortcut: "/brand/logo-mark.png",
-  },
   manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
