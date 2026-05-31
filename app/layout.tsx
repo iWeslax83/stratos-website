@@ -12,6 +12,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { SkyBackdrop } from "@/components/brand/sky-backdrop";
 import { LogoLightbox } from "@/components/brand/logo-lightbox";
+import { SiteChrome } from "@/components/layout/site-chrome";
 import { site } from "@/data/site";
 
 const body = Hanken_Grotesk({
@@ -117,13 +118,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="font-body" suppressHydrationWarning>
-        <SkyBackdrop />
-        <div className="relative flex min-h-dvh flex-col">
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </div>
-        <LogoLightbox />
+        <SiteChrome
+          backdrop={<SkyBackdrop />}
+          header={<Header />}
+          footer={<Footer />}
+          lightbox={<LogoLightbox />}
+        >
+          {children}
+        </SiteChrome>
         <Analytics />
         <SpeedInsights />
       </body>
