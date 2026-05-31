@@ -1,13 +1,19 @@
+import { timingSafeEqual as nodeTimingSafeEqual } from "node:crypto";
 import { NextResponse } from "next/server";
 import { signSession, SESSION_COOKIE, SESSION_TTL_MS } from "@/lib/admin/auth";
 
 function timingSafeEqual(a: string, b: string): boolean {
   const enc = new TextEncoder();
-  const ab = enc.encode(a), bb = enc.encode(b);
-  if (ab.length !== bb.length) return false;
-  let diff = 0;
-  for (let i = 0; i < ab.length; i++) diff |= ab[i] ^ bb[i];
-  return diff === 0;
+  const ab = enc.encode(a);
+  const bb = enc.encode(b);
+  // Pad both to the same length so length never leaks via early return.
+  const len = Math.max(ab.length, bb.length);
+  const pa = new Uint8Array(len);
+  const pb = new Uint8Array(len);
+  pa.set(ab);
+  pb.set(bb);
+  const equal = nodeTimingSafeEqual(pa, pb);
+  return equal && ab.length === bb.length;
 }
 
 export async function POST(req: Request) {
