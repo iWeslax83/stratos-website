@@ -212,7 +212,7 @@ function Hero() {
 
 function QuickFacts() {
   const stats = [
-    { label: "Active Members", value: "7" },
+    { label: "Active Members", value: String(site.team.members.length) },
     { label: "Departments", value: "4" },
     { label: "Competition Projects", value: "3" },
     { label: "1st-Place Wins", value: "1" },

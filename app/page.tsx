@@ -1,10 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Plane, Cpu, Wrench, Trophy, Gauge, Users, GraduationCap } from "lucide-react";
+import { ArrowRight, Plane, Cpu, Wrench, Trophy, Gauge, Users } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { DroneSilhouette } from "@/components/brand/drone-silhouette";
-import { CompetitionPulse } from "@/components/home/competition-pulse";
 import { RevealBand } from "@/components/home/reveal-band";
 import { ProjectCard } from "@/components/projects/project-card";
 import { cn } from "@/lib/cn";
@@ -14,7 +13,6 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <StatsBar />
       <TechStatsBar />
       <FpvStatsBar />
       <Manifesto />
@@ -31,9 +29,18 @@ export default function HomePage() {
       <Pillars />
       <AchievementsStrip />
       <ProjectPreview />
+      <RevealBand
+        image={site.media.revealBand}
+        eyebrow="Yarış FPV Drone'u · MEB Robot"
+        title="Sahanın en hızlısı olmak için ayarlandı."
+        stats={[
+          { value: "~170", unit: "km/h", label: "Maks. Hız" },
+          { value: "409", unit: "g", label: "Ağırlık" },
+          { value: "8", unit: "ms", label: "Video Gecikmesi" },
+        ]}
+      />
       <Roadmap />
       <TeamTeaser />
-      <Outreach />
       <SponsorCta />
     </>
   );
@@ -52,7 +59,7 @@ function TechStatsBar() {
         <div className="flex items-center gap-3 py-6">
           <Gauge size={14} className="shrink-0 text-[var(--color-brand-300)]" />
           <p className="text-[0.65rem] uppercase tracking-[0.35em] text-[var(--color-brand-300)]">
-            Sahadaki Aracın Ölçülen Performansı
+            Otonom İHA&apos;mızın Teknik Özellikleri
           </p>
           <span className="hidden h-px flex-1 bg-gradient-to-r from-[var(--color-brand-400)]/40 to-transparent sm:block" />
           <Link
@@ -102,7 +109,7 @@ function FpvStatsBar() {
         <div className="flex items-center gap-3 py-6">
           <Gauge size={14} className="shrink-0 text-[var(--color-sky-dawn)]" />
           <p className="text-[0.65rem] uppercase tracking-[0.35em] text-[var(--color-sky-dawn)]">
-            FPV Yarış Drone&apos;u Teknik Özellikleri
+            Yarış FPV Drone&apos;umuzun Teknik Özellikleri
           </p>
           <span className="hidden h-px flex-1 bg-gradient-to-r from-[var(--color-sky-dawn)]/40 to-transparent sm:block" />
           <Link
@@ -134,33 +141,6 @@ function FpvStatsBar() {
           GEPRC SpeedX2 2207E 1960Kv · Gemfan 5136 · F722-HD V2 · TAKER H60 60A · MATEN 1.6W VTX · Caddx Ratel 2 · ELRS 2.4GHz · GPS
         </p>
         <div className="pb-12" />
-      </Container>
-    </section>
-  );
-}
-
-function StatsBar() {
-  const stats = [
-    { label: "Aktif Üye", value: "7" },
-    { label: "Departman", value: "4" },
-    { label: "Yarışma Projesi", value: "3" },
-    { label: "Birincilik", value: "1" },
-  ];
-  return (
-    <section className="relative border-y border-white/5 bg-[color-mix(in_oklab,var(--color-ink-900)_70%,transparent)]">
-      <Container size="wide">
-        <dl className="grid grid-cols-2 divide-x divide-white/5 sm:grid-cols-4">
-          {stats.map((s) => (
-            <div key={s.label} className="px-4 py-8 text-center">
-              <dt className="text-[0.65rem] uppercase tracking-[0.3em] text-ink-400">
-                {s.label}
-              </dt>
-              <dd className="mt-3 font-data text-3xl sm:text-4xl font-bold text-ink-50">
-                {s.value}
-              </dd>
-            </div>
-          ))}
-        </dl>
       </Container>
     </section>
   );
@@ -221,7 +201,6 @@ function Hero() {
                 Projeleri gör <ArrowRight size={16} />
               </Button>
             </div>
-            <CompetitionPulse />
             <p className="mt-12 text-[0.65rem] uppercase tracking-[0.4em] text-ink-400 animate-rise delay-500">
               {site.brand.school} · {site.brand.city}
             </p>
@@ -309,13 +288,10 @@ function Pillars() {
           </div>
           <div className="md:col-span-8">
             <div className="grid gap-5 sm:grid-cols-2">
-              {pillars.map((p, i) => (
+              {pillars.map((p) => (
                 <div
                   key={p.title}
-                  className={cn(
-                    "group relative overflow-hidden rounded-xl border border-white/10 bg-white/[0.02] p-6 transition-all hover:border-[var(--color-brand-400)]/40 hover:bg-white/[0.04]",
-                    i % 2 === 1 && "sm:mt-10",
-                  )}
+                  className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-white/10 bg-white/[0.02] p-6 transition-all hover:border-[var(--color-brand-400)]/40 hover:bg-white/[0.04]"
                 >
                   <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-[radial-gradient(circle,var(--color-brand-400)_0%,transparent_70%)] opacity-0 blur-2xl transition-opacity group-hover:opacity-30" />
                   <p.icon size={26} className="text-[var(--color-brand-300)]" />
@@ -353,13 +329,10 @@ function AchievementsStrip() {
           </Button>
         </div>
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {site.achievements.map((a, i) => (
+          {site.achievements.map((a) => (
             <div
               key={a.id}
-              className={cn(
-                "relative overflow-hidden border border-white/10 bg-gradient-to-br from-white/[0.03] to-transparent p-6",
-                i === 1 ? "rounded-3xl md:mt-12" : "rounded-2xl",
-              )}
+              className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.03] to-transparent p-6"
             >
               <p className="text-[0.65rem] uppercase tracking-[0.3em] text-ink-400">
                 {a.category} · {a.year}
@@ -542,90 +515,6 @@ function TeamTeaser() {
             </ul>
           </div>
         </div>
-      </Container>
-    </section>
-  );
-}
-
-function Outreach() {
-  return (
-    <section className="relative border-t border-white/5 py-24">
-      <Container size="default">
-        <div className="text-center">
-          <p className="text-xs uppercase tracking-[0.3em] text-[var(--color-brand-300)]">
-            Topluma Açılan Kanatlar
-          </p>
-          <h2 className="mt-4 font-display text-3xl sm:text-4xl font-bold">
-            Bildiğimizi paylaşıyoruz.
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-sm text-ink-300">
-            İHA&apos;yı yalnızca yarışmak için değil, anlatmak için de yapıyoruz.
-          </p>
-        </div>
-
-        {site.outreach.length === 0 ? (
-          <div className="relative mt-12 overflow-hidden rounded-2xl border border-dashed border-white/15 bg-white/[0.02] p-10 text-center">
-            <GraduationCap
-              size={36}
-              className="mx-auto text-[var(--color-brand-300)]/80"
-            />
-            <p className="mt-6 font-display text-xl font-bold text-ink-50">
-              Atölyeden topluma.
-            </p>
-            <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-ink-300">
-              Genç öğrencilere yönelik atölyelerimizi, okul ziyaretlerimizi ve
-              tanıtım çalışmalarımızı yakında karelerle ve sayılarla burada
-              paylaşacağız.
-            </p>
-            <p className="mt-6 text-[0.65rem] uppercase tracking-[0.3em] text-ink-500">
-              Yakında
-            </p>
-          </div>
-        ) : (
-          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {site.outreach.map((o) => (
-              <article
-                key={o.slug}
-                className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] transition-colors hover:border-[var(--color-brand-400)]/40"
-              >
-                <div className="relative aspect-[16/10] overflow-hidden bg-[linear-gradient(150deg,var(--color-sky-deep),var(--color-brand-800))]">
-                  {o.image && (
-                    <Image
-                      src={o.image}
-                      alt={o.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                  )}
-                  {o.stat && (
-                    <div className="absolute left-3 top-3 rounded-full bg-[color-mix(in_oklab,var(--color-ink-950)_70%,transparent)] px-3 py-1 backdrop-blur">
-                      <span className="font-display text-sm font-black text-ink-50">
-                        {o.stat}
-                      </span>
-                      {o.statLabel && (
-                        <span className="ml-1.5 text-[0.6rem] uppercase tracking-[0.15em] text-ink-200">
-                          {o.statLabel}
-                        </span>
-                      )}
-                    </div>
-                  )}
-                </div>
-                <div className="p-6">
-                  <p className="text-[0.6rem] uppercase tracking-[0.3em] text-ink-400">
-                    {o.period}
-                  </p>
-                  <h3 className="mt-2 font-display text-lg font-bold text-ink-50">
-                    {o.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-ink-300">
-                    {o.blurb}
-                  </p>
-                </div>
-              </article>
-            ))}
-          </div>
-        )}
       </Container>
     </section>
   );

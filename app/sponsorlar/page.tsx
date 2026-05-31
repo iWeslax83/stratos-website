@@ -95,55 +95,6 @@ export default function SponsorlarPage() {
         </section>
 
         <section className="border-t border-white/5 py-16">
-          <div className="grid gap-12 md:grid-cols-12 md:gap-16">
-            <div className="md:col-span-5">
-              <p className="text-xs uppercase tracking-[0.3em] text-[var(--color-brand-300)]">
-                Teknik Kanıt
-              </p>
-              <h2 className="mt-4 font-display text-3xl sm:text-4xl font-bold leading-tight">
-                Sponsorluk bir mühendislik yatırımıdır.
-              </h2>
-              <p className="mt-5 text-base leading-relaxed text-ink-200">
-                Sahaya çıkan İHA'mız <strong className="text-ink-50">TEKNOFEST 2026</strong> sunum
-                raporunu başarıyla geçti. Konfigürasyon, üretim ve yazılım
-                tercihlerimiz raporda detaylı şekilde belgelendi.
-              </p>
-              <p className="mt-4 text-sm text-ink-300">
-                Aşağıdaki özet, sponsor olduğunuzda destek vereceğiniz aracın
-                ölçülen performans ve donanım seçimini özetliyor.
-              </p>
-              <Button
-                as="link"
-                href="/projeler/otonom-doner-kanat"
-                variant="ghost"
-                size="sm"
-                className="mt-6"
-              >
-                Detaylı Proje Sayfası <ArrowRight size={14} />
-              </Button>
-            </div>
-
-            <div className="md:col-span-7">
-              <dl className="grid grid-cols-2 gap-4 sm:grid-cols-2">
-                {site.sponsorship.credibility.map((item) => (
-                  <div
-                    key={item.label}
-                    className="rounded-xl border border-white/10 bg-white/[0.02] p-5"
-                  >
-                    <dt className="text-[0.65rem] uppercase tracking-[0.25em] text-ink-400">
-                      {item.label}
-                    </dt>
-                    <dd className="mt-2 font-display text-xl font-bold text-ink-50">
-                      {item.value}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-          </div>
-        </section>
-
-        <section className="border-t border-white/5 py-16">
           <div className="text-center">
             <p className="text-xs uppercase tracking-[0.3em] text-[var(--color-brand-300)]">
               Sponsorlardan

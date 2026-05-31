@@ -39,6 +39,7 @@ export const site = {
     { href: "/takim", label: "Takım" },
     { href: "/basarilar", label: "Başarılar" },
     { href: "/galeri", label: "Galeri" },
+    { href: "/topluluk", label: "Topluluk" },
     { href: "/blog", label: "Blog" },
     { href: "/sponsorlar", label: "Sponsorlar" },
     { href: "/iletisim", label: "İletişim" },
@@ -197,13 +198,13 @@ export const site = {
     intro:
       "Stratos yeni kurulan bir takım ve ulusal ve uluslararası yarışmalarda iddialı olmayı hedefliyor. Sponsorlarımızın adı aracımızın gövdesinde ve paylaştığımız içeriklerde yer alır.",
     tiers: [
-      // Platin & Altın hidden until first big sponsor lands — empty high tiers
-      // signal "nobody committed yet" to visitors. Flip hidden→false to re-enable.
+      // Platin & Altın now visible: Türkiye Teknoloji Takımı came in at the
+      // Platin level (70.000 TL), so the high tiers are live.
       {
         id: "platin",
         name: "Platin",
         amount: "50.000 TL+",
-        hidden: true,
+        hidden: false,
         benefits: [
           "İHA gövdesinde büyük logo",
           "Tüm takım kıyafetlerinde logo",
@@ -217,7 +218,7 @@ export const site = {
         id: "altin",
         name: "Altın",
         amount: "25.000 TL+",
-        hidden: true,
+        hidden: false,
         benefits: [
           "İHA gövdesinde orta boy logo",
           "Takım kıyafetlerinde logo",
@@ -248,21 +249,17 @@ export const site = {
     ],
     sponsors: [
       {
+        name: "Türkiye Teknoloji Takımı",
+        logo: "/images/sponsors/t3-vakfi-logo.png",
+        url: "https://www.t3vakfi.org" as string | null,
+        tier: "platin",
+      },
+      {
         name: "Deneme Dünyası",
         logo: "/images/sponsors/deneme-dunyasi-logo.png",
         url: "https://denemedunyasi.com.tr" as string | null,
         tier: "gumus",
       },
-    ],
-    credibility: [
-      { label: "Toplam uçuş ağırlığı", value: "2.4 kg" },
-      { label: "Hover uçuş süresi", value: "19.76 dk" },
-      { label: "Maksimum hız", value: "59.4 km/h" },
-      { label: "Maks. menzil", value: "12 km" },
-      { label: "Otopilot", value: "Pixhawk 6C" },
-      { label: "Görev bilgisayarı", value: "Raspberry Pi 5 (8 GB)" },
-      { label: "Yazılım", value: "ArduPilot · OpenCV" },
-      { label: "Gövde", value: "3K Karbon Fiber" },
     ],
   },
   // "Topluma Açılan Kanatlar" — gerçek etkinlikler docs/media-fill-prompt.md
@@ -271,7 +268,7 @@ export const site = {
   media: {
     // Sabit arka plan reveal bandının fotoğrafı (public/images/reveal/...).
     // Geçici stok görsel; gerçek uçuş karesiyle değiştir (docs/media-fill-prompt.md).
-    revealBand: "/images/reveal/flight-band-placeholder.jpg" as string | null,
+    revealBand: "/images/reveal/flight-band.jpg" as string | null,
   },
 } as const;
 
