@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 
 const base = "w-full rounded-lg border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm";
 
@@ -64,8 +63,6 @@ export function ListEditor<T>({ label, value, onChange, blank, render }: {
   label: string; value: T[]; onChange: (v: T[]) => void; blank: T;
   render: (item: T, set: (patch: Partial<T>) => void) => React.ReactNode;
 }) {
-  // useState not needed here — state lives in parent via SectionForm
-  void useState; // keep import used
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
