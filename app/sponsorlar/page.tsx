@@ -1,19 +1,10 @@
 import Image from "next/image";
-import { Check, ArrowRight, Quote } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { PageHeader } from "@/components/ui/page-header";
 import { Button } from "@/components/ui/button";
 import { site } from "@/data/site";
 import { cn } from "@/lib/cn";
-
-type Testimonial = {
-  quote: string;
-  author: string;
-  role: string;
-  company: string;
-};
-
-const testimonials: Testimonial[] = [];
 
 export const metadata = {
   title: "Sponsorlar",
@@ -22,9 +13,9 @@ export const metadata = {
 };
 
 const tierAccent: Record<string, string> = {
-  platin: "from-[#E5E4E2] via-[#CFCFCF] to-[#A8A8A8]",
   altin: "from-[#FFD27A] via-[#F5B042] to-[#C28A1B]",
   gumus: "from-[#D9DEE3] via-[#A2ACB7] to-[#6C7785]",
+  bronz: "from-[#E2A878] via-[#C17A45] to-[#8A4F26]",
   destekci: "from-[var(--color-brand-300)] via-[var(--color-brand-500)] to-[var(--color-brand-700)]",
 };
 
@@ -39,14 +30,14 @@ export default function SponsorlarPage() {
 
       <Container size="wide">
         <section className="py-16">
-          <div className="mx-auto grid max-w-3xl gap-6 md:grid-cols-2">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {site.sponsorship.tiers
               .filter((t) => !("hidden" in t && t.hidden))
               .map((tier, idx) => (
               <div
                 key={tier.id}
                 className={cn(
-                  "relative flex flex-col overflow-hidden rounded-2xl border bg-white/[0.02] p-7 transition-all hover:bg-white/[0.04]",
+                  "relative flex flex-col overflow-hidden rounded-2xl border bg-white/[0.02] p-6 transition-all hover:bg-white/[0.04]",
                   idx === 0
                     ? "border-[var(--color-brand-400)]/40"
                     : "border-white/10",
@@ -64,9 +55,6 @@ export default function SponsorlarPage() {
                 <h3 className="mt-2 font-display text-2xl font-black uppercase tracking-wide text-ink-50">
                   {tier.name}
                 </h3>
-                <p className="mt-2 font-display text-sm font-semibold text-[var(--color-brand-300)]">
-                  {tier.amount}
-                </p>
                 <ul className="mt-6 flex-1 space-y-3">
                   {tier.benefits.map((b) => (
                     <li key={b} className="flex items-start gap-2.5">
@@ -92,64 +80,6 @@ export default function SponsorlarPage() {
               </div>
             ))}
           </div>
-        </section>
-
-        <section className="border-t border-white/5 py-16">
-          <div className="text-center">
-            <p className="text-xs uppercase tracking-[0.3em] text-[var(--color-brand-300)]">
-              Sponsorlardan
-            </p>
-            <h2 className="mt-4 font-display text-2xl sm:text-3xl font-bold">
-              İş birliği yapanların kendi sözleriyle.
-            </h2>
-          </div>
-
-          {testimonials.length === 0 ? (
-            <div className="relative mx-auto mt-10 max-w-3xl overflow-hidden rounded-3xl border border-dashed border-white/15 bg-gradient-to-br from-white/[0.03] to-transparent p-10 sm:p-14">
-              <Quote
-                size={36}
-                className="text-[var(--color-brand-300)]/70"
-              />
-              <p className="mt-5 font-display text-2xl sm:text-3xl font-bold leading-snug text-ink-50">
-                İlk sponsor sözlerimizi yakında burada paylaşacağız.
-              </p>
-              <p className="mt-5 max-w-xl text-sm leading-relaxed text-ink-300">
-                Sponsorlarımızdan aldığımız geri dönüşler, neden Stratos&apos;u
-                desteklediklerini ve birlikte ne ürettiğimizi, bu bölümde yer
-                alacak. İlk iş birliğimizden ses çıktığında, doğrudan onların
-                ağzından duyacaksınız.
-              </p>
-              <div className="mt-8 flex flex-wrap items-center gap-3 text-[0.65rem] uppercase tracking-[0.3em] text-ink-500">
-                <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand-400)]" />
-                Sponsor olun, sözünüz buradan duyulsun
-              </div>
-            </div>
-          ) : (
-            <div className="mt-10 grid gap-6 md:grid-cols-2">
-              {testimonials.map((t) => (
-                <figure
-                  key={t.author}
-                  className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.03] to-transparent p-8"
-                >
-                  <Quote
-                    size={32}
-                    className="text-[var(--color-brand-300)]/70"
-                  />
-                  <blockquote className="mt-5 font-display text-lg leading-relaxed text-ink-100">
-                    &ldquo;{t.quote}&rdquo;
-                  </blockquote>
-                  <figcaption className="mt-6 border-t border-white/5 pt-5">
-                    <p className="font-display text-base font-bold text-ink-50">
-                      {t.author}
-                    </p>
-                    <p className="mt-1 text-xs uppercase tracking-[0.2em] text-ink-400">
-                      {t.role} · {t.company}
-                    </p>
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
-          )}
         </section>
 
         <section className="border-t border-white/5 py-16">

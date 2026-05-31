@@ -197,14 +197,13 @@ export const site = {
   sponsorship: {
     intro:
       "Stratos yeni kurulan bir takım ve ulusal ve uluslararası yarışmalarda iddialı olmayı hedefliyor. Sponsorlarımızın adı aracımızın gövdesinde ve paylaştığımız içeriklerde yer alır.",
+    // Amount'lar sitede gösterilmiyor (vitrin sade kalsın); sunum dosyası ve
+    // birebir görüşme için veride duruyor. Tier sırası: Altın > Gümüş > Bronz > Destekçi.
     tiers: [
-      // Platin & Altın now visible: Türkiye Teknoloji Takımı came in at the
-      // Platin level (70.000 TL), so the high tiers are live.
       {
-        id: "platin",
-        name: "Platin",
+        id: "altin",
+        name: "Altın",
         amount: "50.000 TL+",
-        hidden: false,
         benefits: [
           "İHA gövdesinde büyük logo",
           "Tüm takım kıyafetlerinde logo",
@@ -215,10 +214,9 @@ export const site = {
         ],
       },
       {
-        id: "altin",
-        name: "Altın",
+        id: "gumus",
+        name: "Gümüş",
         amount: "25.000 TL+",
-        hidden: false,
         benefits: [
           "İHA gövdesinde orta boy logo",
           "Takım kıyafetlerinde logo",
@@ -228,8 +226,8 @@ export const site = {
         ],
       },
       {
-        id: "gumus",
-        name: "Gümüş",
+        id: "bronz",
+        name: "Bronz",
         amount: "10.000 TL+",
         benefits: [
           "İHA üstünde küçük logo",
@@ -252,7 +250,7 @@ export const site = {
         name: "Türkiye Teknoloji Takımı",
         logo: "/images/sponsors/t3-vakfi-logo.png",
         url: "https://www.t3vakfi.org" as string | null,
-        tier: "platin",
+        tier: "altin",
       },
       {
         name: "Deneme Dünyası",
