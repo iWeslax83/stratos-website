@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { SectionForm } from "@/components/admin/section-form";
 import { TextField, TextArea, StringList, ListEditor } from "@/components/admin/fields";
+import { ImageUpload } from "@/components/admin/image-upload";
 import type { Project, Spec } from "@/data/types";
 
 function useSection<T>(section: string) {
@@ -43,7 +44,7 @@ export default function ProjelerEditor() {
                 <TextArea label="Özet" value={item.summary} onChange={(v) => patch({ summary: v })} rows={3} />
                 <StringList label="Öne çıkanlar" value={item.highlights} onChange={(v) => patch({ highlights: v })} />
                 <StringList label="Teknolojiler" value={item.tech} onChange={(v) => patch({ tech: v })} />
-                <TextField label="Görsel (boş = yok)" value={item.image ?? ""} onChange={(v) => patch({ image: v || null })} />
+                <ImageUpload label="Görsel" value={item.image ?? ""} category="projects" onChange={(v) => patch({ image: v || null })} />
                 <div className="pl-2 border-l border-neutral-700">
                   <ListEditor<Spec>
                     label="Teknik özellikler"

@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { SectionForm } from "@/components/admin/section-form";
 import { TextField, TextArea, ListEditor } from "@/components/admin/fields";
+import { ImageUpload } from "@/components/admin/image-upload";
 import type { OutreachItem } from "@/data/types";
 
 function useSection<T>(section: string) {
@@ -40,7 +41,7 @@ export default function ToplulukEditor() {
                 <TextArea label="Açıklama" value={item.blurb} onChange={(v) => patch({ blurb: v })} rows={3} />
                 <TextField label="İstatistik" value={item.stat ?? ""} onChange={(v) => patch({ stat: v })} />
                 <TextField label="İstatistik etiketi" value={item.statLabel ?? ""} onChange={(v) => patch({ statLabel: v })} />
-                <TextField label="Görsel (boş = yok)" value={item.image ?? ""} onChange={(v) => patch({ image: v || null })} />
+                <ImageUpload label="Görsel" value={item.image ?? ""} category="outreach" onChange={(v) => patch({ image: v || null })} />
               </div>
             )}
           />

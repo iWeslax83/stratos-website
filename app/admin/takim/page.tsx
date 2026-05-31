@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { SectionForm } from "@/components/admin/section-form";
 import { TextField, TextArea, ListEditor } from "@/components/admin/fields";
+import { ImageUpload } from "@/components/admin/image-upload";
 import type { Team, Member, Department } from "@/data/types";
 
 function useSection<T>(section: string) {
@@ -32,7 +33,7 @@ export default function TakimEditor() {
               <div className="space-y-3">
                 <TextField label="Ad Soyad" value={s.advisor.name} onChange={(v) => set({ ...s, advisor: { ...s.advisor, name: v } })} />
                 <TextField label="Rol" value={s.advisor.role} onChange={(v) => set({ ...s, advisor: { ...s.advisor, role: v } })} />
-                <TextField label="Fotoğraf (boş = yok)" value={s.advisor.photo ?? ""} onChange={(v) => set({ ...s, advisor: { ...s.advisor, photo: v || null } })} />
+                <ImageUpload label="Fotoğraf" value={s.advisor.photo ?? ""} category="team" onChange={(v) => set({ ...s, advisor: { ...s.advisor, photo: v || null } })} />
               </div>
             </section>
 
@@ -48,7 +49,7 @@ export default function TakimEditor() {
                     <TextField label="Ad Soyad" value={item.name} onChange={(v) => patch({ name: v })} />
                     <TextField label="Rol" value={item.role} onChange={(v) => patch({ role: v })} />
                     <TextField label="Departman" value={item.department} onChange={(v) => patch({ department: v })} />
-                    <TextField label="Fotoğraf (boş = yok)" value={item.photo ?? ""} onChange={(v) => patch({ photo: v || null })} />
+                    <ImageUpload label="Fotoğraf" value={item.photo ?? ""} category="team" onChange={(v) => patch({ photo: v || null })} />
                     <label className="flex items-center gap-2 text-sm">
                       <input
                         type="checkbox"

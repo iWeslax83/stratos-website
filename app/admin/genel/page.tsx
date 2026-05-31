@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { SectionForm } from "@/components/admin/section-form";
 import { TextField } from "@/components/admin/fields";
+import { ImageUpload } from "@/components/admin/image-upload";
 import type { Brand, Contact, Season, Social, Media } from "@/data/types";
 
 function useSection<T>(section: string) {
@@ -90,7 +91,7 @@ export default function GenelEditor() {
         <SectionForm section="media" initial={media}>
           {(s, set) => (
             <div className="space-y-3">
-              <TextField label="Reveal band görseli (boş = yok)" value={s.revealBand ?? ""} onChange={(v) => set({ ...s, revealBand: v || null })} />
+              <ImageUpload label="Reveal band görseli" value={s.revealBand ?? ""} category="reveal" onChange={(v) => set({ ...s, revealBand: v || null })} />
             </div>
           )}
         </SectionForm>

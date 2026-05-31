@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { SectionForm } from "@/components/admin/section-form";
 import { TextField, TextArea, Select, StringList, ListEditor } from "@/components/admin/fields";
+import { ImageUpload } from "@/components/admin/image-upload";
 import type { Sponsorship, Tier, Sponsor } from "@/data/types";
 
 function useSection<T>(section: string) {
@@ -65,7 +66,7 @@ export default function SponsorlarEditor() {
                   render={(item, patch) => (
                     <div className="space-y-3">
                       <TextField label="Ad" value={item.name} onChange={(v) => patch({ name: v })} />
-                      <TextField label="Logo (yol)" value={item.logo} onChange={(v) => patch({ logo: v })} />
+                      <ImageUpload label="Logo" value={item.logo} category="sponsors" onChange={(v) => patch({ logo: v })} />
                       <TextField label="URL (boş = yok)" value={item.url ?? ""} onChange={(v) => patch({ url: v || null })} />
                       <Select
                         label="Tier"
