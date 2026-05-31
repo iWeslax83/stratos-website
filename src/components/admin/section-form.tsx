@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 
-export function SectionForm<T>({ section, initial, children }: {
-  section: string; initial: T;
+export function SectionForm<T>({ section, initial, lang, children }: {
+  section: string; initial: T; lang: string;
   children: (state: T, set: (v: T) => void) => React.ReactNode;
 }) {
   const [state, setState] = useState<T>(initial);
@@ -13,16 +13,12 @@ export function SectionForm<T>({ section, initial, children }: {
     setStatus("saving"); setMsg("");
     const res = await fetch("/api/admin/content", {
       method: "POST", headers: { "content-type": "application/json" },
-      body: JSON.stringify({ section, data: state }),
+      body: JSON.stringify({ section, data: state, lang }),
     });
     if (res.ok) {
-      const j = await res.json().catch(() => ({}));
       setStatus("ok");
-      setMsg(j.en === false
-        ? "Kaydedildi. (EN çevirisi başarısız — tekrar dene)"
-        : "Kaydedildi — ~1-2 dk içinde yayında.");
-    }
-    else {
+      setMsg("Kaydedildi — ~1-2 dk içinde yayında.");
+    } else {
       const j = await res.json().catch(() => ({}));
       setStatus("err"); setMsg(j.error ?? "Hata");
     }
