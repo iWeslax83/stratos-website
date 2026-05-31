@@ -13,6 +13,7 @@ import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { DroneSilhouette } from "@/components/brand/drone-silhouette";
 import { site } from "@/data/site";
+import { siteEn } from "@/data/site-en";
 import { cn } from "@/lib/cn";
 
 export const metadata = {
@@ -22,59 +23,13 @@ export const metadata = {
 };
 
 const tierAccent: Record<string, string> = {
-  platin: "from-[#E5E4E2] via-[#CFCFCF] to-[#A8A8A8]",
   altin: "from-[#FFD27A] via-[#F5B042] to-[#C28A1B]",
   gumus: "from-[#D9DEE3] via-[#A2ACB7] to-[#6C7785]",
+  bronz: "from-[#E8A87C] via-[#C77B4A] to-[#8B4E23]",
   destekci:
     "from-[var(--color-brand-300)] via-[var(--color-brand-500)] to-[var(--color-brand-700)]",
 };
 
-const tiersEn = [
-  {
-    id: "platin",
-    name: "Platinum",
-    amount: "₺50,000+",
-    benefits: [
-      "Large logo on the aircraft fuselage",
-      "Logo on every team uniform",
-      "Featured logo on the homepage",
-      "Named recognition in official team videos",
-      "VIP on-site access during competitions",
-      "Detailed end-of-season impact report",
-    ],
-  },
-  {
-    id: "altin",
-    name: "Gold",
-    amount: "₺25,000+",
-    benefits: [
-      "Mid-size logo on the aircraft",
-      "Logo on team uniforms",
-      "Featured logo on the sponsors page",
-      "Social-media spotlight posts",
-      "End-of-season report",
-    ],
-  },
-  {
-    id: "gumus",
-    name: "Silver",
-    amount: "₺10,000+",
-    benefits: [
-      "Small logo on the aircraft",
-      "Logo on the sponsors page",
-      "Social-media thank-you post",
-    ],
-  },
-  {
-    id: "destekci",
-    name: "Supporter",
-    amount: "Under ₺5,000 / in-kind",
-    benefits: [
-      "Name in the supporters section",
-      "Social-media thank-you post",
-    ],
-  },
-];
 
 const credibilityEn = [
   { label: "All-up mass", value: "2.4 kg" },
@@ -114,32 +69,6 @@ const pillarsEn = [
   },
 ];
 
-const achievementsEn = [
-  {
-    id: "meb-design",
-    title: "MEB Robot · Best Design Award",
-    year: "2026",
-    category: "Design",
-    blurb:
-      "Recognized for mechanical design and originality at the national MEB Robot competition.",
-  },
-  {
-    id: "nasa-spaceapps",
-    title: "NASA SpaceApps Hackathon · Bursa Province 1st",
-    year: "2025",
-    category: "Hackathon",
-    blurb:
-      "First place in the Bursa province leg of NASA's SpaceApps Challenge.",
-  },
-  {
-    id: "teknofest-iha",
-    title: "TEKNOFEST UAV · Project Report Accepted",
-    year: "2026",
-    category: "TEKNOFEST",
-    blurb:
-      "Our rotary-wing project report passed the official TEKNOFEST review round.",
-  },
-];
 
 export default function EnglishLanding() {
   return (
@@ -309,7 +238,7 @@ function Achievements() {
           </h2>
         </div>
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {achievementsEn.map((a) => (
+          {siteEn.achievements.map((a) => (
             <div
               key={a.id}
               className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.03] to-transparent p-6"
@@ -438,13 +367,7 @@ function TechSpecs() {
 }
 
 function Team() {
-  const captains = site.team.members.filter((m) => m.captain);
-  const captainRoleEn: Record<string, string> = {
-    "Emir Sakarya": "Electronics & Software Lead",
-    "Demir Özcan": "Design Lead",
-    "Erdem Gümüş": "Chief Pilot",
-    "Berke Azim Açıkkol": "Sponsorship Lead",
-  };
+  const captains = siteEn.team.members.filter((m) => m.captain);
   return (
     <section id="team" className="relative scroll-mt-24 border-t border-white/5 py-24">
       <Container size="wide">
@@ -481,7 +404,7 @@ function Team() {
                 {c.name}
               </p>
               <p className="mt-1 text-[0.7rem] uppercase tracking-[0.2em] text-[var(--color-brand-200)]">
-                {captainRoleEn[c.name] ?? c.role}
+                {c.role}
               </p>
             </div>
           ))}
@@ -510,7 +433,7 @@ function SponsorTiers() {
         </div>
 
         <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {tiersEn.map((tier, idx) => (
+          {siteEn.sponsorship.tiers.map((tier, idx) => (
             <div
               key={tier.id}
               className={cn(
