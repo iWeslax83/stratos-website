@@ -1,9 +1,7 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 
 export default function AdminLogin() {
-  const router = useRouter();
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -16,9 +14,15 @@ export default function AdminLogin() {
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ password }),
     });
+    if (res.ok) {
+      // Full-page navigation so the new session cookie is sent and middleware
+      // re-runs cleanly (a client-side router.push can reuse a stale,
+      // pre-login prefetch of /admin and bounce back to login).
+      window.location.assign("/admin");
+      return;
+    }
     setLoading(false);
-    if (res.ok) router.push("/admin");
-    else setError("Hatalı şifre");
+    setError("Hatalı şifre");
   }
 
   return (
