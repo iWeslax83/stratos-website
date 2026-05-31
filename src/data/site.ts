@@ -22,5 +22,5 @@ export const site: Site = { ...(content as SiteContent), nav };
 
 export type {
   Site, SiteContent, Project, Member, Department, Achievement, Tier, Sponsor,
-  OutreachItem,
+  OutreachItem, NavItem, Spec,
 } from "./types";
