@@ -1,4 +1,11 @@
-const MODEL = "gemini-2.0-flash";
+// Models tried in order. On a non-OK response (e.g. 429 free-tier quota = 0
+// for a given model/region) we fall through to the next model. First success wins.
+const MODELS = ["gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.0-flash"];
+
+/** Strip an accidental ```json ... ``` markdown fence if the model adds one. */
+function stripFence(text: string): string {
+  return text.trim().replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "");
+}
 
 /** Translate a {path: TR text} map to {path: EN text} using Gemini. */
 export async function translateMap(strings: Record<string, string>): Promise<Record<string, string>> {
@@ -15,23 +22,29 @@ export async function translateMap(strings: Record<string, string>): Promise<Rec
     JSON.stringify(strings),
   ].join("\n");
 
-  const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${apiKey}`,
-    {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { responseMimeType: "application/json", temperature: 0.2 },
-      }),
-    },
-  );
-  if (!res.ok) throw new Error(`Gemini ${res.status}: ${await res.text()}`);
-  const json = await res.json();
-  const text: string = json.candidates?.[0]?.content?.parts?.[0]?.text ?? "{}";
-  const parsed = JSON.parse(text) as Record<string, string>;
-  // only keep keys we asked for
-  const out: Record<string, string> = {};
-  for (const k of keys) if (typeof parsed[k] === "string") out[k] = parsed[k];
-  return out;
+  const body = JSON.stringify({
+    contents: [{ parts: [{ text: prompt }] }],
+    generationConfig: { responseMimeType: "application/json", temperature: 0.2 },
+  });
+
+  let lastError = "";
+  for (const model of MODELS) {
+    const res = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
+      { method: "POST", headers: { "content-type": "application/json" }, body },
+    );
+    if (!res.ok) {
+      // Quota (429) or model unavailable — record and try the next model.
+      lastError = `Gemini ${model} ${res.status}: ${await res.text()}`;
+      continue;
+    }
+    const json = await res.json();
+    const text: string = json.candidates?.[0]?.content?.parts?.[0]?.text ?? "{}";
+    const parsed = JSON.parse(stripFence(text)) as Record<string, string>;
+    // only keep keys we asked for
+    const out: Record<string, string> = {};
+    for (const k of keys) if (typeof parsed[k] === "string") out[k] = parsed[k];
+    return out;
+  }
+  throw new Error(lastError || "Gemini: all models failed");
 }
