@@ -24,8 +24,8 @@ test("putFile sends base64 + sha + branch", async () => {
   const spy = vi.fn(async () => new Response(JSON.stringify({ commit: { sha: "x" } }), { status: 200 }));
   vi.stubGlobal("fetch", spy);
   await putFile("p.json", "hello", "Stratos", "prevsha");
-  const [, init] = spy.mock.calls[0];
-  const body = JSON.parse(init.body);
+  const call = spy.mock.calls[0] as unknown as [string, { body: string }];
+  const body = JSON.parse(call[1].body);
   expect(decodeURIComponent(escape(atob(body.content)))).toBe("hello");
   expect(body.sha).toBe("prevsha");
   expect(body.branch).toBe("main");
