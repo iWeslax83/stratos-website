@@ -7,11 +7,15 @@ function b64url(bytes: ArrayBuffer | Uint8Array): string {
   for (const b of arr) s += String.fromCharCode(b);
   return btoa(s).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
 }
-function fromB64url(s: string): Uint8Array {
+function fromB64url(s: string): Uint8Array<ArrayBuffer> {
   s = s.replace(/-/g, "+").replace(/_/g, "/");
   const pad = s.length % 4 ? 4 - (s.length % 4) : 0;
   const bin = atob(s + "=".repeat(pad));
-  return Uint8Array.from(bin, (c) => c.charCodeAt(0));
+  // Build a Uint8Array backed by a plain ArrayBuffer (not ArrayBufferLike) so it
+  // satisfies the BufferSource type required by crypto.subtle.verify.
+  const arr = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+  return arr;
 }
 async function key(): Promise<CryptoKey> {
   const secret = process.env.SESSION_SECRET;

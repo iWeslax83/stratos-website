@@ -43,7 +43,7 @@ export async function POST(req: Request) {
       }
       throw e;
     }
-    // TODO(Phase 5): trigger EN translation here.
+    // Blog EN translation is intentionally out of scope.
     return NextResponse.json({ ok: true });
   }
 

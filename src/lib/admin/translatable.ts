@@ -1,30 +1,5 @@
 import type { Section } from "./schema";
 
-// For each section, the leaf field names (within array items or objects) that
-// hold human text. Array indices are inserted automatically by the walker.
-type Rule = { arrayOf?: string[]; fields?: string[]; nested?: Record<string, Rule> };
-
-const RULES: Record<Section, Rule> = {
-  brand: { fields: ["tagline", "longTagline", "descriptor", "descriptorShort"] },
-  contact: { fields: ["address"] },
-  season: { fields: ["label", "competition", "currentPhase", "nextMilestone"] },
-  social: {},
-  media: {},
-  achievements: { arrayOf: ["title", "category", "blurb"] },
-  projects: { arrayOf: ["title", "competition", "summary"], nested: {
-    highlights: { fields: [] }, // string[] handled specially below
-  } },
-  team: { nested: {
-    advisor: { fields: ["role"] },
-    members: { arrayOf: ["role", "department"] },
-    departments: { arrayOf: ["name", "blurb"] },
-  } },
-  sponsorship: { fields: ["intro"], nested: {
-    tiers: { arrayOf: ["name"] }, // benefits handled as string[]
-  } },
-  outreach: { arrayOf: ["title", "blurb", "statLabel"] },
-};
-
 // To keep the walker simple and robust, we hand-roll extraction per shape.
 // Returns flat {dotPath: text}.
 export function extractStrings(section: Section, data: unknown): Record<string, string> {
@@ -32,9 +7,14 @@ export function extractStrings(section: Section, data: unknown): Record<string, 
   const put = (p: string, v: unknown) => { if (typeof v === "string" && v.trim()) out[p] = v; };
 
   switch (section) {
-    case "brand": case "season":
-      for (const f of RULES[section].fields ?? []) put(f, (data as any)[f]);
+    case "brand": {
+      for (const f of ["tagline", "longTagline", "descriptor", "descriptorShort"]) put(f, (data as any)[f]);
       break;
+    }
+    case "season": {
+      for (const f of ["label", "competition", "currentPhase", "nextMilestone"]) put(f, (data as any)[f]);
+      break;
+    }
     case "contact":
       put("address", (data as any).address); break;
     case "achievements": case "outreach":
