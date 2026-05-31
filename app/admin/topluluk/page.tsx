@@ -1,32 +1,25 @@
 "use client";
-import { useEffect, useState } from "react";
 import { SectionForm } from "@/components/admin/section-form";
+import { useSection } from "@/components/admin/use-section";
+import { useAdminLang } from "@/components/admin/lang-context";
 import { TextField, TextArea, ListEditor } from "@/components/admin/fields";
 import { ImageUpload } from "@/components/admin/image-upload";
 import type { OutreachItem } from "@/data/types";
-
-function useSection<T>(section: string) {
-  const [data, setData] = useState<T | null>(null);
-  useEffect(() => {
-    fetch(`/api/admin/content?section=${section}`)
-      .then((r) => r.json()).then((j) => setData(j.data));
-  }, [section]);
-  return data;
-}
 
 const blankOutreach: OutreachItem = {
   slug: "", title: "", period: "", blurb: "", stat: "", statLabel: "", image: null,
 };
 
 export default function ToplulukEditor() {
-  const outreach = useSection<OutreachItem[]>("outreach");
+  const { lang } = useAdminLang();
+  const outreach = useSection<OutreachItem[]>("outreach", lang);
 
   if (!outreach) return <p className="text-neutral-500">Yükleniyor…</p>;
 
   return (
     <div className="space-y-8">
       <h1 className="text-xl font-bold">Topluluk</h1>
-      <SectionForm section="outreach" initial={outreach}>
+      <SectionForm key={lang} section="outreach" initial={outreach} lang={lang}>
         {(s, set) => (
           <ListEditor<OutreachItem>
             label="Etkinlikler"

@@ -1,25 +1,18 @@
 "use client";
-import { useEffect, useState } from "react";
 import { SectionForm } from "@/components/admin/section-form";
+import { useSection } from "@/components/admin/use-section";
+import { useAdminLang } from "@/components/admin/lang-context";
 import { TextField } from "@/components/admin/fields";
 import { ImageUpload } from "@/components/admin/image-upload";
 import type { Brand, Contact, Season, Social, Media } from "@/data/types";
 
-function useSection<T>(section: string) {
-  const [data, setData] = useState<T | null>(null);
-  useEffect(() => {
-    fetch(`/api/admin/content?section=${section}`)
-      .then((r) => r.json()).then((j) => setData(j.data));
-  }, [section]);
-  return data;
-}
-
 export default function GenelEditor() {
-  const brand = useSection<Brand>("brand");
-  const contact = useSection<Contact>("contact");
-  const social = useSection<Social>("social");
-  const season = useSection<Season>("season");
-  const media = useSection<Media>("media");
+  const { lang } = useAdminLang();
+  const brand = useSection<Brand>("brand", lang);
+  const contact = useSection<Contact>("contact", lang);
+  const social = useSection<Social>("social", lang);
+  const season = useSection<Season>("season", lang);
+  const media = useSection<Media>("media", lang);
 
   if (!brand || !contact || !social || !season || !media)
     return <p className="text-neutral-500">Yükleniyor…</p>;
@@ -28,7 +21,7 @@ export default function GenelEditor() {
     <div className="space-y-12">
       <section>
         <h2 className="mb-4 text-lg font-bold">Marka</h2>
-        <SectionForm section="brand" initial={brand}>
+        <SectionForm key={`brand-${lang}`} section="brand" initial={brand} lang={lang}>
           {(s, set) => (
             <div className="space-y-3">
               <TextField label="Ad" value={s.name} onChange={(v) => set({ ...s, name: v })} />
@@ -45,7 +38,7 @@ export default function GenelEditor() {
 
       <section>
         <h2 className="mb-4 text-lg font-bold">İletişim</h2>
-        <SectionForm section="contact" initial={contact}>
+        <SectionForm key={`contact-${lang}`} section="contact" initial={contact} lang={lang}>
           {(s, set) => (
             <div className="space-y-3">
               <TextField label="E-posta" value={s.email} onChange={(v) => set({ ...s, email: v })} />
@@ -59,7 +52,7 @@ export default function GenelEditor() {
 
       <section>
         <h2 className="mb-4 text-lg font-bold">Sosyal Medya</h2>
-        <SectionForm section="social" initial={social}>
+        <SectionForm key={`social-${lang}`} section="social" initial={social} lang={lang}>
           {(s, set) => (
             <div className="space-y-3">
               <TextField label="Instagram (boş = yok)" value={s.instagram ?? ""} onChange={(v) => set({ ...s, instagram: v || null })} />
@@ -72,7 +65,7 @@ export default function GenelEditor() {
 
       <section>
         <h2 className="mb-4 text-lg font-bold">Sezon</h2>
-        <SectionForm section="season" initial={season}>
+        <SectionForm key={`season-${lang}`} section="season" initial={season} lang={lang}>
           {(s, set) => (
             <div className="space-y-3">
               <TextField label="Etiket" value={s.label} onChange={(v) => set({ ...s, label: v })} />
@@ -88,7 +81,7 @@ export default function GenelEditor() {
 
       <section>
         <h2 className="mb-4 text-lg font-bold">Medya</h2>
-        <SectionForm section="media" initial={media}>
+        <SectionForm key={`media-${lang}`} section="media" initial={media} lang={lang}>
           {(s, set) => (
             <div className="space-y-3">
               <ImageUpload label="Reveal band görseli" value={s.revealBand ?? ""} category="reveal" onChange={(v) => set({ ...s, revealBand: v || null })} />

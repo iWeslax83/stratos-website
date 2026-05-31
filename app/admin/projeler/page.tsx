@@ -1,18 +1,10 @@
 "use client";
-import { useEffect, useState } from "react";
 import { SectionForm } from "@/components/admin/section-form";
+import { useSection } from "@/components/admin/use-section";
+import { useAdminLang } from "@/components/admin/lang-context";
 import { TextField, TextArea, StringList, ListEditor } from "@/components/admin/fields";
 import { ImageUpload } from "@/components/admin/image-upload";
 import type { Project, Spec } from "@/data/types";
-
-function useSection<T>(section: string) {
-  const [data, setData] = useState<T | null>(null);
-  useEffect(() => {
-    fetch(`/api/admin/content?section=${section}`)
-      .then((r) => r.json()).then((j) => setData(j.data));
-  }, [section]);
-  return data;
-}
 
 const blankSpec: Spec = { value: "", unit: "", label: "" };
 const blankProject: Project = {
@@ -21,14 +13,15 @@ const blankProject: Project = {
 };
 
 export default function ProjelerEditor() {
-  const projects = useSection<Project[]>("projects");
+  const { lang } = useAdminLang();
+  const projects = useSection<Project[]>("projects", lang);
 
   if (!projects) return <p className="text-neutral-500">Yükleniyor…</p>;
 
   return (
     <div className="space-y-8">
       <h1 className="text-xl font-bold">Projeler</h1>
-      <SectionForm section="projects" initial={projects}>
+      <SectionForm key={lang} section="projects" initial={projects} lang={lang}>
         {(s, set) => (
           <ListEditor<Project>
             label="Projeler"

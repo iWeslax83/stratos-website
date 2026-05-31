@@ -1,31 +1,24 @@
 "use client";
-import { useEffect, useState } from "react";
 import { SectionForm } from "@/components/admin/section-form";
+import { useSection } from "@/components/admin/use-section";
+import { useAdminLang } from "@/components/admin/lang-context";
 import { TextField, TextArea, ListEditor } from "@/components/admin/fields";
 import { ImageUpload } from "@/components/admin/image-upload";
 import type { Team, Member, Department } from "@/data/types";
-
-function useSection<T>(section: string) {
-  const [data, setData] = useState<T | null>(null);
-  useEffect(() => {
-    fetch(`/api/admin/content?section=${section}`)
-      .then((r) => r.json()).then((j) => setData(j.data));
-  }, [section]);
-  return data;
-}
 
 const blankMember: Member = { name: "", role: "", department: "", captain: false, photo: null };
 const blankDepartment: Department = { id: "", name: "", blurb: "" };
 
 export default function TakimEditor() {
-  const team = useSection<Team>("team");
+  const { lang } = useAdminLang();
+  const team = useSection<Team>("team", lang);
 
   if (!team) return <p className="text-neutral-500">Yükleniyor…</p>;
 
   return (
     <div className="space-y-12">
       <h1 className="text-xl font-bold">Takım</h1>
-      <SectionForm section="team" initial={team}>
+      <SectionForm key={lang} section="team" initial={team} lang={lang}>
         {(s, set) => (
           <div className="space-y-10">
             <section>
