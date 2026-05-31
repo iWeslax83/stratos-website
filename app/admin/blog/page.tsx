@@ -1,17 +1,9 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useSection } from "@/components/admin/use-section";
+import { useAdminLang } from "@/components/admin/lang-context";
 import { SectionForm } from "@/components/admin/section-form";
 import { TextField, TextArea, Select, StringList, ListEditor } from "@/components/admin/fields";
 import type { BlogPost, BlogBlock } from "@/data/types";
-
-function useSection<T>(section: string) {
-  const [data, setData] = useState<T | null>(null);
-  useEffect(() => {
-    fetch(`/api/admin/content?section=${section}`)
-      .then((r) => r.json()).then((j) => setData(j.data));
-  }, [section]);
-  return data;
-}
 
 const CATEGORY_OPTIONS = [
   { value: "Build Log", label: "Build Log" },
@@ -133,14 +125,18 @@ const blankPost: BlogPost = {
 };
 
 export default function BlogEditor() {
-  const posts = useSection<BlogPost[]>("blog");
+  const { lang } = useAdminLang();
+  const posts = useSection<BlogPost[]>("blog", "tr");
 
   if (!posts) return <p className="text-neutral-500">Yükleniyor…</p>;
 
   return (
     <div className="space-y-8">
       <h1 className="text-xl font-bold">Blog</h1>
-      <SectionForm section="blog" initial={posts}>
+      {lang === "en" && (
+        <p className="text-sm text-neutral-500">Blog yalnızca Türkçe düzenlenir.</p>
+      )}
+      <SectionForm section="blog" initial={posts} lang="tr">
         {(s, set) => (
           <ListEditor<BlogPost>
             label="Yazılar"
@@ -175,15 +171,7 @@ export default function BlogEditor() {
                     onChange={(content) => patch({ content })}
                     blank={blankBlock}
                     render={(block, _patchBlock) => {
-                      // _patchBlock uses Partial<BlogBlock> but blocks are discriminated unions;
-                      // we need full replacement — capture index via the onChange above instead.
-                      // We use a local helper that calls onChange on the full content array.
-                      // Because ListEditor gives us a patch(Partial<T>) callback, and BlogBlock
-                      // is a discriminated union, we replace by spreading the whole block.
                       return renderBlock(block, (newBlock) => {
-                        // Build a full replacement by spreading — TypeScript is happy because
-                        // we only call patch with keys that exist on all union members.
-                        // Safest: cast via unknown.
                         _patchBlock(newBlock as unknown as Partial<BlogBlock>);
                       });
                     }}

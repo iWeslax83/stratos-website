@@ -1,29 +1,22 @@
 "use client";
-import { useEffect, useState } from "react";
 import { SectionForm } from "@/components/admin/section-form";
+import { useSection } from "@/components/admin/use-section";
+import { useAdminLang } from "@/components/admin/lang-context";
 import { TextField, TextArea, ListEditor } from "@/components/admin/fields";
 import type { Achievement } from "@/data/types";
-
-function useSection<T>(section: string) {
-  const [data, setData] = useState<T | null>(null);
-  useEffect(() => {
-    fetch(`/api/admin/content?section=${section}`)
-      .then((r) => r.json()).then((j) => setData(j.data));
-  }, [section]);
-  return data;
-}
 
 const blankAchievement: Achievement = { id: "", title: "", year: "", category: "", blurb: "" };
 
 export default function BasarilarEditor() {
-  const achievements = useSection<Achievement[]>("achievements");
+  const { lang } = useAdminLang();
+  const achievements = useSection<Achievement[]>("achievements", lang);
 
   if (!achievements) return <p className="text-neutral-500">Yükleniyor…</p>;
 
   return (
     <div className="space-y-8">
       <h1 className="text-xl font-bold">Başarılar</h1>
-      <SectionForm section="achievements" initial={achievements}>
+      <SectionForm key={lang} section="achievements" initial={achievements} lang={lang}>
         {(s, set) => (
           <ListEditor<Achievement>
             label="Başarılar"

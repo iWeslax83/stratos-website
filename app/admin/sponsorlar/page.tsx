@@ -1,31 +1,24 @@
 "use client";
-import { useEffect, useState } from "react";
 import { SectionForm } from "@/components/admin/section-form";
+import { useSection } from "@/components/admin/use-section";
+import { useAdminLang } from "@/components/admin/lang-context";
 import { TextField, TextArea, Select, StringList, ListEditor } from "@/components/admin/fields";
 import { ImageUpload } from "@/components/admin/image-upload";
 import type { Sponsorship, Tier, Sponsor } from "@/data/types";
-
-function useSection<T>(section: string) {
-  const [data, setData] = useState<T | null>(null);
-  useEffect(() => {
-    fetch(`/api/admin/content?section=${section}`)
-      .then((r) => r.json()).then((j) => setData(j.data));
-  }, [section]);
-  return data;
-}
 
 const blankTier: Tier = { id: "", name: "", amount: "", benefits: [] };
 const blankSponsor: Sponsor = { name: "", logo: "", url: null, tier: "altin" };
 
 export default function SponsorlarEditor() {
-  const sponsorship = useSection<Sponsorship>("sponsorship");
+  const { lang } = useAdminLang();
+  const sponsorship = useSection<Sponsorship>("sponsorship", lang);
 
   if (!sponsorship) return <p className="text-neutral-500">Yükleniyor…</p>;
 
   return (
     <div className="space-y-12">
       <h1 className="text-xl font-bold">Sponsorlar</h1>
-      <SectionForm section="sponsorship" initial={sponsorship}>
+      <SectionForm key={lang} section="sponsorship" initial={sponsorship} lang={lang}>
         {(s, set) => {
           const tierOptions = s.tiers.length > 0
             ? s.tiers.map((t) => ({ value: t.id, label: t.name || t.id }))
