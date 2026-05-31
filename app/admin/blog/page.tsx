@@ -36,7 +36,7 @@ function freshBlock(type: BlogBlock["type"]): BlogBlock {
     case "h2": return { type: "h2", text: "" };
     case "quote": return { type: "quote", text: "" };
     case "list": return { type: "list", items: [] };
-    case "code": return { type: "code", lang: "", code: "" };
+    case "code": return { type: "code", code: "" };
     case "metric": return { type: "metric", items: [] };
   }
 }
