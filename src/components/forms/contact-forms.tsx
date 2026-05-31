@@ -196,9 +196,9 @@ function SponsorForm() {
           <option value="" disabled>
             Bir paket seçin
           </option>
-          <option value="platin">Platin</option>
           <option value="altin">Altın</option>
           <option value="gumus">Gümüş</option>
+          <option value="bronz">Bronz</option>
           <option value="destekci">Destekçi</option>
           <option value="custom">Özel iş birliği</option>
         </select>
