@@ -15,7 +15,13 @@ export function SectionForm<T>({ section, initial, children }: {
       method: "POST", headers: { "content-type": "application/json" },
       body: JSON.stringify({ section, data: state }),
     });
-    if (res.ok) { setStatus("ok"); setMsg("Kaydedildi — ~1-2 dk içinde yayında."); }
+    if (res.ok) {
+      const j = await res.json().catch(() => ({}));
+      setStatus("ok");
+      setMsg(j.en === false
+        ? "Kaydedildi. (EN çevirisi başarısız — tekrar dene)"
+        : "Kaydedildi — ~1-2 dk içinde yayında.");
+    }
     else {
       const j = await res.json().catch(() => ({}));
       setStatus("err"); setMsg(j.error ?? "Hata");

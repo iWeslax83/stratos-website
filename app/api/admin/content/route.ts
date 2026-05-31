@@ -67,6 +67,20 @@ export async function POST(req: Request) {
     }
     throw e;
   }
-  // TODO(Phase 5): trigger EN translation here.
-  return NextResponse.json({ ok: true });
+  // --- EN translation (best-effort) ---
+  try {
+    const enPath = "src/content/site.en.json";
+    const en = await getFile(enPath);
+    const enAll = JSON.parse(en.text ?? "{}") as Record<string, unknown>;
+    const { extractStrings, applyStrings } = await import("@/lib/admin/translatable");
+    const { translateMap } = await import("@/lib/admin/gemini");
+    const strings = extractStrings(section as Section, parsed.data);
+    const translated = await translateMap(strings);
+    enAll[section] = applyStrings(section as Section, parsed.data, translated);
+    await putFile(enPath, JSON.stringify(enAll, null, 2) + "\n",
+      `content(${section}): EN çeviri`, en.sha);
+    return NextResponse.json({ ok: true, en: true });
+  } catch (e) {
+    return NextResponse.json({ ok: true, en: false, enError: (e as Error).message });
+  }
 }
