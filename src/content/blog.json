@@ -1,0 +1,430 @@
+{
+  "posts": [
+    {
+      "slug": "teknofest-2026-donanim-tercihleri",
+      "title": "TEKNOFEST 2026 · Donanım Tercihlerimiz ve Neden Önemli",
+      "excerpt": "Otonom Döner Kanat İHA'mızdaki her parça bir mühendislik tercihinin sonucu. Pixhawk 6C'den karbon fiber gövdeye, bu seçimleri neden yaptığımızı anlatıyoruz.",
+      "date": "2026-02-14",
+      "readTimeMin": 7,
+      "category": "Donanım",
+      "author": "Emir Sakarya · Elektronik & Yazılım Kaptanı",
+      "content": [
+        {
+          "type": "p",
+          "text": "Aslında baştan bilmiyorduk. İlk parça listemiz iki kez değişti. Sonunda elimizde kalan listede her parçanın bir gerekçesi var, ama hepsine birkaç ay test ederek ulaştık. Bu yazıda en kritik üç tercihi açıyorum; F450 gövdeyle başlayıp neden bıraktığımızı, neden iki ayrı işlemci kullandığımızı ve karbon fiber yanında neden hâlâ ABS bastığımızı."
+        },
+        {
+          "type": "h2",
+          "text": "X-quadrotor, 520 mm: hesap kitap değil, gözle kontrol"
+        },
+        {
+          "type": "p",
+          "text": "İlk denemelerde F450 plastik gövdeyi düşünmüştük. Ucuz, kolay temin ediliyordu. Ama Pi Kamera'yı altına bağlayıp hover ettiğimizde görüntünün kenarına pervane gölgesi giriyordu. Bu, hedef tespitini anında bozuyor. X-tipi 520 mm gövdeye geçtikten sonra geniş açılı tarama temiz kaldı. Yan etkisi: 10 inç pervaneye yeterli açıklık verirken bagaja sığacak kadar kompakt kaldı."
+        },
+        {
+          "type": "metric",
+          "items": [
+            {
+              "label": "Toplam ağırlık",
+              "value": "2.4 kg"
+            },
+            {
+              "label": "Hover süresi",
+              "value": "19.76 dk"
+            },
+            {
+              "label": "Maks. hız",
+              "value": "59.4 km/h"
+            },
+            {
+              "label": "Hover throttle",
+              "value": "%45.9"
+            }
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Tek karta sıkıştırmadık"
+        },
+        {
+          "type": "p",
+          "text": "Hem PID döngüsünü hem OpenCV pipeline'ını tek bir SoC'de koşturmak teoride mümkün. Pratikte: görüntü işleme ağırlaştığı an uçuş kararlılığı bozulur. Bunu kabul etmek istemedik. Pixhawk 6C uçuş kontrolünü yapıyor, çift IMU yedekliliğiyle. Raspberry Pi 5 (8 GB) bütün görüntü işini yürütüyor. İki kart arasındaki köprü FTDI USB-TTL üzerinden MAVLink; gecikme bir saniyenin çok altında."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Pixhawk 6C: ArduPilot stack, sensör füzyonu + motor PWM çıkışı",
+            "Raspberry Pi 5: OpenCV görüntü işleme, DroneKit/PyMAVLink köprüsü",
+            "Aktif soğutucu: Pi 5'in throttling yapmaması için şart, ilk testte fark ettik",
+            "Holybro PM07 + Pololu D24V50F5 BEC: Pi 5'in 5V/5A ihtiyacını izole hat üzerinden alıyor"
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Ucuz olanı değil, sahada çalışan en uygunu seçtik. Sponsor maliyetinden çok, yarışma günü güvenilirliği öncelik."
+        },
+        {
+          "type": "h2",
+          "text": "Hem karbon fiber hem ABS, çünkü ikisi farklı işe yarıyor"
+        },
+        {
+          "type": "p",
+          "text": "Ana gövde plakaları 3K karbon fiber. Dayanım/ağırlık oranı alüminyumu çok geride bırakıyor; üstelik elektromanyetik yalıtım ve titreşim sönümleme açısından da avantajlı. Ama her şeyi karbondan yapmak hem aşırı pahalı hem mantıksız. Motor sabitleyici, kanat eklentisi, yük haznesi gibi yarışma sırasında değişme ihtimali yüksek parçalar ABS filament. 3D yazıcımız sahada da yanımızda; bir parça kırılırsa yeniden basıyoruz. Saha onarım süremiz 10 dakikanın altında."
+        },
+        {
+          "type": "h2",
+          "text": "Neden bunlar önemli"
+        },
+        {
+          "type": "p",
+          "text": "Tek tek bakıldığında her parça makul görünebilir. Asıl mesele sahada birlikte çalışmaları. Bu üç tercihin altında iki net hedef var: (1) hedef tespit pipeline'ı görev boyunca düşmeyecek, (2) bir parça kırılırsa pist kenarında onarıp tekrar uçurabileceğiz. Yazılım tarafını, özellikle SITL'den sahaya geçiş sürecini, ayrı bir yazıda açtık."
+        }
+      ]
+    },
+    {
+      "slug": "iki-beyinli-iha-yazilim-mimarisi",
+      "title": "İki Beyinli İHA: Pixhawk 6C ve Raspberry Pi 5 Yazılım Mimarisi",
+      "excerpt": "Tek karta sıkıştırmaya çalışmadık. İki ayrı işlemci, aralarında MAVLink köprüsü, sahaya çıkmadan önce SITL'de iki hafta test. Mimarinin nasıl oturduğunu anlatıyoruz.",
+      "date": "2026-02-28",
+      "readTimeMin": 8,
+      "category": "Yazılım",
+      "author": "Emir Sakarya · Elektronik & Yazılım Kaptanı",
+      "content": [
+        {
+          "type": "p",
+          "text": "İlk başta tek karta sığdırmayı denemek istemiştik. Raspberry Pi 4 + Navio2 kombinasyonu gözden geçirildi. İki hafta sonra vazgeçtik. Sebebi şu: PID döngüsünün deterministik tepki süresi var, görüntü işlemenin yok. İki yükü birbiriyle yarıştırınca her ikisi de fakirleşiyor. Sonunda iki ayrı donanıma geçtik."
+        },
+        {
+          "type": "h2",
+          "text": "Görev paylaşımı"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Pixhawk 6C: sensörden veri okuma, motora PWM gönderme, havada stabil durma. Hepsi bu.",
+            "Raspberry Pi 5 (8 GB): görüntü işleme + karar mekanizması.",
+            "İki kart arasındaki köprü: FTDI USB-TTL üzerinden MAVLink protokolü."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "Pixhawk'ı kasten 'aptal' tutuyoruz. Karar Pi'de, sadece komut Pixhawk'ta. Bu ayrım, hangi tarafın çöktüğünü ayıklamayı çok kolaylaştırdı. Bir keresinde otonom test sırasında İHA havada dönüp duruyordu; üç dakika sonra anladık ki Pi'deki OpenCV scripti exception atmış ama Pixhawk son verilen 'sağa' komutuna sadık kalıyor. Bunu mimaride bir hata değil, beklenen davranış olarak işliyoruz. Pi'nin watchdog'u eklendikten sonra problem tekrar etmedi."
+        },
+        {
+          "type": "h2",
+          "text": "ArduPilot, PID ve karbon fiber detayı"
+        },
+        {
+          "type": "p",
+          "text": "Uçuş yazılımı olarak ArduPilot tercihimiz açık kaynak yapısı için. PX4'ü de değerlendirdik; ArduPilot ile dökümantasyon daha bol, Türkçe toplulukta da destek var. Karbon fiber gövdenin dinamiği plastik gövdeden farklı; Stabilize moddaki P, I, D değerlerini iki gün ayarlamak zorunda kaldık. AutoTune'u açtık ama önerdiği değerler bizde aşırı agresifti, manuel düşürdük."
+        },
+        {
+          "type": "h2",
+          "text": "Pi tarafı: DroneKit ve PyMAVLink"
+        },
+        {
+          "type": "p",
+          "text": "Pi 5'te koşan Python kodu, OpenCV'nin bulduğu hedef koordinatlarını hata payı vektörüne çeviriyor. Bu vektör DroneKit ile Guided modda velocity_target komutuna dönüşüyor. PyMAVLink ise daha düşük seviyeli; bazı komutlar için elimiz daha rahat oluyor. İkisini birlikte kullanıyoruz. 8 GB RAM ve aktif soğutucu varken bütün döngü 200 ms civarında tamamlanıyor."
+        },
+        {
+          "type": "h2",
+          "text": "SITL: sahaya çıkmadan önce iki hafta"
+        },
+        {
+          "type": "p",
+          "text": "İHA donanımı pahalı; kaza riskini sıfırlamak istedik. Bütün otonom görev ve hedef tespit algoritmalarını önce SITL (Software In The Loop) altında çalıştırdık. SITL, gerçek Pixhawk firmware'ini sanal bir araç üzerinde simüle ediyor. İlk SITL koşusunda 'iniş' komutu hedefin 4 metre yanına geliyordu. Hatanın sebebi: koordinat dönüşümünde y-ekseni ters çevrilmemişti. Bunu sahada bulsaydık muhtemelen propeller değiştirmek zorunda kalırdık."
+        },
+        {
+          "type": "metric",
+          "items": [
+            {
+              "label": "MAVLink kanalı",
+              "value": "TELEM2"
+            },
+            {
+              "label": "Telemetri",
+              "value": "915 MHz"
+            },
+            {
+              "label": "Kumanda",
+              "value": "2.4 GHz"
+            },
+            {
+              "label": "Motor tepki süresi",
+              "value": "0.0059 s"
+            }
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Yer istasyonu"
+        },
+        {
+          "type": "p",
+          "text": "Sahada Mission Planner kullanıyoruz. Hem anlık konum ve batarya takibi için, hem de PID parametrelerini hızlı revize etmek için. Bir dizüstüde tüm uçuşlar logleniyor; eve dönünce log dosyalarını inceliyoruz, Pi tarafından gelen kararla Pixhawk'ın gerçek tepkisi arasında fark var mı diye bakıyoruz. Holybro 3DR 100 mW 915 MHz telemetri kullandığımız için 2.4 GHz kumandayla çakışma sorunu yaşamadık."
+        }
+      ]
+    },
+    {
+      "slug": "otonom-hedef-tespiti-5-adim",
+      "title": "Otonom Hedef Tespiti: 5 Adımda Sahaya İniş",
+      "excerpt": "Pi Kamera'dan gelen ham görüntü nasıl bir LAND komutuna dönüşüyor? OpenCV pipeline'ımızın beş adımını sırayla açıyoruz. Bonus: hangi adımda en çok kafa yorduk.",
+      "date": "2026-03-15",
+      "readTimeMin": 6,
+      "category": "Yazılım",
+      "author": "Emir Sakarya · Elektronik & Yazılım Kaptanı",
+      "content": [
+        {
+          "type": "p",
+          "text": "Pist kenarında kameranın gördüğünü ekranda izleyince, hedefin etrafında oynayan yeşil bir kontur çiziliyor. Bu görsel basit duruyor ama altında beş adım var. Hepsini Raspberry Pi 5 üzerinde, yer istasyonuna veri göndermeden çalıştırıyoruz; çünkü 4G/5G bağlantısı saha gününde çalışırsa şanslıyız."
+        },
+        {
+          "type": "h2",
+          "text": "1. Veri toplama"
+        },
+        {
+          "type": "p",
+          "text": "Pi Kamera Modülü 3, yerdeki hedefi anlık tarar. 12 MP çözünürlük ve otomatik odaklama var; İHA havada hareketliyken bile keskin kare yakalıyor. Kamerayı doğrudan gövdeye monte etmek bir hata; ilk testte 'jello' etkisi yüzünden kontur algılama sürekli sıçradı. Çözüm: TPU'dan kendi tasarladığımız antivibrasyon takozlar."
+        },
+        {
+          "type": "h2",
+          "text": "2. Görüntü işleme (OpenCV)"
+        },
+        {
+          "type": "p",
+          "text": "Görüntü ilk önce HSV'ye çevriliyor. RGB'de çalışmak ışık değişiminde kafamızı çok ağrıttı. HSV'ye geçince güneş ve gölge ayrımı için tek eşik yetiyor. Renk filtresi sonrası kontur tespiti; hedefin piksel cinsinden merkez koordinatları çıkıyor."
+        },
+        {
+          "type": "h2",
+          "text": "3. Hata hesaplama"
+        },
+        {
+          "type": "p",
+          "text": "Kameranın merkez koordinatı sabit. Hedefin merkez koordinatından çıkarınca hata vektörünü buluyoruz. Bu piksel cinsinden bir vektör; uçuş yüksekliği biliniyorsa fiziksel mesafeye çeviriliyor. İrtifa GPS + barometre kombinasyonundan geliyor; ikisinin ortalaması daha güvenilir oluyor."
+        },
+        {
+          "type": "h2",
+          "text": "4. Aksiyon kararı"
+        },
+        {
+          "type": "p",
+          "text": "Hata tolerans dışındaysa Pi 5, PyMAVLink üzerinden Pixhawk'a velocity_target komutu gönderiyor. Sağa, sola, ileri, geri; 0.5 m/s civarı bir hızla. Tolerans içine girene kadar bu döngü tekrar ediyor. Burada zor kısım, kazanç ayarı; çok büyük olursa hedefin üzerinde salınıyor, çok küçük olursa hiç ortalayamıyor."
+        },
+        {
+          "type": "h2",
+          "text": "5. Görev icrası"
+        },
+        {
+          "type": "p",
+          "text": "Hata X ve Y eksenlerinde sıfıra yakın olduğunda Pi 5, otopilota LAND komutu gönderiyor. Pixhawk kademeli olarak alçalıyor, son metrede daha yavaş. İnişin son aşamasında kamera artık güvenilir veri vermiyor (hedef çok yakında, kontur kayboluyor), bu yüzden son metre tamamen Pixhawk'a bırakılmış."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Pipeline tamamen araç üzerinde, yer istasyonuna görsel veri gitmiyor.",
+            "TPU antivibrasyon takozlar OpenCV'nin doğruluk payını %15 artırdı (kendi log'larımızdaki ölçüm).",
+            "İlk SITL koşusunda y-ekseni yanlış işaretliydi, hedefin 4 m yanına iniş yapıyordu.",
+            "İnişin son metresi tamamen Pixhawk barometresine bırakılıyor."
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "fea-karbon-fiber-govde-dogrulama",
+      "title": "FEA ile Karbon Fiber Gövde Doğrulama",
+      "excerpt": "Önce bilgisayarda kırdık, sonra üretime geçtik. Gerinim, stres ve yer değiştirme analizleri tasarımı nasıl iki kez değiştirdi?",
+      "date": "2026-03-28",
+      "readTimeMin": 6,
+      "category": "Donanım",
+      "author": "İbrahim Özdemir · Mekanik Üyesi",
+      "content": [
+        {
+          "type": "p",
+          "text": "2.4 kg'lık bir İHA pist kenarında pek de zararsız görünmüyor; motor titreşimi ve ani manevra yükleri gövdeye sert biniyor. FEA (Finite Element Analysis) yapmadan üretime başlamadık. Sebep: karbon fiber plakaların CNC kesimi pahalı, bir hata olursa parçayı çöpe atıyoruz. Üç farklı analiz çalıştırdık. İkisi tasarımı değiştirdi."
+        },
+        {
+          "type": "h2",
+          "text": "Gerinim analizi"
+        },
+        {
+          "type": "p",
+          "text": "Uçuş sırasında yapısal bileşenlere binen yük dağılımını çıkardık. Kritik bağlantı noktalarının mukavemet sınırlarında kaldığı doğrulandı. İlk koşuda motor kollarının gövdeyle birleştiği yerde lokal yığılma vardı; köşe radyusunu büyüttük, sorun ortadan kalktı."
+        },
+        {
+          "type": "h2",
+          "text": "Stres analizi"
+        },
+        {
+          "type": "p",
+          "text": "Uygulanan kuvvetler altında parçalarda oluşan mikro şekil değişimleri ölçüldü. Malzeme elastik limit içinde kaldı. Bu analiz tasarımın dinamik yükler altındaki form stabilitesini optimize etmemize de yarıyor; özellikle iniş anındaki ani yük transferi için."
+        },
+        {
+          "type": "h2",
+          "text": "Yer değiştirme analizi"
+        },
+        {
+          "type": "p",
+          "text": "Statik ve dinamik yükler altında bileşenlerin orijinal konumlarından sapmasını ölçtük. Yapısal rijitliği bu şekilde sayısallaştırdık. Uçuş sırasında oluşan esnemelerin aerodinamik formu bozmayacak sınırlar içinde kaldığı görüldü. Bu analiz aslında en çok kanat şaftında işe yaradı; ilk konsept 6 mm çapındaydı, esneme limiti aştı, 8 mm karbon dolgulu polimere geçtik."
+        },
+        {
+          "type": "h2",
+          "text": "Üretime yansıyan kararlar"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Ana gövde plakaları 3K karbon fiber, CNC ile 0.1 mm toleransta kesildi.",
+            "Kanat sabitleyici kolonlar 4 eksenli CNC ile imal edildi (form karmaşık, 3 eksenli yetmedi).",
+            "Motor sabitleyici, kanat eklentisi, yük haznesi gibi parçalar ABS filamentle 3D baskı.",
+            "Kanat karbon fiber borusu 8 mm, karbon dolgulu polimerden; ilk konseptte 6 mm'di."
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Saha onarımı kabusu olmasın diye"
+        },
+        {
+          "type": "p",
+          "text": "Kollar ve iniş takımları cıvatalı. Olası bir kırılmada parça değişimi 10 dakikadan kısa sürüyor. Bu, sadece bir tasarım tercihi değil; geçen senenin saha hikayelerinden ders. Eski takım arkadaşımızdan dinlemiştik, yarış günü kanat çatlamış, yarım saatte epoksiyle yapıştırılmaya çalışılmış; tabii ki uçmamış. Biz aynı duruma düşmek istemedik."
+        }
+      ]
+    },
+    {
+      "slug": "6s-guc-sistemi-19-dakika-hover",
+      "title": "6S Güç Sistemi: 19.76 Dakika Hover'ın Arkasındaki Sayılar",
+      "excerpt": "Batarya kapasitesi sadece bir parça. 19.76 dakikalık hover süresini yakalamak için BEC, ESC, pervane geometrisi, soğutma, hepsi birden çalışmak zorundaydı.",
+      "date": "2026-04-10",
+      "readTimeMin": 6,
+      "category": "Donanım",
+      "author": "Ahmet Ege Aksoy · Elektronik Üyesi",
+      "content": [
+        {
+          "type": "p",
+          "text": "Bir İHA'nın havada kalma süresi sadece mAh ile ölçülmüyor. Motor verimi, pervane geometrisi, ESC tepkisi, voltaj regülasyonu, hatta soğutma çözümü… Hepsi denkleme giriyor. 19.76 dakikaya nasıl çıktığımızı parça parça açayım."
+        },
+        {
+          "type": "h2",
+          "text": "Batarya seçimi: 22.2V 6S, 5000 mAh, 40C"
+        },
+        {
+          "type": "p",
+          "text": "RC Masterflight 6S 5000 mAh Li-Po. 40C deşarj değeri, kalkış anında gereken yüksek gücü voltaj düşümü olmadan veriyor. 6S olduğu için motorlar daha fazla tork üretiyor. Bataryanın ağırlığı 720 g; toplam ağırlığımızın yaklaşık üçte biri. 4S de denedik, hover süresi 13 dakika civarına düşüyordu; 6S'in artı yarım kilo ağırlığına değdi."
+        },
+        {
+          "type": "h2",
+          "text": "İki katmanlı güç dağıtımı"
+        },
+        {
+          "type": "p",
+          "text": "Holybro PM07 güç modülü, bataryadan gelen yüksek akımı dört ESC'ye dağıtırken Pixhawk için temiz 5.2V veriyor. İşin kolay yanı bu. Asıl mesele Raspberry Pi 5'in 5V/5A ihtiyacı. PM07'nin BEC çıkışı bu akımı veremez. Veremeyince ne oluyor? Pixhawk reboot atıyor, Pi de düşüyor. Atölye testinde bir kere yaşadık, üç saatlik kayıt çöpe gitti. Pololu D24V50F5'i ayrı bir hat olarak ekledik. Verim yüksek, ısı kaybı düşük. Bu BEC olmasaydı Pi 5 her uzun görevde stabil kalmazdı."
+        },
+        {
+          "type": "h2",
+          "text": "MN4010 580 KV + 1055 karbon dolgulu"
+        },
+        {
+          "type": "p",
+          "text": "T-MOTOR MN4010 580KV. 6S batarya ve 10 inç pervaneler için optimize edilmiş. Motor başına 1.5 ila 2 kg arası itki çıkarıyor; bizim toplam uçuş ağırlığımız zaten 2.4 kg. Yani rahat marjla çalışıyoruz. Pervane tarafında 1055 karbon dolgulu seçtik. Plastik alternatife göre esnemiyor. Ani manevrada itki kaybı yok. Plastik 1045'leri ilk denemelerde kullanmıştık; hızlı manevrada belirgin bir tepki gecikmesi vardı, hatta bir tanesinde uç kısım ufak çatlamıştı."
+        },
+        {
+          "type": "metric",
+          "items": [
+            {
+              "label": "Hover süresi",
+              "value": "19.76 dk"
+            },
+            {
+              "label": "Hover throttle",
+              "value": "%45.9"
+            },
+            {
+              "label": "Hover verim",
+              "value": "%68"
+            },
+            {
+              "label": "Maks. itki süresi",
+              "value": "3.2 dk"
+            }
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "İki ayrı senaryo, iki ayrı tablo"
+        },
+        {
+          "type": "p",
+          "text": "Hover'da toplam 12.9 A çekiyoruz, motor başına 53.2 W. Maks. itki senaryosunda toplam 80.8 A, verim %74.7. Bu iki tabloyu önceden bilmek bizim için kritik; saha gününde hangi görevi sıralayacağımızı bu sayıların üzerinden planlıyoruz. Bir hedef tespit görevini tam gazla bitirmeye çalışırsak hover bütçesi cayır cayır eriyor."
+        },
+        {
+          "type": "h2",
+          "text": "Batarya düşerse"
+        },
+        {
+          "type": "p",
+          "text": "PM07 modülü anlık voltaj ve akım değerlerini Pixhawk'a iletiyor. Batarya kritik seviyeye düştüğünde failsafe devreye giriyor (RTL · otonom eve dönüş gibi). Buzzer ise sesli uyarı veriyor. Pilot dalgın olsa bile araç kendi başının çaresine bakacak şekilde ayarlı. Bu özellik bizim için soft-belt; bir kere ihtiyacımız olmasın istiyoruz ama olsa da hazırız."
+        }
+      ]
+    },
+    {
+      "slug": "yari-otonom-tam-otonom-kontrol-mimarisi",
+      "title": "Yarı Otonom'dan Tam Otonom'a: Uçuş Kontrol Mimarimiz",
+      "excerpt": "Kumandadaki tek bir switch ile araç tam otonomdan manuel kontrole geçebiliyor. Çift katmanlı mimariyi ve failsafe protokollerini açıyoruz.",
+      "date": "2026-04-25",
+      "readTimeMin": 5,
+      "category": "Yazılım",
+      "author": "Erdem Gümüş · Ana Pilot",
+      "content": [
+        {
+          "type": "p",
+          "text": "Pilot olarak en çok korktuğum tek şey var. Otonom modda araç kontrolden çıkarsa, hızlıca manuel'e geçemeyecek olmak. O sebeple mimari iki katmanlı kuruldu. Yarı otonom, tam otonom. Geçiş kumandadaki tek bir switch ile. Switch'in pozisyonunu ezberlemiş durumdayım, kalkıştan önce her seferinde tekrar kontrol ediyorum."
+        },
+        {
+          "type": "h2",
+          "text": "Yarı otonom: Loiter"
+        },
+        {
+          "type": "p",
+          "text": "Acil müdahaleler FlySky FS-i6X kumanda üzerinden bana kalıyor. İş yükümü azaltmak için Loiter modu açık. Çubuklara dokunmuyorsam araç olduğu yerde duruyor. Sürüklenmiyor. Rüzgâr varsa GPS konum koruması devrede; bizim okul bahçesindeki testlerde 4 m/s'lik yan rüzgârda bile sapma yarım metreyi geçmedi."
+        },
+        {
+          "type": "h2",
+          "text": "Tam otonom: Guided"
+        },
+        {
+          "type": "p",
+          "text": "Yarışma alanındaki asıl görev (hedef tespit, hizalama, iniş) sırasında araç Guided moda alınıyor. Pilot girdisi tamamen pasif. Tüm uçuş kararları Pi 5 üzerindeki görüntü işleme algoritmasından geliyor. Pixhawk sadece komutu uyguluyor. Ben yedek pozisyonda, switch'in başında."
+        },
+        {
+          "type": "h2",
+          "text": "Manuel override"
+        },
+        {
+          "type": "p",
+          "text": "Kumanda üzerindeki atanmış bir switch ile görev iptal edilebiliyor. Otonom davranış istenmedik bir noktaya gidiyorsa switch'i indiriyorum; araç Loiter'a düşüyor, ben kontrole alıyorum. İlk SITL testlerinde override'ın geç tepki verdiğini gördük; mavlink mesaj önceliklerini tekrar gözden geçirdik, şu an tepki süresi yarım saniyenin altında."
+        },
+        {
+          "type": "h2",
+          "text": "Failsafe protokolleri"
+        },
+        {
+          "type": "list",
+          "items": [
+            "RTL: batarya kritik seviyeye düştüğünde otomatik eve dönüş.",
+            "Sinyal kesintisi: kumanda sinyali gidince Pixhawk Loiter'a geçer, RTL geri sayımı başlar.",
+            "GPS kaybı: Loiter olmaz, Althold (irtifa koruma) devreye girer, ben manuel kontrolüne alırım.",
+            "Sesli uyarı: GPS kilit durumu ve düşük voltaj buzzer ile bildirilir.",
+            "Safety button: araç 'arm' olmadan önce mekanik kilit görevi görür; yanlışlıkla motorların dönmesini engelliyor."
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "GPS ve telemetri"
+        },
+        {
+          "type": "p",
+          "text": "Holybro M10 GPS'i karbon fiber stant ile yukarı taşıdık. Motorların manyetik gürültüsünden uzak. Otonom navigasyon ve Loiter için santimetre hassasiyetinde veri veriyor. Telemetri 915 MHz; kumanda 2.4 GHz. İki bant kasıtlı ayrı tutuluyor, çakışma olmuyor. Geçen sezon başka bir takımda iki sistem aynı banttaymış, sahada o tarafa kötü bir gün olmuş; dinlerken not aldık."
+        }
+      ]
+    }
+  ]
+}
