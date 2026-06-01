@@ -201,7 +201,7 @@ function SponsorForm() {
         />
       </div>
 
-      <StatusLine status={status} errorMsg={errorMsg} successMsg="Sponsor talebiniz iletildi, 24-48 saat içinde yanıt vereceğiz." />
+      <StatusLine status={status} errorMsg={errorMsg} successMsg="Sponsor talebiniz iletildi, en kısa sürede yanıt vereceğiz." />
 
       <div className="flex justify-end">
         <Button type="submit" size="md" variant="primary">
