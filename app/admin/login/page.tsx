@@ -2,13 +2,15 @@
 import { useState } from "react";
 
 export default function AdminLogin() {
-  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  async function submit(e: React.FormEvent) {
+  async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true); setError("");
+    // Read straight from the form so the actual field value (incl. autofill)
+    // is sent on the FIRST submit — not a possibly-stale React state value.
+    const password = String(new FormData(e.currentTarget).get("password") ?? "");
     const res = await fetch("/api/admin/login", {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -30,8 +32,7 @@ export default function AdminLogin() {
       <form onSubmit={submit} className="w-full max-w-sm space-y-4">
         <h1 className="text-xl font-bold">Stratos Admin</h1>
         <input
-          type="password" value={password} autoFocus
-          onChange={(e) => setPassword(e.target.value)}
+          type="password" name="password" autoFocus autoComplete="current-password"
           placeholder="Şifre"
           className="w-full rounded-lg border border-neutral-700 bg-neutral-900 px-4 py-3"
         />
