@@ -16,7 +16,7 @@ interface SponsorPayload {
   name: string;
   email: string;
   phone?: string;
-  tier: string;
+  tier?: string;
   message: string;
 }
 
@@ -49,7 +49,7 @@ function validate(body: unknown): Payload | { error: string; spam?: boolean } {
   const b = body as Record<string, unknown>;
   if (isSpam(b)) return { error: "Spam koruması tetiklendi.", spam: true };
   if (b.kind === "sponsor") {
-    const required = ["company", "name", "email", "tier", "message"] as const;
+    const required = ["company", "name", "email", "message"] as const;
     for (const k of required) if (!isString(b[k])) return { error: `Alan eksik: ${k}` };
     return {
       kind: "sponsor",
@@ -57,7 +57,7 @@ function validate(body: unknown): Payload | { error: string; spam?: boolean } {
       name: String(b.name).trim(),
       email: String(b.email).trim(),
       phone: isString(b.phone) ? String(b.phone).trim() : undefined,
-      tier: String(b.tier).trim(),
+      tier: isString(b.tier) ? String(b.tier).trim() : undefined,
       message: String(b.message).trim(),
     };
   }
@@ -86,7 +86,7 @@ function renderHtml(p: Payload) {
   <tr><td><strong>İletişim</strong></td><td>${escapeHtml(p.name)}</td></tr>
   <tr><td><strong>E-posta</strong></td><td>${escapeHtml(p.email)}</td></tr>
   <tr><td><strong>Telefon</strong></td><td>${escapeHtml(p.phone ?? "Belirtilmedi")}</td></tr>
-  <tr><td><strong>Paket</strong></td><td>${escapeHtml(p.tier)}</td></tr>
+  ${p.tier ? `<tr><td><strong>Paket</strong></td><td>${escapeHtml(p.tier)}</td></tr>` : ""}
 </table>
 <h3>Mesaj</h3>
 <p>${escapeHtml(p.message).replace(/\n/g, "<br>")}</p>`;

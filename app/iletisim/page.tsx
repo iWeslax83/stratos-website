@@ -66,9 +66,6 @@ export default function IletisimPage() {
                 </div>
               </li>
             </ul>
-            <p className="mt-8 text-xs uppercase tracking-[0.2em] text-ink-400">
-              Yanıt süresi · 24-48 saat
-            </p>
           </aside>
 
           <div className="md:col-span-8">
