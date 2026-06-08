@@ -5,11 +5,11 @@ type Variant = "primary" | "secondary" | "ghost" | "outline";
 type Size = "sm" | "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full font-display font-semibold uppercase tracking-[0.18em] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed";
+  "inline-flex items-center justify-center gap-2 rounded-full font-display font-semibold uppercase tracking-[0.18em] transition-all duration-200 active:translate-y-px active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed";
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-[var(--color-brand-400)] text-ink-950 hover:bg-[var(--color-brand-300)] shadow-[0_0_40px_-8px_var(--color-brand-300)] hover:shadow-[0_0_60px_-6px_var(--color-brand-300)]",
+    "bg-[var(--color-brand-400)] text-ink-950 hover:bg-[var(--color-brand-300)] shadow-[0_6px_20px_-8px_color-mix(in_oklab,var(--color-brand-400)_70%,transparent)] hover:shadow-[0_10px_28px_-10px_color-mix(in_oklab,var(--color-brand-300)_75%,transparent)]",
   secondary:
     "bg-ink-100 text-ink-950 hover:bg-white",
   ghost:

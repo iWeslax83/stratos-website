@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
-import { DroneSilhouette } from "@/components/brand/drone-silhouette";
+import { CinematicHero } from "@/components/home/cinematic-hero";
 import { site } from "@/data/site";
 import { siteEn } from "@/data/site-en";
 import { cn } from "@/lib/cn";
@@ -89,53 +89,35 @@ export default function EnglishLanding() {
 
 function Hero() {
   return (
-    <section className="relative isolate overflow-hidden">
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-sky-night)] via-[var(--color-sky-deep)] to-[var(--color-ink-900)]" />
-        <div className="absolute inset-0 starfield opacity-70" />
-        <div className="absolute -top-32 right-[-10%] h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle,var(--color-brand-400)_0%,transparent_60%)] opacity-25 blur-3xl" />
-        <div className="absolute bottom-[-20%] left-[-10%] h-[700px] w-[700px] rounded-full bg-[radial-gradient(circle,var(--color-sky-dawn)_0%,transparent_60%)] opacity-15 blur-3xl" />
-        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-[var(--color-ink-900)]" />
+    <CinematicHero image="/images/projects/otonom-doner-kanat.jpg">
+      <p className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 text-[0.7rem] uppercase tracking-[0.3em] text-ink-200 backdrop-blur animate-rise">
+        <Languages size={12} /> English · TEKNOFEST 2026 · Rotary Wing
+      </p>
+      <h1 className="mt-8 font-display text-[2.4rem] sm:text-[5rem] lg:text-[5.8rem] font-black leading-[0.95] tracking-tight break-words [overflow-wrap:anywhere] hyphens-auto sm:break-normal sm:[overflow-wrap:normal] sm:hyphens-none">
+        <span className="block text-ink-50 animate-rise delay-100">
+          Aiming for the
+        </span>
+        <span className="wordmark-stratos block animate-rise delay-200">
+          STRATOSPHERE
+        </span>
+      </h1>
+      <p className="mt-8 max-w-xl text-base sm:text-lg leading-relaxed text-ink-200 animate-rise delay-300">
+        Stratos is the UAV team at {site.brand.school} in {site.brand.city}.
+        Students design our aircraft, build it, write its software and fly it
+        themselves, and we compete with it at national level.
+      </p>
+      <div className="mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center animate-rise delay-400">
+        <Button as="link" href="#sponsor" size="lg">
+          Become a Sponsor <ArrowRight size={16} />
+        </Button>
+        <Button as="link" href="/" variant="outline" size="lg">
+          Continue in Türkçe
+        </Button>
       </div>
-
-      <div className="pointer-events-none absolute right-[-8%] top-1/2 hidden h-[420px] w-[420px] -translate-y-1/2 text-[var(--color-brand-300)]/15 lg:block animate-fade">
-        <DroneSilhouette className="h-full w-full spin-slow" />
-      </div>
-
-      <Container size="wide">
-        <div className="grid min-h-[78dvh] place-items-center py-24 sm:py-32">
-          <div className="text-center">
-            <p className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 text-[0.7rem] uppercase tracking-[0.3em] text-ink-200 backdrop-blur animate-rise">
-              <Languages size={12} /> English · TEKNOFEST 2026 · Rotary Wing
-            </p>
-            <h1 className="mt-8 font-display text-[2.4rem] sm:text-[5rem] lg:text-[6.4rem] font-black leading-[0.95] tracking-tight break-words [overflow-wrap:anywhere] hyphens-auto">
-              <span className="block text-ink-50 animate-rise delay-100">
-                Aiming for the
-              </span>
-              <span className="wordmark-stratos block animate-rise delay-200">
-                STRATOSPHERE
-              </span>
-            </h1>
-            <p className="mx-auto mt-8 max-w-2xl text-base sm:text-lg leading-relaxed text-ink-200 animate-rise delay-300">
-              Stratos is the UAV team at {site.brand.school} in {site.brand.city}.
-              Students design our aircraft, build it, write its software and
-              fly it themselves, and we compete with it at national level.
-            </p>
-            <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row animate-rise delay-400">
-              <Button as="link" href="#sponsor" size="lg">
-                Become a Sponsor <ArrowRight size={16} />
-              </Button>
-              <Button as="link" href="/" variant="outline" size="lg">
-                Continue in Türkçe
-              </Button>
-            </div>
-            <p className="mt-12 text-[0.65rem] uppercase tracking-[0.4em] text-ink-400 animate-rise delay-500">
-              {site.brand.school} · {site.brand.city}, Türkiye
-            </p>
-          </div>
-        </div>
-      </Container>
-    </section>
+      <p className="mt-12 text-[0.65rem] uppercase tracking-[0.4em] text-ink-400 animate-rise delay-500">
+        {site.brand.school} · {site.brand.city}, Türkiye
+      </p>
+    </CinematicHero>
   );
 }
 

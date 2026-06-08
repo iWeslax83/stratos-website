@@ -1,9 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Plane, Cpu, Wrench, Trophy, Gauge, Users } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
-import { DroneSilhouette } from "@/components/brand/drone-silhouette";
+import { Reveal } from "@/components/ui/reveal";
+import { CinematicHero } from "@/components/home/cinematic-hero";
 import { RevealBand } from "@/components/home/reveal-band";
 import { ProjectCard } from "@/components/projects/project-card";
 import { cn } from "@/lib/cn";
@@ -13,201 +13,229 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <TechStatsBar />
-      <FpvStatsBar />
-      <Manifesto />
+      <Reveal>
+        <TechStatsBar />
+      </Reveal>
+      <Reveal>
+        <FpvStatsBar />
+      </Reveal>
+      <Reveal>
+        <Manifesto />
+      </Reveal>
       <RevealBand
         image={site.media.revealBand}
         eyebrow="Otonom Döner Kanat · TEKNOFEST 2026"
         title="Tasarladık, ürettik, uçurduk."
+        description="Pixhawk uçuş kontrolcüsü ve kendi yazdığımız otonom yazılımla, kalkıştan hassas inişe kadar her aşamayı sahada doğruladık."
+        accent="brand"
+        align="left"
         stats={[
           { value: "19.76", unit: "dk", label: "Hover" },
           { value: "59.4", unit: "km/h", label: "Maks. Hız" },
           { value: "12", unit: "km", label: "Menzil" },
         ]}
       />
-      <Pillars />
-      <AchievementsStrip />
-      <ProjectPreview />
+      <Reveal>
+        <Pillars />
+      </Reveal>
+      <Reveal>
+        <AchievementsStrip />
+      </Reveal>
+      <Reveal>
+        <ProjectPreview />
+      </Reveal>
       <RevealBand
-        image={site.media.revealBand}
+        image="/images/projects/fpv-doner-kanat.jpg"
         eyebrow="Yarış FPV Drone'u · MEB Robot"
         title="Sahanın en hızlısı olmak için ayarlandı."
+        description="409 gramlık karbon gövde, 1960Kv motorlar ve 8 ms gecikmeli analog video; sürücüyle drone arasında neredeyse hiç bekleme yok."
+        accent="dawn"
+        align="right"
         stats={[
           { value: "~170", unit: "km/h", label: "Maks. Hız" },
           { value: "409", unit: "g", label: "Ağırlık" },
           { value: "8", unit: "ms", label: "Video Gecikmesi" },
         ]}
       />
-      <Roadmap />
-      <TeamTeaser />
-      <SponsorCta />
+      <Reveal>
+        <Roadmap />
+      </Reveal>
+      <Reveal>
+        <TeamTeaser />
+      </Reveal>
+      <Reveal>
+        <SponsorCta />
+      </Reveal>
     </>
   );
 }
 
-function TechStatsBar() {
-  const specs = [
-    { label: "Hover Süresi", value: "19.76", unit: "dk" },
-    { label: "Maks. Hız", value: "59.4", unit: "km/h" },
-    { label: "Maks. Menzil", value: "~12", unit: "km" },
-    { label: "Taşıma Kapasitesi", value: "11.8", unit: "kg" },
-  ];
+type Spec = { label: string; value: string; unit: string };
+
+function SpecStrip({
+  name,
+  eyebrow,
+  href,
+  accentVar,
+  specs,
+  components,
+  reverse = false,
+}: {
+  name: string;
+  eyebrow: string;
+  href: string;
+  accentVar: string;
+  specs: Spec[];
+  components: string;
+  reverse?: boolean;
+}) {
   return (
-    <section className="relative border-b border-white/5 bg-[color-mix(in_oklab,var(--color-ink-900)_55%,transparent)]">
+    <section className="relative border-b border-white/5">
       <Container size="wide">
-        <div className="flex items-center gap-3 py-6">
-          <Gauge size={14} className="shrink-0 text-[var(--color-brand-300)]" />
-          <p className="text-[0.65rem] uppercase tracking-[0.35em] text-[var(--color-brand-300)]">
-            Otonom İHA&apos;mızın Teknik Özellikleri
-          </p>
-          <span className="hidden h-px flex-1 bg-gradient-to-r from-[var(--color-brand-400)]/40 to-transparent sm:block" />
-          <Link
-            href="/projeler/otonom-doner-kanat"
-            className="hidden text-[0.65rem] font-display font-semibold uppercase tracking-[0.25em] text-ink-300 hover:text-white sm:inline-flex items-center gap-1.5"
+        <div className="grid gap-x-12 gap-y-10 py-14 sm:py-16 lg:grid-cols-12 lg:items-center">
+          {/* Aircraft label + spec sheet link */}
+          <div
+            className={cn(
+              "lg:col-span-4",
+              reverse && "lg:order-2 lg:text-right",
+            )}
           >
-            Teknik Detay <ArrowRight size={11} />
-          </Link>
-        </div>
-        <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] pb-px sm:grid-cols-4">
-          {specs.map((s) => (
             <div
-              key={s.label}
-              className="bg-[color-mix(in_oklab,var(--color-ink-900)_70%,transparent)] px-5 py-7 text-center"
+              className={cn(
+                "flex items-center gap-2.5",
+                reverse && "lg:flex-row-reverse",
+              )}
             >
-              <dt className="text-[0.6rem] uppercase tracking-[0.3em] text-ink-400">
-                {s.label}
-              </dt>
-              <dd className="mt-3 font-data font-bold leading-none tracking-tight text-ink-50">
-                <span className="text-3xl sm:text-4xl">{s.value}</span>
-                <span className="ml-1.5 text-sm font-bold text-[var(--color-brand-300)]">
-                  {s.unit}
-                </span>
-              </dd>
+              <Gauge size={14} className="shrink-0" style={{ color: accentVar }} />
+              <p
+                className="text-[0.62rem] font-semibold uppercase tracking-[0.3em]"
+                style={{ color: accentVar }}
+              >
+                {eyebrow}
+              </p>
             </div>
-          ))}
-        </dl>
-        <p className="mt-4 text-center text-[0.65rem] uppercase tracking-[0.3em] text-ink-500 sm:text-left">
-          Pixhawk 6C · Raspberry Pi 5 · ArduPilot · OpenCV · 3K Karbon Fiber
-        </p>
-        <div className="pb-12" />
+            <h3 className="mt-4 font-display text-2xl font-bold leading-tight text-ink-50">
+              {name}
+            </h3>
+            <p className="mt-3 text-[0.7rem] leading-relaxed tracking-wide text-ink-500">
+              {components}
+            </p>
+            <Link
+              href={href}
+              className={cn(
+                "mt-5 inline-flex items-center gap-1.5 text-[0.65rem] font-display font-semibold uppercase tracking-[0.25em] text-ink-300 transition-colors hover:text-white",
+                reverse && "lg:flex-row-reverse",
+              )}
+            >
+              Teknik Detay <ArrowRight size={11} />
+            </Link>
+          </div>
+
+          {/* Readout: featured lead stat + supporting figures, hairline separated */}
+          <dl
+            className={cn(
+              "grid grid-cols-2 sm:grid-cols-4 lg:col-span-8",
+              reverse && "lg:order-1",
+            )}
+          >
+            {specs.map((s, i) => (
+              <div
+                key={s.label}
+                className={cn(
+                  "border-t border-white/10 py-5 sm:border-t-0 sm:px-6 sm:py-1",
+                  i > 0 && "sm:border-l sm:border-white/10",
+                  i === 0 && "sm:pl-0",
+                )}
+              >
+                <dd className="font-data font-bold leading-none tracking-tight text-ink-50">
+                  <span className={i === 0 ? "text-4xl sm:text-5xl" : "text-2xl sm:text-3xl"}>
+                    {s.value}
+                  </span>
+                  <span
+                    className="ml-1.5 text-sm font-bold"
+                    style={{ color: accentVar }}
+                  >
+                    {s.unit}
+                  </span>
+                </dd>
+                <dt className="mt-3 text-[0.58rem] uppercase tracking-[0.28em] text-ink-400">
+                  {s.label}
+                </dt>
+              </div>
+            ))}
+          </dl>
+        </div>
       </Container>
     </section>
   );
 }
 
-function FpvStatsBar() {
-  const specs = [
-    { label: "Maks. Hız", value: "~170", unit: "km/h" },
-    { label: "Ağırlık", value: "409", unit: "g" },
-    { label: "Uçuş Süresi", value: "14-19", unit: "dk" },
-    { label: "Video Gecikmesi", value: "8", unit: "ms" },
-  ];
+function TechStatsBar() {
   return (
-    <section className="relative border-b border-white/5 bg-[color-mix(in_oklab,var(--color-ink-900)_45%,transparent)]">
-      <Container size="wide">
-        <div className="flex items-center gap-3 py-6">
-          <Gauge size={14} className="shrink-0 text-[var(--color-sky-dawn)]" />
-          <p className="text-[0.65rem] uppercase tracking-[0.35em] text-[var(--color-sky-dawn)]">
-            Yarış FPV Drone&apos;umuzun Teknik Özellikleri
-          </p>
-          <span className="hidden h-px flex-1 bg-gradient-to-r from-[var(--color-sky-dawn)]/40 to-transparent sm:block" />
-          <Link
-            href="/projeler/fpv-doner-kanat"
-            className="hidden text-[0.65rem] font-display font-semibold uppercase tracking-[0.25em] text-ink-300 hover:text-white sm:inline-flex items-center gap-1.5"
-          >
-            Teknik Detay <ArrowRight size={11} />
-          </Link>
-        </div>
-        <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] pb-px sm:grid-cols-4">
-          {specs.map((s) => (
-            <div
-              key={s.label}
-              className="bg-[color-mix(in_oklab,var(--color-ink-900)_70%,transparent)] px-5 py-7 text-center"
-            >
-              <dt className="text-[0.6rem] uppercase tracking-[0.3em] text-ink-400">
-                {s.label}
-              </dt>
-              <dd className="mt-3 font-data font-bold leading-none tracking-tight text-ink-50">
-                <span className="text-3xl sm:text-4xl">{s.value}</span>
-                <span className="ml-1.5 text-sm font-bold text-[var(--color-sky-dawn)]">
-                  {s.unit}
-                </span>
-              </dd>
-            </div>
-          ))}
-        </dl>
-        <p className="mt-4 text-center text-[0.65rem] uppercase tracking-[0.3em] text-ink-500 sm:text-left">
-          GEPRC SpeedX2 2207E 1960Kv · Gemfan 5136 · F722-HD V2 · TAKER H60 60A · MATEN 1.6W VTX · Caddx Ratel 2 · ELRS 2.4GHz · GPS
-        </p>
-        <div className="pb-12" />
-      </Container>
-    </section>
+    <SpecStrip
+      name="Otonom Döner Kanat"
+      eyebrow="Otonom İHA · Teknik Özellikler"
+      href="/projeler/otonom-doner-kanat"
+      accentVar="var(--color-brand-300)"
+      components="Pixhawk 6C · Raspberry Pi 5 · ArduPilot · OpenCV · 3K Karbon Fiber"
+      specs={[
+        { label: "Hover Süresi", value: "19.76", unit: "dk" },
+        { label: "Maks. Hız", value: "59.4", unit: "km/h" },
+        { label: "Maks. Menzil", value: "~12", unit: "km" },
+        { label: "Taşıma Kapasitesi", value: "11.8", unit: "kg" },
+      ]}
+    />
+  );
+}
+
+function FpvStatsBar() {
+  return (
+    <SpecStrip
+      name="Yarış FPV Drone"
+      eyebrow="Yarış FPV · Teknik Özellikler"
+      href="/projeler/fpv-doner-kanat"
+      accentVar="var(--color-sky-dawn)"
+      reverse
+      components="GEPRC SpeedX2 2207E 1960Kv · Gemfan 5136 · F722-HD V2 · TAKER H60 60A · MATEN 1.6W VTX · Caddx Ratel 2 · ELRS 2.4GHz"
+      specs={[
+        { label: "Maks. Hız", value: "~170", unit: "km/h" },
+        { label: "Ağırlık", value: "409", unit: "g" },
+        { label: "Uçuş Süresi", value: "14-19", unit: "dk" },
+        { label: "Video Gecikmesi", value: "8", unit: "ms" },
+      ]}
+    />
   );
 }
 
 function Hero() {
   return (
-    <section className="relative isolate overflow-hidden">
-      {/* Layered cinematic background */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-sky-night)] via-[var(--color-sky-deep)] to-[var(--color-ink-900)]" />
-        <div className="absolute inset-0 starfield opacity-70" />
-        <div className="absolute -top-32 right-[-10%] h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle,var(--color-brand-400)_0%,transparent_60%)] opacity-[0.12] blur-3xl" />
-        <div className="absolute bottom-[-20%] left-[-10%] h-[700px] w-[700px] rounded-full bg-[radial-gradient(circle,var(--color-sky-dawn)_0%,transparent_60%)] opacity-[0.07] blur-3xl" />
-        {/* Phoenix backdrop: gentle rise + wing-flap loop behind the headline */}
-        <div className="pointer-events-none absolute inset-x-0 top-[8%] flex justify-center lg:justify-end lg:pr-[4%]">
-          <div className="phoenix-rise w-[min(820px,94%)] opacity-[0.16] mix-blend-screen">
-            <Image
-              src="/brand/phoenix.png"
-              alt=""
-              width={1350}
-              height={625}
-              aria-hidden="true"
-              className="phoenix-flap h-auto w-full select-none"
-            />
-          </div>
-        </div>
-        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-[var(--color-ink-900)]" />
+    <CinematicHero image="/images/projects/otonom-doner-kanat.jpg">
+      <p className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 text-[0.7rem] uppercase tracking-[0.3em] text-ink-200 backdrop-blur animate-rise">
+        <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand-300)] shadow-[0_0_12px_var(--color-brand-300)]" />
+        TEKNOFEST 2026 · Döner Kanat
+      </p>
+      <h1 className="mt-8 font-display text-[2.7rem] sm:text-[5rem] lg:text-[6.2rem] font-black leading-[0.92] tracking-tight break-words [overflow-wrap:anywhere] hyphens-auto sm:break-normal sm:[overflow-wrap:normal] sm:hyphens-none">
+        <span className="block text-ink-50 animate-rise delay-100">Stratosferi</span>
+        <span className="wordmark-stratos block animate-rise delay-200">HEDEFLİYORUZ</span>
+      </h1>
+      <p className="mt-8 max-w-xl text-base sm:text-lg leading-relaxed text-ink-200 animate-rise delay-300">
+        {site.brand.longTagline}
+      </p>
+      <div className="mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center animate-rise delay-400">
+        <Button as="link" href="/sponsorlar" size="lg">
+          Sponsor Ol <ArrowRight size={16} />
+        </Button>
+        <Button as="link" href="/iletisim#uyelik" variant="secondary" size="lg">
+          <Users size={16} /> Bize Katıl
+        </Button>
+        <Button as="link" href="/projeler" variant="ghost" size="lg">
+          Projeleri gör <ArrowRight size={16} />
+        </Button>
       </div>
-
-      {/* Floating decorative drone silhouette */}
-      <div className="pointer-events-none absolute right-[-8%] top-1/2 hidden h-[420px] w-[420px] -translate-y-1/2 text-[var(--color-brand-300)]/15 lg:block animate-fade">
-        <DroneSilhouette className="h-full w-full spin-slow" />
-      </div>
-
-      <Container size="wide">
-        <div className="grid min-h-[80dvh] items-center py-24 sm:py-32">
-          <div className="max-w-5xl">
-            <p className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 text-[0.7rem] uppercase tracking-[0.3em] text-ink-200 backdrop-blur animate-rise">
-              <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand-300)] shadow-[0_0_12px_var(--color-brand-300)]" />
-              TEKNOFEST 2026 · Döner Kanat
-            </p>
-            <h1 className="mt-8 font-display text-[2.7rem] sm:text-[5rem] lg:text-[6.8rem] font-black leading-[0.92] tracking-tight break-words [overflow-wrap:anywhere] hyphens-auto">
-              <span className="block text-ink-50 animate-rise delay-100">Stratosferi</span>
-              <span className="wordmark-stratos block animate-rise delay-200">HEDEFLİYORUZ</span>
-            </h1>
-            <p className="mt-8 max-w-xl text-base sm:text-lg leading-relaxed text-ink-200 animate-rise delay-300">
-              {site.brand.longTagline}
-            </p>
-            <div className="mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center animate-rise delay-400">
-              <Button as="link" href="/sponsorlar" size="lg">
-                Sponsor Ol <ArrowRight size={16} />
-              </Button>
-              <Button as="link" href="/iletisim#uyelik" variant="secondary" size="lg">
-                <Users size={16} /> Bize Katıl
-              </Button>
-              <Button as="link" href="/projeler" variant="ghost" size="lg">
-                Projeleri gör <ArrowRight size={16} />
-              </Button>
-            </div>
-            <p className="mt-12 text-[0.65rem] uppercase tracking-[0.4em] text-ink-400 animate-rise delay-500">
-              {site.brand.school} · {site.brand.city}
-            </p>
-          </div>
-        </div>
-      </Container>
-    </section>
+      <p className="mt-12 text-[0.65rem] uppercase tracking-[0.4em] text-ink-400 animate-rise delay-500">
+        {site.brand.school} · {site.brand.city}
+      </p>
+    </CinematicHero>
   );
 }
 
@@ -271,9 +299,9 @@ function Pillars() {
   ];
 
   return (
-    <section className="relative border-y border-white/5 bg-gradient-to-b from-transparent via-white/[0.02] to-transparent py-24">
+    <section className="relative border-y border-white/5 py-24">
       <Container size="wide">
-        <div className="grid gap-10 md:grid-cols-12 md:gap-16">
+        <div className="grid gap-12 md:grid-cols-12 md:gap-16">
           <div className="md:col-span-4">
             <p className="text-xs uppercase tracking-[0.3em] text-[var(--color-brand-300)]">
               Disiplinler
@@ -286,25 +314,25 @@ function Pillars() {
               yazılımdan saha testine kadar.
             </p>
           </div>
-          <div className="md:col-span-8">
-            <div className="grid gap-5 sm:grid-cols-2">
-              {pillars.map((p) => (
-                <div
-                  key={p.title}
-                  className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-white/10 bg-white/[0.02] p-6 transition-all hover:border-[var(--color-brand-400)]/40 hover:bg-white/[0.04]"
-                >
-                  <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-[radial-gradient(circle,var(--color-brand-400)_0%,transparent_70%)] opacity-0 blur-2xl transition-opacity group-hover:opacity-30" />
-                  <p.icon size={26} className="text-[var(--color-brand-300)]" />
-                  <h3 className="mt-5 font-display text-lg font-bold uppercase tracking-wide">
-                    {p.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-300">
-                    {p.blurb}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
+          <ol className="md:col-span-8">
+            {pillars.map((p, i) => (
+              <li
+                key={p.title}
+                className="group grid grid-cols-[auto_1fr] gap-x-6 gap-y-1 border-t border-white/10 py-7 first:border-t-0 first:pt-0 sm:grid-cols-[auto_auto_1fr] sm:items-baseline"
+              >
+                <span className="font-data text-sm font-bold tabular-nums text-[var(--color-brand-300)]/70">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="flex items-center gap-2.5 font-display text-lg font-bold tracking-tight text-ink-50 transition-colors group-hover:text-[var(--color-brand-200)]">
+                  <p.icon size={18} className="text-[var(--color-brand-300)]" />
+                  {p.title}
+                </h3>
+                <p className="col-start-2 max-w-md text-sm leading-relaxed text-ink-300 sm:col-start-3">
+                  {p.blurb}
+                </p>
+              </li>
+            ))}
+          </ol>
         </div>
       </Container>
     </section>
@@ -328,22 +356,52 @@ function AchievementsStrip() {
             Tüm başarılar <ArrowRight size={14} />
           </Button>
         </div>
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {site.achievements.map((a) => (
-            <div
-              key={a.id}
-              className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.03] to-transparent p-6"
-            >
-              <p className="text-[0.65rem] uppercase tracking-[0.3em] text-ink-400">
-                {a.category} · {a.year}
-              </p>
-              <h3 className="mt-3 font-display text-xl font-bold leading-snug text-ink-50">
-                {a.title}
-              </h3>
-              <p className="mt-3 text-sm text-ink-300">{a.blurb}</p>
+        {(() => {
+          const [featured, ...rest] = site.achievements;
+          return (
+            <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/[0.06] lg:grid-cols-5">
+              {/* Featured achievement — spans the full height of the two stacked cells */}
+              <article className="group relative flex flex-col justify-between gap-12 bg-[var(--color-ink-900)] p-9 transition-colors hover:bg-[var(--color-ink-800)] lg:col-span-3 lg:row-span-2">
+                <div className="flex items-center gap-3">
+                  <span className="h-px w-8 bg-[var(--color-brand-300)]" aria-hidden="true" />
+                  <p className="text-[0.62rem] uppercase tracking-[0.3em] text-[var(--color-brand-300)]">
+                    {featured.category} · Öne çıkan
+                  </p>
+                </div>
+                <div>
+                  <span className="font-data text-5xl font-bold tabular-nums leading-none text-ink-700 transition-colors group-hover:text-[var(--color-brand-300)]/60">
+                    {featured.year}
+                  </span>
+                  <h3 className="mt-4 max-w-md font-display text-2xl font-bold leading-snug text-ink-50 sm:text-3xl">
+                    {featured.title}
+                  </h3>
+                  <p className="mt-4 max-w-md text-sm leading-relaxed text-ink-300">
+                    {featured.blurb}
+                  </p>
+                </div>
+              </article>
+              {rest.map((a) => (
+                <article
+                  key={a.id}
+                  className="group relative flex flex-col bg-[var(--color-ink-900)] p-7 transition-colors hover:bg-[var(--color-ink-800)] lg:col-span-2"
+                >
+                  <div className="flex items-baseline justify-between">
+                    <p className="text-[0.62rem] uppercase tracking-[0.3em] text-ink-400">
+                      {a.category}
+                    </p>
+                    <span className="font-data text-sm font-bold tabular-nums text-ink-600 transition-colors group-hover:text-[var(--color-brand-300)]">
+                      {a.year}
+                    </span>
+                  </div>
+                  <h3 className="mt-4 font-display text-lg font-bold leading-snug text-ink-50">
+                    {a.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-ink-300">{a.blurb}</p>
+                </article>
+              ))}
             </div>
-          ))}
-        </div>
+          );
+        })()}
       </Container>
     </section>
   );
@@ -524,8 +582,8 @@ function SponsorCta() {
   return (
     <section className="relative py-24">
       <Container size="default">
-        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-[var(--color-brand-700)] to-[var(--color-sky-deep)] p-10 sm:p-16">
-          <div className="absolute right-0 top-0 h-72 w-72 rounded-full bg-[radial-gradient(circle,var(--color-brand-300)_0%,transparent_60%)] opacity-40 blur-3xl" />
+        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-[var(--color-brand-800)] via-[var(--color-sky-deep)] to-[var(--color-ink-900)] p-10 sm:p-16">
+          <span className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--color-brand-300)]/50 to-transparent" />
           <div className="relative">
             <p className="text-xs uppercase tracking-[0.3em] text-[var(--color-brand-200)]">
               Sponsor Ol
