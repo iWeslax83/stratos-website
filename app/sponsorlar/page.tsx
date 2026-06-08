@@ -68,15 +68,6 @@ export default function SponsorlarPage() {
                     </li>
                   ))}
                 </ul>
-                <Button
-                  as="link"
-                  href="/iletisim"
-                  variant={idx === 0 ? "primary" : "outline"}
-                  size="sm"
-                  className="mt-7"
-                >
-                  Bu Paketi Konuş <ArrowRight size={14} />
-                </Button>
               </div>
             ))}
           </div>
