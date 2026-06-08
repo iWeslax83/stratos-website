@@ -225,23 +225,16 @@ p { text-wrap: pretty; }
   transform-origin: center;
 }
 
-/* Phoenix hero backdrop — outer wrapper handles slow rise/fall,
-   inner element does a faster wing-flap (scaleY pulse). */
-@keyframes phoenix-rise {
-  0%, 100% { transform: translateY(18px); }
-  50%      { transform: translateY(-14px); }
+/* Hero photo ken-burns — a slow, subtle scale + drift on the image wrapper.
+   Pure transform (GPU-composited); no mix-blend, so it never repaints/janks.
+   Starts pre-scaled so the drift never exposes the wrapper edge. */
+@keyframes hero-kenburns {
+  0%   { transform: scale(1.06) translate3d(0, 0, 0); }
+  100% { transform: scale(1.12) translate3d(-1.5%, -1%, 0); }
 }
-@keyframes phoenix-flap {
-  0%, 100% { transform: scaleY(1); }
-  50%      { transform: scaleY(0.92); }
-}
-.phoenix-rise {
-  animation: phoenix-rise 7.5s ease-in-out infinite;
-  will-change: transform;
-}
-.phoenix-flap {
-  animation: phoenix-flap 2.1s ease-in-out infinite;
-  transform-origin: center;
+.hero-kenburns {
+  transform: scale(1.06);
+  animation: hero-kenburns 26s ease-in-out infinite alternate;
   will-change: transform;
 }
 
@@ -249,7 +242,7 @@ p { text-wrap: pretty; }
   .sky-twinkle-slow, .sky-twinkle-mid, .sky-twinkle-fast,
   .sky-drift-a, .sky-drift-b,
   .animate-rise, .animate-fade, .spin-slow,
-  .phoenix-rise, .phoenix-flap {
+  .hero-kenburns {
     animation: none;
   }
 }
