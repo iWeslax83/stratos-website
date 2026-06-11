@@ -35,6 +35,7 @@ export const team = z.object({
 });
 export const sponsorship = z.object({
   intro: z.string(),
+  showPrices: z.boolean().optional(),
   tiers: z.array(z.object({
     id: z.string(), name: z.string(), amount: z.string(), benefits: z.array(z.string()),
   })),

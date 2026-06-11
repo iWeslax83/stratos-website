@@ -2,7 +2,7 @@
 import { SectionForm } from "@/components/admin/section-form";
 import { useSection } from "@/components/admin/use-section";
 import { useAdminLang } from "@/components/admin/lang-context";
-import { TextField, TextArea, Select, StringList, ListEditor } from "@/components/admin/fields";
+import { TextField, TextArea, Select, StringList, ListEditor, Toggle } from "@/components/admin/fields";
 import { ImageUpload } from "@/components/admin/image-upload";
 import type { Sponsorship, Tier, Sponsor } from "@/data/types";
 
@@ -33,6 +33,14 @@ export default function SponsorlarEditor() {
 
               <section>
                 <h2 className="mb-4 text-lg font-bold">Tier'lar</h2>
+                <div className="mb-5 rounded-lg border border-neutral-800 p-4">
+                  <Toggle
+                    label="Fiyatları göster"
+                    hint="Kapalıyken paket kartlarında tutar gizlenir."
+                    value={s.showPrices !== false}
+                    onChange={(v) => set({ ...s, showPrices: v })}
+                  />
+                </div>
                 <ListEditor<Tier>
                   label="Tier'lar"
                   value={s.tiers}

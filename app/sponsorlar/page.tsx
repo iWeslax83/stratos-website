@@ -55,6 +55,11 @@ export default function SponsorlarPage() {
                 <h3 className="mt-2 font-display text-2xl font-black uppercase tracking-wide text-ink-50">
                   {tier.name}
                 </h3>
+                {site.sponsorship.showPrices !== false && (
+                  <p className="mt-3 font-data text-lg font-bold tracking-tight text-[var(--color-brand-300)]">
+                    {tier.amount}
+                  </p>
+                )}
                 <ul className="mt-6 flex-1 space-y-3">
                   {tier.benefits.map((b) => (
                     <li key={b} className="flex items-start gap-2.5">

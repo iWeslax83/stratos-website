@@ -24,6 +24,34 @@ export function TextArea({ label, value, onChange, rows = 4 }: {
   );
 }
 
+export function Toggle({ label, value, onChange, hint }: {
+  label: string; value: boolean; onChange: (v: boolean) => void; hint?: string;
+}) {
+  return (
+    <label className="flex items-start justify-between gap-4">
+      <span className="space-y-1">
+        <span className="block text-xs uppercase tracking-wide text-neutral-400">{label}</span>
+        {hint && <span className="block text-xs text-neutral-500">{hint}</span>}
+      </span>
+      <button
+        type="button"
+        role="switch"
+        aria-checked={value}
+        onClick={() => onChange(!value)}
+        className={`relative mt-0.5 h-6 w-11 shrink-0 rounded-full transition-colors ${
+          value ? "bg-sky-600" : "bg-neutral-700"
+        }`}
+      >
+        <span
+          className={`absolute top-0.5 h-5 w-5 rounded-full bg-white transition-transform ${
+            value ? "translate-x-[1.375rem]" : "translate-x-0.5"
+          }`}
+        />
+      </button>
+    </label>
+  );
+}
+
 export function Select({ label, value, onChange, options }: {
   label: string; value: string; onChange: (v: string) => void; options: { value: string; label: string }[];
 }) {

@@ -39,7 +39,7 @@ export interface Sponsor {
   name: string; logo: string; url: string | null; tier: string;
 }
 export interface Sponsorship {
-  intro: string; tiers: Tier[]; sponsors: Sponsor[];
+  intro: string; showPrices?: boolean; tiers: Tier[]; sponsors: Sponsor[];
 }
 export interface OutreachItem {
   slug: string; title: string; period: string; blurb: string;

@@ -235,6 +235,7 @@
   },
   "sponsorship": {
     "intro": "Stratos yeni kurulan bir takım ve ulusal ve uluslararası yarışmalarda iddialı olmayı hedefliyor. Sponsorlarımızın adı aracımızın gövdesinde ve paylaştığımız içeriklerde yer alır.",
+    "showPrices": true,
     "tiers": [
       {
         "id": "altin",
@@ -274,7 +275,7 @@
       {
         "id": "destekci",
         "name": "Destekçi",
-        "amount": "5.000 TL altı / ayni destek",
+        "amount": "10.000 TL altı / ayni destek",
         "benefits": [
           "Web sitesi destekçiler bölümünde isim",
           "Sosyal medya teşekkür postu"
